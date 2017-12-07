@@ -119,7 +119,7 @@ block slides
             let audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
             audioCtx.decodeAudioData(audioData, buffer => {
-                decodedAudioData = buffer.getChannelData(0);
+                let decodedAudioData = buffer.getChannelData(0);
                 console.log(decodedAudioData);
             }, e => {
                 // callback for any errors with decoding audio data
