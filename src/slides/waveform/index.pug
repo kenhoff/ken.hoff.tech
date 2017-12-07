@@ -1,10 +1,13 @@
 extends ../../layouts/slides/stream
 
+block head
+    title Let's do the Wave(form)
+    link(rel="stylesheet" href="waveform.css")
+
 block slides
     .slide.alt
         h1 Let's do the Wave(form)
-        p Front Range Frontend
-        p Dec 2017
+        img(src="waves.gif" width="100")
     .slide
         h2 Hi! I'm Ken.
         p I'm a full-stack product engineer.
@@ -26,15 +29,15 @@ block slides
         p If you'd like to revisit this later:
         table
             tr
-                td These slides: 
+                td Slides: 
                 td #[a(href="https://ken.hoff.tech/slides/waveform") ken.hoff.tech/slides/waveform]
             tr
-                td The source code: 
+                td Source code: 
                 td #[a(href="https://github.com/kenhoff/winds-waveform-example") github.com/kenhoff/winds-waveform-example]
             tr
-                td The finished product:
+                td Live demo:
                 td #[a(href="http://kenhoff.github.io/winds-waveform-example") kenhoff.github.io/winds-waveform-example]
-    .slide
+    .slide.alt
         h2 How to build a front end waveform from start to finish:
         ol
             li project setup
@@ -64,6 +67,16 @@ block slides
 
         code #[a(href="https://kenhoff.github.io/winds-waveform-example/bluegrass.mp3") bluegrass.mp3]
     .slide
+        h3 Also - 
+        p You'll need to serve your page via #[code http://], not #[code file://]
+        :markdown-it
+            ```
+            yarn global add http-server
+            http-server -p 1234
+            ```
+            
+            _(browsers won't let you request resources via `http://` if you're on a `file://` page)_
+    .slide.alt
         ol
             li.completed project setup
             li get audio data
@@ -89,7 +102,7 @@ block slides
                         console.log(err);
                     });
             ```
-    .slide
+    .slide.alt
         ol
             li.completed project setup
             li.completed get audio data
@@ -115,13 +128,18 @@ block slides
             ```
     .slide
         h2 Step 3, Part 2: convert the samples into "buckets"
-        p todo: explain a "bucketing" algorithm
+        ol
+            li Take the first #[code N] samples
+            li Find the maximum value, store that in an array
+            li Take the next #[code N] samples
+            li Find the maximum value, append that to the array
+            li #[code GOTO 3]
     .slide
         h2 Step 3, Part 2: convert the samples into "buckets"
         :markdown-it
             ```js
             const NUMBER_OF_BUCKETS = 100; // number of "bars" the waveform should have
-            
+
             let bucketDataSize = Math.floor(decodedAudioData.length / NUMBER_OF_BUCKETS);
             let buckets = [];
             for (var i = 0; i < NUMBER_OF_BUCKETS; i++) {
@@ -137,7 +155,7 @@ block slides
                 buckets.push(size / 2);
             }
             ```
-    .slide
+    .slide.alt
         ol
             li.completed project setup
             li.completed get audio data
@@ -146,37 +164,23 @@ block slides
             li connect everything together with CSS
             li connect it to your audio player
     .slide
-        h2 Step 4, Part 1: create our progress bar SVGs
+        h2 Step 4: create our waveform "bars"
+        p We've got our "buckets". How do we turn that into a waveform?
+        img(src="elmo-thinking.gif")
+        p With #[strong SVG]!
+    .slide 
+        h2 Creating an SVG waveform
         :markdown-it
             ```html
-            <!-- this SVG is the "background" and progress bar -->
-            <svg viewbox="0 0 100 100" class="waveform-container" preserveaspectratio="none">
-                <rect 
-                    class="waveform-bg"
-                    x="0" y="0" 
-                    height="100" width="100"
-                />
-                <rect 
-                    id="waveform-progress" 
-                    class="waveform-progress" 
-                    x="0" y="0" 
-                    height="100" width="40"
-                />
-            </svg>
-
-        
-    .slide
-        h2 Step 4, Part 2: render out our waveform "bars"
-        :markdown-it
-            ```html
-            <!-- this SVG is the "clipping mask" - the waveform bars -->
-            <svg height="0" width="0">
-                <defs>
-                    <clippath id="waveform-mask"></clippath>
-                </defs>
-            </svg>
+            <!-- not the final version! -->
+            <svg id="waveform-mask"></svg>
             ```
+
+            Use JavaScript to generate the "bars" from our "buckets":
+
             ```js
+            const SPACE_BETWEEN_BARS = 0.2; // from 0 (no gaps between bars) to 1 (only gaps - bars won't be visible)
+
             document.getElementById('waveform-mask').innerHTML = buckets.map((bucket, i) => {
                 let bucketSVGWidth = 100.0 / buckets.length;
                 let bucketSVGHeight = bucket * 100.0;
@@ -190,6 +194,60 @@ block slides
             }).join('');
             ```
     .slide
+        :markdown-it
+            - Yes, we _could_ do this with the DOM and `<div>`s
+            - But, we want the progress bar to "shine through" the waveform bars
+        img(src="waveform-mock.png")
+    .slide
+        h3 Masking #[em (or, clipping)]
+        .masking-example
+            img(src="svg-mask-example.png" width="300")
+            span +
+            img(src="svg-mask-example-3.png" width="100")
+            span = 
+            img(src="svg-mask-example-4.png" width="100")
+        p "Only display through this SVG element".
+        p
+            a(href="https://codepen.io/yoksel/full/fsdbu") Here's a bunch more examples.
+        img(src="mask.gif" width="200")
+    .slide
+        h2 Step 4, Part 1: create our progress bar SVGs
+        ul
+            li A "progress bar" SVG
+            li A "background" SVG
+        :markdown-it
+            ```html
+            <!-- this SVG is the "background" and progress bar -->
+            <svg viewBox="0 0 100 100" class="waveform-container" preserveAspectRatio="none">
+                <rect 
+                    class="waveform-bg"
+                    x="0" y="0" 
+                    height="100" width="100"
+                />
+                <rect 
+                    id="waveform-progress" 
+                    class="waveform-progress" 
+                    x="0" y="0" 
+                    height="100" width="40"
+                />
+            </svg>
+    .slide
+        h2 Step 4, Part 2: #[code clipPath] SVG, and add the waveform bars
+        :markdown-it
+            ```html
+            <!-- this SVG is the "clipping mask" - the waveform bars -->
+            <svg height="0" width="0">
+                <defs>
+                    <clipPath id="waveform-mask"></clipPath>
+                </defs>
+            </svg>
+            ```
+            
+        ul
+            li Doesn't get displayed directly (height and width of 0)
+            li But, we'll connect it later with CSS
+                    
+    .slide.alt
         ol
             li.completed project setup
             li.completed get audio data
@@ -200,7 +258,7 @@ block slides
     .slide
         h2 Step 5: connect your SVGs with CSS
         :markdown-it
-            ```
+            ```css
             .waveform-bg {
                 clip-path: url("#waveform-mask");
                 fill: lightgray;
@@ -210,7 +268,10 @@ block slides
                 fill: #44bc75;
             }
             ```
-    .slide
+            
+            `clip-path` tells the element **"only display _through_ this SVG pattern"**.
+        
+    .slide.alt
         ol
             li.completed project setup
             li.completed get audio data
@@ -219,6 +280,25 @@ block slides
             li.completed connect everything together with CSS
             li connect it to your audio player
     .slide
+        :markdown-it
+            ## Step 6: `<audio>` element, connect it to the waveform
+            
+            ```html
+            <!-- our audio element -->
+            <audio id="audio-element" src="bluegrass.mp3" controls="controls"></audio>
+            ```
+            ```javascript
+            let audioElement = document.getElementById('audio-element');
+            let waveformProgress = document.getElementById('waveform-progress');
+
+            // every 100 milliseconds, update the waveform-progress SVG with a new width 
+            // (the percentage of time elapsed on the audio file)
+            setInterval(() => {
+                let percentComplete = audioElement.currentTime / audioElement.duration * 100;
+                waveformProgress.setAttribute('width', percentComplete);
+            }, 100);
+            ```
+    .slide.alt
         ol
             li.completed project setup
             li.completed get audio data
@@ -226,6 +306,19 @@ block slides
             li.completed render out our waveform "bars"
             li.completed connect everything together with CSS
             li.completed connect it to your audio player
-
+    .slide
+        h2 Step 7: Yay it works!
+        img(src="elmo-dancing.gif")
+        p
+            a(href="https://kenhoff.github.io/winds-waveform-example") Live Demo
+    .slide
+        h2 What's next?
+        ul
+            li Just one network call for audio
+            li "Maximum loudness" isn't very useful
+            li Still some incompatible styling
     .slide.alt
-        h2 thanks so much!
+        h1 Thanks so much!
+        img(src="elmo-wave.gif" width="200")
+        p
+            a(href="https://twitter.com/ken_hoff") #[i.fa.fa-twitter] ken_hoff

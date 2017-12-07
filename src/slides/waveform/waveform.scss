@@ -1,0 +1,15 @@
+.masking-example {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2em;
+
+    > * {
+        margin-right: 1em;
+    }
+
+    img {
+        width: 100px;
+    }
+}

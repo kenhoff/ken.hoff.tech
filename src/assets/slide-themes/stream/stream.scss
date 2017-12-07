@@ -1,6 +1,6 @@
 $blue: #4c8efa;
 $gray: gray;
-$lightgray: lightgray;
+$lightgray: #eee;
 
 @font-face {
     font-family: "Hanken Sans";
@@ -99,6 +99,7 @@ body {
     background-position: center;
     background-repeat: repeat;
     background-blend-mode: multiply;
+    padding-bottom: 3em;
 }
 
 .deck-current {
@@ -118,10 +119,15 @@ body {
             color: inherit;
         }
     }
+    li.completed {
+        color: $lightgray;
+    }
 }
 
 img {
     max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 code {
@@ -139,6 +145,7 @@ pre {
 
 li {
     text-align: left;
+    margin-bottom: 0.5em;
     &.completed {
         font-style: italic;
         text-decoration: line-through;
@@ -154,4 +161,26 @@ td {
 code.hljs {
     padding: 0;
     background: unset;
+}
+
+footer {
+    padding: 0 1em;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: white;
+    > * {
+        padding: 1em 0;
+        max-height: 100%;
+    }
+    img {
+        vertical-align: middle;
+        max-height: 100%;
+        max-width: 100%;
+    }
 }
