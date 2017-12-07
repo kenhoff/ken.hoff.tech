@@ -1,6 +1,6 @@
-extends ./layout
+extends ../../layouts/slides/stream
 
-block content
+block slides
     .slide.alt
         h1 Let's do the Wave(form)
     .slide
@@ -9,10 +9,13 @@ block content
         p i work at stream! here's what stream does.
     .slide
         p I'm working on Winds!
-        p screenshot of winds
+        img(src="winds-dashboard-preview.png")
+    .slide
+        p I needed to build a "waveform" for Winds
+        img(src="waveform-mock.png")
     .slide
         p we're going to build a frontend waveform from start to finish
-        img(src="/waveform.gif")
+        img(src="waveform.gif")
     .slide
         h2 How to build a frontend waveform from start to finish:
         ol
