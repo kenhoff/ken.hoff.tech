@@ -1,1 +1,2 @@
 $.deck(".slide")
+hljs.initHighlightingOnLoad();

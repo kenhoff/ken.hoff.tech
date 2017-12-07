@@ -3,27 +3,229 @@ extends ../../layouts/slides/stream
 block slides
     .slide.alt
         h1 Let's do the Wave(form)
+        p Front Range Frontend
+        p Dec 2017
     .slide
-        p Hi! I'm Ken. something about me and where i work and what i do.
-    .slide
-        p i work at stream! here's what stream does.
+        h2 Hi! I'm Ken.
+        p I'm a full-stack product engineer.
+        p I build #[a(href="https://ken.hoff.tech") dumb fun web stuff] and #[a(href="http://www.rustbucketgarage.tv") work on rusty old cars].
+    .slide.alt
+        h2 I'm currently a Developer Advocate at #[a(href="https://getstream.io") Stream]! 
+        p Stream lets you build #[strong scalable] and #[strong personalized] activity feeds.
     .slide
         p I'm working on Winds!
         img(src="winds-dashboard-preview.png")
+        p Winds is an RSS reader and podcast player that will showcase activity feeds from Stream.
     .slide
-        p I needed to build a "waveform" for Winds
+        p I needed to build a "waveform" for Winds:
         img(src="waveform-mock.png")
     .slide
-        p we're going to build a frontend waveform from start to finish
+        p We're going to build that waveform!
         img(src="waveform.gif")
     .slide
-        h2 How to build a frontend waveform from start to finish:
+        p If you'd like to revisit this later:
+        table
+            tr
+                td These slides: 
+                td #[a(href="https://ken.hoff.tech/slides/waveform") ken.hoff.tech/slides/waveform]
+            tr
+                td The source code: 
+                td #[a(href="https://github.com/kenhoff/winds-waveform-example") github.com/kenhoff/winds-waveform-example]
+            tr
+                td The finished product:
+                td #[a(href="http://kenhoff.github.io/winds-waveform-example") kenhoff.github.io/winds-waveform-example]
+    .slide
+        h2 How to build a front end waveform from start to finish:
         ol
+            li project setup
             li get audio data
-            li convert audio data into a reasonable format
-            li render out some rectangles to the page
-            li connect these recangles together with CSS
+            li convert audio data into "buckets"
+            li render out our waveform "bars"
+            li connect everything together with CSS
             li connect it to your audio player
+
+    .slide
+        :markdown-it
+            ## Step 1: Get your project folder set up
+
+            ```html
+            <html>
+                <head>
+                    <!-- axios is a library for XMLHttpRequest -->
+                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                </head>
+                <body>
+                    <h1>Winds Waveform Example</h1>
+                </body>
+            </html>
+            ```
+
+            Also, your audio file:
+
+        code #[a(href="https://kenhoff.github.io/winds-waveform-example/bluegrass.mp3") bluegrass.mp3]
+    .slide
+        ol
+            li.completed project setup
+            li get audio data
+            li convert audio data into "buckets"
+            li render out our waveform "bars"
+            li connect everything together with CSS
+            li connect it to your audio player
+    .slide
+        :markdown-it
+            ## Step 2: Retrieve that audio data
+
+            Throw a `<script>` tag at the bottom of the `<body>`.
+
+            Use `axios` (or XHR, or `fetch`, or whatever!) to get your audio data as an `ArrayBuffer`.
+
+            ```js
+                axios({url: "bluegrass.mp3", responseType: "arraybuffer"})
+                    .then(response => {
+                        let audioData = response.data;
+                        console.log(audioData);
+                    }).catch(err => {
+                        // catch any errors with fetching the audio
+                        console.log(err);
+                    });
+            ```
+    .slide
+        ol
+            li.completed project setup
+            li.completed get audio data
+            li convert audio data into "buckets"
+            li render out our waveform "bars"
+            li connect everything together with CSS
+            li connect it to your audio player
+    .slide
+        h2 Step 3, Part 1: convert the audio data into "samples"
+        p A "sample" is a single data point on an audio track
+        p Played back fast enough, they sound like a podcast!
+        :markdown-it
+            ```js
+            let audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+
+            audioCtx.decodeAudioData(audioData, buffer => {
+                decodedAudioData = buffer.getChannelData(0);
+                console.log(decodedAudioData);
+            }, e => {
+                // callback for any errors with decoding audio data
+                console.log('Error with decoding audio data' + e.err);
+            });
+            ```
+    .slide
+        h2 Step 3, Part 2: convert the samples into "buckets"
+        p todo: explain a "bucketing" algorithm
+    .slide
+        h2 Step 3, Part 2: convert the samples into "buckets"
+        :markdown-it
+            ```js
+            const NUMBER_OF_BUCKETS = 100; // number of "bars" the waveform should have
+            
+            let bucketDataSize = Math.floor(decodedAudioData.length / NUMBER_OF_BUCKETS);
+            let buckets = [];
+            for (var i = 0; i < NUMBER_OF_BUCKETS; i++) {
+                let startingPoint = i * bucketDataSize;
+                let endingPoint = i * bucketDataSize + bucketDataSize;
+                let max = 0;
+                for (var j = startingPoint; j < endingPoint; j++) {
+                    if (decodedAudioData[j] > max) {
+                        max = decodedAudioData[j];
+                    }
+                }
+                let size = Math.abs(max);
+                buckets.push(size / 2);
+            }
+            ```
+    .slide
+        ol
+            li.completed project setup
+            li.completed get audio data
+            li.completed convert audio data into "buckets"
+            li render out our waveform "bars"
+            li connect everything together with CSS
+            li connect it to your audio player
+    .slide
+        h2 Step 4, Part 1: create our progress bar SVGs
+        :markdown-it
+            ```html
+            <!-- this SVG is the "background" and progress bar -->
+            <svg viewbox="0 0 100 100" class="waveform-container" preserveaspectratio="none">
+                <rect 
+                    class="waveform-bg"
+                    x="0" y="0" 
+                    height="100" width="100"
+                />
+                <rect 
+                    id="waveform-progress" 
+                    class="waveform-progress" 
+                    x="0" y="0" 
+                    height="100" width="40"
+                />
+            </svg>
+
+        
+    .slide
+        h2 Step 4, Part 2: render out our waveform "bars"
+        :markdown-it
+            ```html
+            <!-- this SVG is the "clipping mask" - the waveform bars -->
+            <svg height="0" width="0">
+                <defs>
+                    <clippath id="waveform-mask"></clippath>
+                </defs>
+            </svg>
+            ```
+            ```js
+            document.getElementById('waveform-mask').innerHTML = buckets.map((bucket, i) => {
+                let bucketSVGWidth = 100.0 / buckets.length;
+                let bucketSVGHeight = bucket * 100.0;
+                return `
+                    <rect
+                        x=${bucketSVGWidth * i + SPACE_BETWEEN_BARS / 2.0}
+                        y=${ (100 - bucketSVGHeight) / 2.0}
+                        width=${bucketSVGWidth - SPACE_BETWEEN_BARS}
+                        height=${bucketSVGHeight} 
+                    />`;
+            }).join('');
+            ```
+    .slide
+        ol
+            li.completed project setup
+            li.completed get audio data
+            li.completed convert audio data into "buckets"
+            li.completed render out our waveform "bars"
+            li connect everything together with CSS
+            li connect it to your audio player
+    .slide
+        h2 Step 5: connect your SVGs with CSS
+        :markdown-it
+            ```
+            .waveform-bg {
+                clip-path: url("#waveform-mask");
+                fill: lightgray;
+            }
+            .waveform-progress {
+                clip-path: url("#waveform-mask");
+                fill: #44bc75;
+            }
+            ```
+    .slide
+        ol
+            li.completed project setup
+            li.completed get audio data
+            li.completed convert audio data into "buckets"
+            li.completed render out our waveform "bars"
+            li.completed connect everything together with CSS
+            li connect it to your audio player
+    .slide
+        ol
+            li.completed project setup
+            li.completed get audio data
+            li.completed convert audio data into "buckets"
+            li.completed render out our waveform "bars"
+            li.completed connect everything together with CSS
+            li.completed connect it to your audio player
+
     .slide.alt
         h2 thanks so much!
-        

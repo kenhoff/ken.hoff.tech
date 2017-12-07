@@ -7,5 +7,5 @@
 
 # Deploying
 
--   `aws s3 sync . s3://ken.hoff.tech`
+-   `aws s3 sync ./build s3://ken.hoff.tech`
 -   <https://ken.hoff.tech>
