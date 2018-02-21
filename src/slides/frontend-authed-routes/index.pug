@@ -1,0 +1,262 @@
+extends ../../layouts/slides/stream
+
+block head
+    title Frontend Authed Routes with react-router
+    link(rel="stylesheet" href="frontend-authed-routes.css")
+
+block slides
+    .slide.alt
+        h1 Frontend Authed Routes with #[code react-router]
+        img(src="https://media.giphy.com/media/IbYGMVhugrOxi/giphy.gif" width="200")
+    .slide
+        h2 Hi! I'm Ken.
+        p I'm a full-stack product engineer.
+        p I build #[a(href="https://ken.hoff.tech") dumb fun web stuff] and #[a(href="http://www.rustbucketgarage.tv") work on rusty old cars].
+    .slide.alt
+        h2 I'm currently a Developer Advocate at #[a(href="https://getstream.io") Stream]! 
+        p Stream lets you build #[strong scalable] and #[strong personalized] activity feeds.
+    .slide
+        p If you'd like to revisit this later:
+        table
+            tr
+                td Slides: 
+                td #[a(href="https://ken.hoff.tech/slides/waveform") ken.hoff.tech/slides/frontend-authed-routes]
+            tr
+                td Source code: 
+                td #[a(href="https://github.com/kenhoff/winds-waveform-example") github.com/kenhoff/frontend-authed-routes]
+            tr
+                td Live demo:
+                td #[a(href="http://kenhoff.github.io/winds-waveform-example") kenhoff.github.io/frontend-authed-routes]
+    .slide
+        h2 I'm working on Winds!
+        p Winds is an RSS reader and podcast player that will showcase activity feeds from Stream.
+        img(src="winds-dashboard-preview.png" width="500")
+    .slide
+        h2 Tonight we're learning about #[code react-router]
+        p and how to build "frontend authenticated routes" with it
+    .slide
+        h2 What you should know for this talk
+        ul
+            li How React works (basically just props and composition)
+            li 
+                p Authentication vs Authorization
+                ul 
+                    li Authentication: "are you who you say you are?"
+                    li Authorization: "are you allowed to see this?"
+
+    .slide.alt
+        h2 Building frontend authed routes with #[code react-router]
+        ol
+            li How #[code react-router] works
+            li A simple #[code react-router] example
+            li The case for frontend authenticated routes
+            li The #[code Route] component
+            li The #[code component], #[code router], and #[code children] props
+            li Our custom #[code AuthedRoute] component
+            li Our custom #[code UnauthedRoute] component
+    .slide
+        h2 What #[code react-router] does
+
+        p Renders different React components based on window location
+
+        p Change page content with #[strong no refreshes]
+
+        p Quick demo: #[a(href="https://kenhoff.github.io/frontend-authed-routes/") kenhoff.github.io/frontend-authed-routes/]
+
+        p Docs: #[a(href="https://reacttraining.com/react-router/") reacttraining.com/react-router/]
+
+    .slide
+        h2 #[code react-router] components
+        ul
+            li #[code Router] 
+            //- (parent component, required for passing info down via #[code context])
+            li #[code Route] 
+            //- (how we describe which components are rendered at which locations)
+            li #[code Link] 
+            //- (attaches event listeners to #[code <a>] tags to listen for location changes)
+        h3 Less-commonly used #[code react-router] components
+        ul
+            li #[code Redirect]
+            li #[code Prompt]
+            li #[code Switch]
+
+    .slide
+        h2 A simple example with #[code react-router]
+
+        :markdown-it
+            ```html
+            <Router history={createBrowserHistory()}>
+                <div>
+                    <ul>
+                        <li><Link to="/home">Home</Link></li>
+                        <li><Link to="/my-profile">My profile</Link></li>
+                        <li><Link to="/my-playlists">My playlists</Link></li>
+                    </ul>
+                    <Route path="/home" component={Home}></Route>
+                    <Route path="/my-profile" component={Profile}></Route>
+                    <Route path="/my-playlists" component={Playlists}></Route>
+                </div>
+            </Router>
+            ```
+
+        p Need to bench test? #[code create-react-app] is probably the easiest
+
+
+    .slide
+        h2 Frontend authenticated routes? psh, who needs that?
+        p #[strong No refreshes when authenticating] - nice to have in web apps, but really important with #[strong desktop/native/electron apps]
+        p #[strong bonus:] code splitting + the right loaders = snappy and satisfying login UX
+    .slide
+        h2 Making some custom route components
+        p Want something #[strong reusable] and #[strong easy-to-read]
+        p Something like "#[code AuthedRoute]" and "#[code UnauthedRoute]"
+        p Still want to use #[code Route] for routes that we don't care about auth on
+    .slide
+        h2 Redirects:
+        table
+            thead
+                tr
+                    th Users
+                    th Source
+                    th Destination
+            tbody
+                tr
+                    td 
+                        strong Unauthed users
+                    td
+                        code /my-profile
+                    td
+                        code /sign-in
+                tr
+                    td 
+                        strong Unauthed users
+                    td
+                        code /my-playlists
+                    td
+                        code /sign-in
+                tr
+                    td 
+                        strong Authed users
+                    td
+                        code /sign-in
+                    td
+                        code /my-profile
+                tr
+                    td 
+                        strong Authed users
+                    td
+                        code /create-account
+                    td
+                        code /my-profile
+
+                tr
+                    td 
+                        strong All users
+                    td
+                        code /
+                    td
+                        code stay put :)
+    .slide
+        h2 The approach
+        p Only show #[code AuthedRoute]s if the user #[strong is] authenticated
+        p Only show #[code UnauthedRoute]s if the user #[strong is not] authenticated
+        p If we don't care about the other routes, just use plain #[code Route]s
+    .slide
+        h2 Maybe #[code Route] has something built in for this?
+        img(src="elmo-thinking.gif")
+
+    .slide
+        h2 The #[code Route] component
+        h3 The easy props:
+        table
+            tr
+                td
+                    strong #[code path]
+                td the URL to match (can include route params, like with #[code express])
+            tr
+                td 
+                    strong #[code component]
+                td the component to render if the path matches (can include nested routes!)
+            tr
+                td 
+                    strong #[code exact]
+                td if the route is #[code ===] instead of #[code includes()] - for example, #[code /] will match #[code /] #[strong and] #[code /my-profile] #[strong unless] #[code exact] is true
+
+    .slide
+        h2 The #[code Route] component
+        h3 The less-easy props:
+        table
+            tr
+                td #[strong #[code component]]
+                td the component to render if the path matches
+            tr
+                td #[strong #[code render]] (function)
+                td called #[strong if the path matches] (return a React component or element)
+            tr
+                td #[strong #[code children]] (function)
+                td this function will #[strong always] be called, regardless of if the path matches or not!
+        //- p (if you try to use #[code component], #[code render], and #[code children] in the same #[code Route], you're gonna have a bad time!)
+    .slide
+        h2 Our #[code AuthedRoute] component
+        p putting it all together....
+        ol
+            li Render a #[code Route]
+            li in each #[code AuthedRoute], use the #[code render] prop to only call the function when the route path matches
+            li in the #[code render] function, check to see if the user is authenticated or not
+            li if the user #[strong is] authenticated, render the #[strong #[code component]] that we want
+            li if the user #[strong is not] authenticated, render a #[code Redirect] to #[code /my-profile]
+    .slide
+        h2 Our #[code AuthedRoute] component
+        :markdown-it
+            ```jsx
+                let AuthedRoute = ({
+                    component: Component,
+                    ...rest
+                }) => {
+                    return <Route {...rest} render={(props) => {
+                        if (userIsAuthenticated()) {
+                            return (<Component {...props}></Component>);
+                        } else {
+                            return (<Redirect to="/sign-in"></Redirect>)
+                        }
+                        }}></Route>
+                }
+
+                <AuthedRoute path="/my-profile" component={Profile}></AuthedRoute>
+            ```
+
+    .slide
+        h2 Our #[code UnauthedRoute] component
+        p ....is basically the opposite of the #[code AuthedRoute] component
+        :markdown-it
+            ```jsx
+                let UnauthedRoute = ({
+                    component: Component,
+                    ...rest
+                }) => {
+                    return <Route {...rest} render={(props) => {
+                        if (userIsAuthenticated()) {
+                            return (<Redirect to="/my-profile"></Redirect>)
+                        } else {
+                            return (<Component {...props}></Component>);
+                        }
+                        }}></Route>
+                }
+
+                <UnauthedRoute path="/sign-in" component={SignIn}></UnauthedRoute>
+            ```
+
+
+
+    .slide
+        h2 Exercises for the reader
+        ul
+            li #[strong Nested routes] - #[code /my-playlists] vs #[code /my-playlists/playlist-1234]
+            li #[strong Authorization] - is this user allowed to see this?
+            li #[strong Deep linking] - redirecting the user to the desired URL #[strong after] they authenticate
+            li #[strong Public/marketing site] - don't serve your main app assets to every visitor on the main site (but then what happens when authed users go to your main site?)
+    .slide.alt
+        h1 Thanks so much!
+        img(src="elmo-wave.gif" width="200")
+        p
+            a(href="https://twitter.com/ken_hoff") #[i.fa.fa-twitter] ken_hoff
