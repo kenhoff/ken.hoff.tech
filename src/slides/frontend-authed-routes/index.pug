@@ -49,9 +49,9 @@ block slides
     .slide.alt
         h2 Building frontend authed routes with #[code react-router]
         ol
-            li #[code react-router] theory, practice and examples
+            li #[code react-router] theory, example, and practice
             li The case for frontend authenticated routes
-            li The #[code Route] component - #[code component], #[code render], and #[code children] props
+            li The #[code Route] component - #[code path], #[code component], and #[code render] props
             li Authed and Unauthed Routes
             li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
     .slide
@@ -94,45 +94,41 @@ block slides
             //- (how we describe which components are rendered at which locations)
             li #[code Link] 
             //- (attaches event listeners to #[code <a>] tags to listen for location changes)
-        h3 Less-commonly used #[code react-router] components
-        ul
             li #[code Redirect]
-            li #[code Prompt]
-            li #[code Switch]
 
-    .slide
-        h2 A slightly more complicated example with #[code react-router]
+    //- .slide
+    //-     h2 A slightly more complicated example with #[code react-router]
+    //- 
+    //-     :markdown-it
+    //-         ```html
+    //-         <Router history={createBrowserHistory()}>
+    //-             <div>
+    //-                 <ul>
+    //-                     <li><Link to="/home">Home</Link></li>
+    //-                     <li><Link to="/pricing">Pricing</Link></li>
+    //-                     <li><Link to="/about">About</Link></li>
+    //-                     <li><Link to="/my-settings">My settings</Link></li>
+    //-                     <li><Link to="/sign-in">Sign in</Link></li>
+    //-                 </ul>
+    //-                 <Route path="/home" component={Home}></Route>
+    //-                 <Route path="/pricing" component={Pricing}></Route>
+    //-                 <Route path="/about" component={About}></Route>
+    //-                 <Route path="/my-settings" component={Settings}></Route>
+    //-                 <Route path="/sign-in" component={SignIn}></Route>
+    //-             </div>
+    //-         </Router>
+    //-         ```
+    //- 
+    //-     //- img(src="https://media.giphy.com/media/3uyIgVxP1qAjS/giphy.gif")
 
-        :markdown-it
-            ```html
-            <Router history={createBrowserHistory()}>
-                <div>
-                    <ul>
-                        <li><Link to="/home">Home</Link></li>
-                        <li><Link to="/pricing">Pricing</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/my-settings">My settings</Link></li>
-                        <li><Link to="/sign-in">Sign in</Link></li>
-                    </ul>
-                    <Route path="/home" component={Home}></Route>
-                    <Route path="/pricing" component={Pricing}></Route>
-                    <Route path="/about" component={About}></Route>
-                    <Route path="/my-settings" component={Settings}></Route>
-                    <Route path="/sign-in" component={SignIn}></Route>
-                </div>
-            </Router>
-            ```
-
-        //- img(src="https://media.giphy.com/media/3uyIgVxP1qAjS/giphy.gif")
-
-    .slide.alt
-        h2 Building frontend authed routes with #[code react-router]
-        ol
-            li.completed #[code react-router] theory, practice and examples
-            li The case for frontend authenticated routes
-            li The #[code Route] component - #[code component], #[code render], and #[code children] props
-            li Authed and Unauthed Routes
-            li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
+    //- .slide.alt
+    //-     h2 Building frontend authed routes with #[code react-router]
+    //-     ol
+    //-         li.completed #[code react-router] theory, practice and examples
+    //-         li The case for frontend authenticated routes
+    //-         li The #[code Route] component - #[code component], #[code render], and #[code children] props
+    //-         li Authed and Unauthed Routes
+    //-         li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
 
     .slide
         h2 Frontend authenticated routes? psh, who needs that?
@@ -199,14 +195,14 @@ block slides
         h2 Maybe #[code Route] has something built in for this?
         img(src="elmo-thinking.gif")
 
-    .slide.alt
-        h2 Building frontend authed routes with #[code react-router]
-        ol
-            li.completed #[code react-router] theory, practice and examples
-            li.completed The case for frontend authenticated routes
-            li The #[code Route] component - #[code component], #[code render], and #[code children] props
-            li Authed and Unauthed Routes
-            li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
+    //- .slide.alt
+    //-     h2 Building frontend authed routes with #[code react-router]
+    //-     ol
+    //-         li.completed #[code react-router] theory, practice and examples
+    //-         li.completed The case for frontend authenticated routes
+    //-         li The #[code Route] component - #[code component], #[code render], and #[code children] props
+    //-         li Authed and Unauthed Routes
+    //-         li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
 
 
     .slide
@@ -222,32 +218,15 @@ block slides
                     strong #[code component]
                 td the component to render if the path matches (can include nested routes!)
             tr
-                td 
-                    strong #[code exact]
-                td 
-                    p 
-                        code path === window.location
-                    p (for example, #[code /] will match #[code /] #[strong and] #[code /my-settings] #[strong unless] #[code exact] is true)
-
-        :markdown-it
-            ```html
-            <Route path="/pricing" component={Pricing} exact={true} />
-            ```
-
-    .slide
-        h2 The #[code Route] component
-        h3 The less-easy props:
-        table
-            tr
-                td #[strong #[code component]]
-                td the component to render if the path matches
-            tr
                 td #[strong #[code render]] (function)
                 td called #[strong if the path matches] (return a React component or element)
-            tr
-                td #[strong #[code children]] (function)
-                td this function will #[strong always] be called, regardless of if the path matches or not!
-        p (don't set more than one of these!)
+            //- tr
+            //-     td 
+            //-         strong #[code exact]
+            //-     td 
+            //-         p 
+            //-             code path === window.location
+            //-         p (for example, #[code /] will match #[code /] #[strong and] #[code /my-settings] #[strong unless] #[code exact] is true)
 
         :markdown-it
             ```html
@@ -257,16 +236,29 @@ block slides
                 return (<About />);
             }} />
             ```
+    //- 
+    //- .slide
+    //-     h2 The #[code Route] component
+    //-     h3 The less-easy props:
+    //-     table
+    //-         tr
+    //-             td #[strong #[code component]]
+    //-             td the component to render if the path matches
+    //-         tr
+    //-             td #[strong #[code children]] (function)
+    //-             td this function will #[strong always] be called, regardless of if the path matches or not!
+    //-     p (don't set more than one of these!)
 
 
-    .slide.alt
-        h2 Building frontend authed routes with #[code react-router]
-        ol
-            li.completed #[code react-router] theory, practice and examples
-            li.completed The case for frontend authenticated routes
-            li.completed The #[code Route] component - #[code component], #[code render], and #[code children] props
-            li Authed and Unauthed Routes
-            li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
+
+    //- .slide.alt
+    //-     h2 Building frontend authed routes with #[code react-router]
+    //-     ol
+    //-         li.completed #[code react-router] theory, practice and examples
+    //-         li.completed The case for frontend authenticated routes
+    //-         li.completed The #[code Route] component - #[code component], #[code render], and #[code children] props
+    //-         li Authed and Unauthed Routes
+    //-         li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
 
 
     .slide
@@ -274,7 +266,7 @@ block slides
         ol
             li use the #[code render] prop (only called when path matches)
             li in #[code render], check to see if the user is authenticated or not
-            li if user #[strong is] authenticated, render the #[strong #[code component]]
+            li if user #[strong is] authenticated, render the component
             li if user #[strong is not] authenticated, render a #[code Redirect] to #[code /sign-in]
 
 
@@ -309,14 +301,14 @@ block slides
                 }}></Route>
             ```
 
-    .slide.alt
-        h2 Building frontend authed routes with #[code react-router]
-        ol
-            li.completed #[code react-router] theory, practice and examples
-            li.completed The case for frontend authenticated routes
-            li.completed The #[code Route] component - #[code component], #[code render], and #[code children] props
-            li.completed Authed and Unauthed Routes
-            li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
+    //- .slide.alt
+    //-     h2 Building frontend authed routes with #[code react-router]
+    //-     ol
+    //-         li.completed #[code react-router] theory, practice and examples
+    //-         li.completed The case for frontend authenticated routes
+    //-         li.completed The #[code Route] component - #[code component], #[code render], and #[code children] props
+    //-         li.completed Authed and Unauthed Routes
+    //-         li Reusable #[code AuthedRoute] and #[code UnauthedRoute] components
 
     .slide
         h2 Reuse it!
