@@ -100,31 +100,40 @@ body {
     background-repeat: repeat;
     background-blend-mode: multiply;
     padding-bottom: 3em;
+
+    &.alt {
+        background: url("/assets/stream-background.png"), $blue;
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat;
+        background-blend-mode: multiply;
+        color: white;
+
+        a {
+            border-bottom-color: white;
+
+            &:hover {
+                color: inherit;
+            }
+        }
+
+        li.completed {
+            color: $lightgray;
+        }
+
+        table {
+            color: inherit;
+            // border-collapse: collapse;
+            td {
+                border: 1px dotted white;
+                // padding: 0.5em 1em;
+            }
+        }
+    }
 }
 
 .deck-current {
     display: flex;
-}
-
-.slide.alt {
-    background: url("/assets/stream-background.png"), $blue;
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    background-blend-mode: multiply;
-    color: white;
-
-    a {
-        border-bottom-color: white;
-
-        &:hover {
-            color: inherit;
-        }
-    }
-
-    li.completed {
-        color: $lightgray;
-    }
 }
 
 img {
@@ -194,4 +203,11 @@ footer {
         max-height: 100%;
         max-width: 100%;
     }
+}
+
+.row {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
