@@ -85,6 +85,11 @@ body {
     text-align: center;
 }
 
+::selection {
+    background-color: $blue;
+    color: white;
+}
+
 .slide {
     display: none;
     margin: auto;
@@ -109,6 +114,11 @@ body {
         background-blend-mode: multiply;
         color: white;
 
+        ::selection {
+            background-color: white;
+            color: $blue;
+        }
+
         a {
             border-bottom-color: white;
 
@@ -123,10 +133,8 @@ body {
 
         table {
             color: inherit;
-            // border-collapse: collapse;
             td {
                 border: 1px dotted white;
-                // padding: 0.5em 1em;
             }
         }
     }
@@ -210,4 +218,7 @@ footer {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    > *:not(:last-child) {
+        margin-right: 1em;
+    }
 }
