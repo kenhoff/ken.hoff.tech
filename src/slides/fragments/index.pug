@@ -2,12 +2,11 @@ extends ../../layouts/slides/stream
 
 block head
     title React Fragments
-    link(rel="stylesheet" href="fragments.css")
+    //- link(rel="stylesheet" href="fragments.css")
 
 block slides
     .slide.alt
         h1 React Fragments
-        p The end of the wrapper div
         img(src="https://i.imgur.com/yEN24Ka.gif")
     .slide
         h2 Hi! I'm Ken.
@@ -15,15 +14,13 @@ block slides
         p I work at #[a(href="https://getstream.io") Stream], helping companies make apps with #[strong scalable] and #[strong personalized] activity feeds.
         p I'm a big fan of building #[a(href="https://ken.hoff.tech") dumb fun web stuff] and #[a(href="http://www.rustbucketgarage.tv") wrenching on rusty old cars].
     .slide.alt
-        h2 using React Fragments for Fun and Profit
+        h2 React Fragments
+        p this is more of a "hey, these exist!" kind of talk than an "in-depth tips and tricks" talk
         ul
-            li.completed Intro
             li rendering an array of elements
             li rendering an array of elements with a React Fragment
-            li how to use a React Fragment
             li why do we even need React Fragments anyway? this seems dumb.
-            li React Fragments in the Real World: CSS grid
-            li Outro
+            li example: CSS grid
     .slide
         p If you'd like to revisit this later:
         table
@@ -35,6 +32,7 @@ block slides
         h2 I've been working on #[a(href="https://getstream.io/winds/") Winds 2.0]!
         p #[a(href="https://getstream.io/winds/") Winds 2.0] is an RSS reader and podcast player that showcases activity feeds from Stream.
         img(src="winds.png" width="500")
+        p Check it out at #[a(href="https://getstream.io/winds/") https://getstream.io/winds/].
     .slide
         h1 I'm sure you've all run into this before
         :markdown-it
@@ -61,19 +59,33 @@ block slides
 
                     4 |         return (<p>I would
                     5 |         </p>
-                  > 6 |         <p>
+                    6 |         <p>
                       |         ^
                     7 |             really like
                     8 |         </p>
                     9 |         <p>
             ```
 
-
-
     .slide
-        h1 the "I need to hit my estimate" way
+        h1 the "I didn't do any research and I need to hit my estimate" way
         :markdown-it
-            ```javascript
+            ```jsx
+            class App extends Component {
+                render() {
+                    return (
+                        <div>
+                            <p>I would</p>,
+                            <p>really like</p>,
+                            <p>to render</p>,
+                            <p>an array</p>
+                        </div>
+                    );
+                }
+            }
+            ```
+        p (or)
+        :markdown-it
+            ```jsx
             class App extends Component {
                 render() {
                     return [
@@ -86,15 +98,14 @@ block slides
             }
             ```
         p (notice the commas! because we're returning a JS object / array, it's okay.)    
-        
     .slide
         h2 Dan Abramov / React folks say:
         h1 "this is 💩"
         h6
-            i (well, sort of -  #[a(href="https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html") here's the blog post explaining all that])
+            i (well, sort of)
+        p #[a(href="https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html") React v16.2.0 introduces Fragments]
     .slide
         h1 How to use a React Fragment
-        p (it's pretty h*ckin easy)
         .row
             div
                 p instead of
@@ -111,42 +122,41 @@ block slides
                         }
                     }
                     ```
-            code -------->
             div
                 p we use
                 :markdown-it
                     ```javascript
-                        class App extends Component {
-                            render() {
-                                return (
-                                    <React.Fragment>
-                                        <p>I would</p>
-                                        <p>really like</p>
-                                        <p>to render</p>
-                                        <p>an array</p>
-                                    </React.Fragment>
-                                );
-                            }
+                    class App extends Component {
+                        render() {
+                            return (
+                                <React.Fragment>
+                                    <p>I would</p>
+                                    <p>really like</p>
+                                    <p>to render</p>
+                                    <p>an array</p>
+                                </React.Fragment>
+                            );
                         }
+                    }
                     ```
 
     .slide
         h2 an alternate method
-        h3 depending on your tooling (build pipeline, linters, beautifiers, etc), this might also work
+        p depending on your tooling (build pipeline, linters, beautifiers, etc), this might also work
         :markdown-it
             ```javascript
-                class App extends Component {
-                    render() {
-                        return (
-                            <>
-                                <p>I would</p>
-                                <p>really like</p>
-                                <p>to render</p>
-                                <p>an array</p>
-                            </>
-                        );
-                    }
+            class App extends Component {
+                render() {
+                    return (
+                        <>
+                            <p>I would</p>
+                            <p>really like</p>
+                            <p>to render</p>
+                            <p>an array</p>
+                        </>
+                    );
                 }
+            }
             ```
         p (see, #[a(href="https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html") the blog post] says that this is supported in some tools, but #[code create-react-app] doesn't support it yet, so use at your own risk)
 
@@ -154,14 +164,57 @@ block slides
         img(src="https://media.giphy.com/media/s239QJIh56sRW/giphy.gif")
     .slide
         h1 the "theory" answer
-        p React Fragments should be used when #[b the styling / layout of your elements depends on their order / nesting]
+        p React Fragments should be used when #[b the styling / layout of your elements is dependent on their order / nesting]
+        p technically correct (but kind of contrived) examples:
+        :markdown-it
+            - tables (`table`, `tr`, and `td`)
+            - lists (`ul`, `ol`, and `li`)
+            - definitions (`dt`, `dd`, and `dl`)
     .slide
         h1 okay, but when should i actually use it
-        p you'll know when you need it ;)
-    .slide
-        h1 example: 2x2 CSS Grid
+        p whenever you need to #[b get rid of a div]
         .row
             div
+                p when you need to turn this rendered output:
+                :markdown-it
+                    ```html
+                    <div class="app">
+                    
+                        (...a bunch of other elements)
+                    
+                        <div> (my react component)
+                            <ComponentA></ComponentA>
+                            <ComponentB></ComponentB>
+                            <ComponentC></ComponentC>
+                        </div>
+                        
+                        (...a bunch more elements)
+                    
+                    </div>
+                    ```
+            i.fa.fa-arrow-right
+            div
+                p into this rendered output:
+                :markdown-it
+                    ```html
+                    <div class="app">
+                    
+                        (...a bunch of other elements)
+                    
+                        <ComponentA></ComponentA>
+                        <ComponentB></ComponentB>
+                        <ComponentC></ComponentC>
+                        
+                        (...a bunch more elements)
+                    
+                    </div>
+                    ```
+
+    .slide
+        h1 Example: 2x2 CSS Grid
+        .row
+            div
+                p grid layout:
                 table
                     tr
                         td
@@ -171,20 +224,141 @@ block slides
                     tr
                         td
                             ul
-                                li menu item 1
-                                li menu item 2
-                                li menu item 3
+                                li subnav menu item 1
+                                li subnav menu item 2
+                                li subnav menu item 3
                         td content
             div
-                p (code for 2x2 css grid)
-        p (content in the right column changes #[b only] when navigation / state changes)
+                :markdown-it
+                    ```css
+                    .grid {
+                        display: grid;
+                        grid-template-areas: 
+                            'topnav header' 
+                            'subnav content';
+                        grid-gap: 1em;
+                    }
+                    ```
+        ol
+            li items in the left column don't change
+            li items in the right column #[b both] change when navigation / state changes
     .slide
-        h2 Yay it works!
-        img(src="elmo-dancing.gif")
-        p
-            a(href="https://kenhoff.github.io/winds-waveform-example") Live Demo
+        h1 component structure
+        .row
+            div
+                p basically, we want this:
+                :markdown-it
+                    ```html
+                    <div className="grid">
+                        <TopNav />
+                        <SubNav />
+                        <ContentComponent />
+                    </div>
+                    ```
+                    
+            div
+                p to render something like this:
+                :markdown-it
+                    ```html
+                    <div class="grid">
+                        <div class="topnav"  />
+                        <div class="subnav"  />
+                        <div class="header"  />
+                        <div class="content" />
+                    </div>
+                    ```
+    .slide
+        h1 the problem is:
+        .row
+            div
+                p if our #[code ContentComponent] renders an extra div:
+                :markdown-it
+                    ```jsx
+                    class ContentComponent extends Component {
+                        render() {
+                            return (
+                                <div>
+                                    <div className="header"/>
+                                    <div className="content"/>
+                                </div>
+                            );
+                        }
+                    }
+                    ```
+            div
+                p it #[strong totally screws up] our CSS grid.
+                :markdown-it
+                    ```html
+                    <div class="grid">
+                        <div class="topnav"  />
+                        <div class="subnav"  />
+                        <div>
+                            <div class="header"  />
+                            <div class="content" />
+                        </div>
+                    </div>
+                    ```
+    .slide
+        h1 to fix it, use a React Fragment!
+        .row
+            div
+                :markdown-it
+                    ```html
+                    <div className="grid">
+                        <TopNav />
+                        <SubNav />
+                        <ContentComponent />
+                    </div>
+                    ```
+            i.fa.fa-plus
+            div
+                :markdown-it
+                    ```jsx
+                    class ContentComponent extends Component {
+                        render() {
+                            return (
+                                <React.Fragment>
+                                    <div className="header"/>
+                                    <div className="content"/>
+                                </React.Fragment>
+                            );
+                        }
+                    }
+                    ```
+            i.fas.fa-equals
+            div
+                :markdown-it
+                    ```html
+                    <div class="grid">
+                        <div class="topnav"  />
+                        <div class="subnav"  />
+                        <div class="header"  />
+                        <div class="content" />
+                    </div>
+                    ```
+    .slide
+        h1 Recap
+        .row
+            :markdown-it
+                ```jsx
+                class ContentComponent extends Component {
+                    render() {
+                        return (
+                            <React.Fragment>
+                                <div className="header"/>
+                                <div className="content"/>
+                            </React.Fragment>
+                        );
+                    }
+                }
+                ```
+            ul
+                li #[code React.Fragment]
+                li Render an array of elements easily
+                li Use it whenever you need to get rid of a wrapper div
+                li More in the #[a(href="https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html") v16.2.0 release notes]
     .slide.alt
         h1 Thanks so much!
         img(src="elmo-wave.gif")
         p
-            a(href="https://twitter.com/ken_hoff") #[i.fa.fa-twitter] ken_hoff
+            a(href="https://twitter.com/ken_hoff") #[i.fab.fa-twitter] ken_hoff
