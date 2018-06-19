@@ -76,8 +76,13 @@
                 border-bottom: 2px solid #29506D;
                 font-weight: bold;
             }
+            ul li a {
+                border-bottom: 2px solid #29506D;
+                /* font-weight: bold; */
+
+            }
             ul.nascar {
-                font-size: 2em;
+                font-size: 1em;
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
@@ -85,8 +90,18 @@
             ul.nascar li {
                 display: inline-block;
             }
-            ul.nascar li:not(:first-child) {
+            ul.nascar li::after {
                 padding-left: 1em;
+                padding-right: 1em;
+                content: "·";
+            }
+            ul.nascar li:last-child::after {
+                padding-left: 1em;
+                padding-right: 1em;
+                content: none;
+            }
+            ul.nascar li:not(:first-child) {
+                /* padding-left: 1em; */
             }
             section {
                 padding: 4em 1.5em;
@@ -137,24 +152,20 @@
                     <strong>Ken Hoff</strong>.</h1>
                 <ul class="nascar">
                     <li>
-                        <a href="mailto:ken@hoff.tech" data-toggle="tooltip" data-placement="top" title="ken@hoff.tech">
-                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        </a>
+                        <a href="mailto:ken@hoff.tech">
+                            ken@hoff.tech</a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/thekenhoff/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
+                        <a href="https://www.linkedin.com/in/thekenhoff/">
+                            LinkedIn</a>
                     </li>
                     <li>
-                        <a href="https://github.com/kenhoff" data-toggle="tooltip" data-placement="top" title="GitHub">
-                            <i class="fa fa-github-alt" aria-hidden="true"></i>
-                        </a>
+                        <a href="https://github.com/kenhoff">
+                            GitHub</a>
                     </li>
                     <li>
-                        <a href="Ken-Hoff-Resume-2018-06-18.pdf" data-toggle="tooltip" data-placement="top" title="Resume">
-                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        </a>
+                        <a href="/Ken-Hoff-Resume-2018-06-18.pdf">
+                            Resumé</a>
                     </li>
                 </ul>
             </section>
@@ -169,7 +180,7 @@
                     years).
                 </p>
                 <p>
-                    I'm currently building scalable & personalized activity feeds as a Developer Advocate at
+                    I'm currently building scalable & personalized activity feeds as a Software Developer / Developer Advocate at
                     <a href="https://getstream.io/" target="_blank">Stream</a>.
                 </p>
                 <p>
@@ -226,11 +237,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         <script type="text/javascript">
             // do dumb javascript milliseconds shtick
-            var startDate = new Date("2013-12-05");
+            var startDate = new Date('2013-12-05');
             setInterval(function () {
                 var millisecondsElapsed = Date.now() - startDate;
-                document.getElementById("timeElapsedSSS").innerHTML = millisecondsElapsed;
-                document.getElementById("timeElapsedHR").innerHTML = (millisecondsElapsed / (1000 * 60 * 60 * 24 * 365)).toFixed(3)
+                document.getElementById('timeElapsedSSS').innerHTML = millisecondsElapsed;
+                document.getElementById('timeElapsedHR').innerHTML = (millisecondsElapsed / (1000 * 60 * 60 * 24 * 365)).toFixed(3);
             }, 11);
             // enable tooltips
             $(function () {
@@ -238,9 +249,9 @@
                     delay: {
                         hide: 4000
                     }
-                })
-                $('[data-toggle="tooltip"]').tooltip()
-            })
+                });
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>
     </body>
 </html>
