@@ -1,9 +1,13 @@
 {
   "dependencies": {
-    "jstransformer-markdown-it": "^2.0.0",
+    "eslint": "^5.0.0",
+    "jstransformer-markdown-it": "^2.1.0",
+    "jstransformer-pug": "^0.3.0",
     "metalsmith": "^2.3.0",
+    "metalsmith-branch": "^0.0.5",
     "metalsmith-changed": "^3.1.1",
+    "metalsmith-jstransformer": "^0.13.2",
     "metalsmith-pug": "^2.0.0",
-    "metalsmith-sass": "^1.4.0"
+    "metalsmith-sass": "^1.5.1"
   }
 }
