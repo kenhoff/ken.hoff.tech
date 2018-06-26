@@ -1,0 +1,8 @@
+//- debug.pug
+html
+    body
+        h1 Posts
+        ul
+            each val, index in postObjects
+                li
+                    a(href=`/${val.slug}`)= val.title
