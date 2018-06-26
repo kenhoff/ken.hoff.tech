@@ -1,0 +1,16 @@
+---
+title: Gish Mechanics
+date: 2012-08-01
+summary: Experiments in soft-body physics.
+links:
+  - url: https://github.com/kenhoff/gishmechanics
+    text: GitHub
+  - url: play
+    text: Play it here
+---
+
+![Screenshot from "Gish Mechanics"](gish_screen.png)
+
+[Gish](http://www.chroniclogic.com/gish.htm) is a 2D, side scrolling platformer made in 2005. The [source code](http://crypticsea.blogspot.com/2010/05/gish-open-source.html) was made available in 2010. I was interested in replicating the unique mechanics it used in a slightly more efficient and accessible format, so I created a tiny simulation of the player's character using WebGL. It's written entirely from scratch, using only Javascript, [WebGL](http://www.khronos.org/webgl/), and a glMatrix utility, without any physics libraries or game making software.
+
+[Play it here.](play)
