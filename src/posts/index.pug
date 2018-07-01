@@ -1,8 +1,13 @@
-//- debug.pug
-html
-    body
-        h1 Posts
-        ul
-            each val, index in postObjects
-                li
-                    a(href=`/${val.slug}`)= val.title
+extends ../layouts/main
+
+block content
+    .hofftech-container
+        section.title
+            h1 
+                strong Posts
+            each postGroup in postGroups
+                h2= postGroup.year
+                ul
+                    each post in postGroup.posts
+                        li
+                            a(href=`/${post.slug}` target="_self")= post.title

@@ -1,17 +1,12 @@
 extends ./layouts/main
 
 block content
-    header
-        .hofftech-container
-            div
-                strong Ken Hoff
-            div
-                a(href="mailto:ken@hoff.tech") ken@hoff.tech
     .hofftech-container
         section.hero
             h1 Hey there — I'm #[strong Ken Hoff].
             ul.nascar
                 li <a href="mailto:ken@hoff.tech">ken@hoff.tech</a>
+                li <a href="/posts" target="_self">posts</a>
                 <li>
                     <a href="https://www.linkedin.com/in/thekenhoff/">LinkedIn</a>
                 </li>
@@ -26,7 +21,7 @@ block content
         <img src="profile6.jpg" alt="" class="img-fluid">
         section.intro
             <h1>I'm a full-stack product engineer.</h1>
-            p I've been building things on the web professionally for exactly #[code#timeElapsedSSS ] milliseconds now (about #[span#timeElapsedHR ] years).
+            p I've been building things on the web professionally for exactly #[code#timeElapsedSSS] milliseconds now (about #[span#timeElapsedHR] years).
             p I'm currently building scalable & personalized activity feeds as a Software Developer / Developer Advocate at #[a(href="https://getstream.io/" target="_blank") Stream].
             p I formerly built prototypes, web apps and services for early-stage startups through #[a(href="https://hoff.tech") Hofftech], my consulting and services company.
         </section>
@@ -45,13 +40,6 @@ block content
             p <a href="https://www.linkedin.com/in/thekenhoff/">LinkedIn</a>
         </section>
     </div>
-    <footer>
-        <div class="hofftech-container">
-            span 🤖
-            span 🚀
-        </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+block body-scripts
     script(type="text/javascript" src="/assets/js/milliseconds.js")

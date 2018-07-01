@@ -36,7 +36,7 @@ We're still working on this: next time, we're thinking that it'd be awesome to h
 
 Carbs Against Hummus is hosted on the disgustingly-easy-to-use [site44](http://www.site44.com/) platform.
 
-The actual HTML of the site is built using [Pug](https://pugjs.org/), and the CSS is built using [Stylus](http://stylus-lang.com/). In the development environment, auto-rebuilding is accomplished using [Nodemon](https://nodemon.io/) and continuously rerunning `build.sh` (a.k.a. less of a [swiss](https://webpack.github.io/) [army](http://gulpjs.com/) [knife](http://gruntjs.com/), more of a [rock](<https://en.wikipedia.org/wiki/Make_(software) tied to a [stick](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)>).
+The actual HTML of the site is built using [Pug](https://pugjs.org/), and the CSS is built using [Stylus](http://stylus-lang.com/). In the development environment, auto-rebuilding is accomplished using [Nodemon](https://nodemon.io/) and continuously rerunning `build.sh` (a.k.a. less of a [swiss](https://webpack.github.io/) [army](http://gulpjs.com/) [knife](http://gruntjs.com/), more of a [rock](https://en.wikipedia.org/wiki/Make_(software)) tied to  [stick](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)).
 
 Check out all the [source code for Carbs Against Hummus on GitHub](https://github.com/kenhoff/carbsagainsthummus).
 

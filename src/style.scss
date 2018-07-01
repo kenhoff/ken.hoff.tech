@@ -44,10 +44,15 @@ body {
 .hofftech-container {
     margin: auto;
     max-width: 768px;
-}
-@media (min-width: 768px) {
-    .hofftech-container {
+    @media (min-width: 768px) {
         padding: 0 1.5em;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
     }
 }
 
@@ -67,30 +72,38 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
 
-footer .hofftech-container,
-header .hofftech-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    padding: 0 1.5em;
+    .hofftech-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        width: 100%;
+        padding: 0 1.5em;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+
+        > *:not(:first-child) {
+            margin-left: 1em;
+        }
+    }
 }
 
 header {
     top: 0;
     position: fixed;
-}
 
-header a,
-header a:active,
-header a:focus,
-header a:hover,
-header a:visited {
-    color: white;
-    /*text-decoration: none;*/
-    border-bottom: 2px solid white;
+    a,
+    a:active,
+    a:focus,
+    a:hover,
+    a:visited {
+        color: white;
+        border-bottom: 2px solid white;
+    }
 }
 
 a,
@@ -102,37 +115,40 @@ a:visited {
     text-decoration: none;
 }
 
-p a {
+a {
     border-bottom: 2px solid #29506D;
     font-weight: bold;
 }
 
-ul li a {
-    border-bottom: 2px solid #29506D;
-    /* font-weight: bold; */
-}
+// ul {
+//     li {
+//         a {
+//             border-bottom: 2px solid #29506D;
+//         }
+//     }
+// }
 
 ul.nascar {
     font-size: 1em;
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
 
-ul.nascar li {
-    display: inline-block;
-}
+    li {
+        display: inline-block;
 
-ul.nascar li::after {
-    padding-left: 1em;
-    padding-right: 1em;
-    content: "·";
-}
+        &::after {
+            padding-left: 1em;
+            padding-right: 1em;
+            content: "·";
+        }
 
-ul.nascar li:last-child::after {
-    padding-left: 1em;
-    padding-right: 1em;
-    content: none;
+        &:last-child::after {
+            padding-left: 0;
+            padding-right: 0;
+            content: none;
+        }
+    }
 }
 
 section {
@@ -143,6 +159,12 @@ section {
 
     h1 {
         margin-bottom: 1em;
+    }
+
+    &.title {
+        @media (min-width: 768px) {
+            padding: 4em 0;
+        }
     }
 }
 
@@ -167,4 +189,8 @@ section {
     color: white;
     font-weight: bolder;
     border-bottom: 2px solid white;
+}
+
+.breadcrumbs {
+    margin: 1.5em 0;
 }

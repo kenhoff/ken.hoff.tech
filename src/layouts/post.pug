@@ -1,1 +1,13 @@
-.post !{contents}
+extends ./main.pug
+
+block content
+    .hofftech-container
+        .breadcrumbs
+            a(href="/posts" target="_self") < back to posts
+        section.title
+            h1
+                strong= title
+            p= formattedDate
+        != contents
+        .breadcrumbs
+            a(href="/posts" target="_self") < back to posts

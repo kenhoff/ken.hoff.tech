@@ -1,5 +1,5 @@
 {
     "watch": "./src",
     "ignore": "./build",
-    "ext": "pug,js,md"
+    "ext": "pug,js,md,scss,html"
 }
