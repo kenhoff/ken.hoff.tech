@@ -19,7 +19,6 @@ Metalsmith(__dirname)
                         files[file].formattedDate = moment(
                             files[file].date
                         ).format("YYYY, MMMM Do");
-                        // console.log(files[file]);
                     }
                 }
                 return done();
@@ -33,7 +32,7 @@ Metalsmith(__dirname)
                     defaultLayout: "layouts/post.pug"
                 })
             )
-            .use(posts)
+            .use(posts())
     )
     .use((files, metalsmith, done) => {
         if (files["posts/index.pug"]) {
