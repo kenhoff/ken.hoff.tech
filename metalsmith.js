@@ -8,8 +8,8 @@ const moment = require("moment");
 const posts = require("./plugins/posts");
 
 Metalsmith(__dirname)
-    // .clean(false)
-    // .use(changed())
+    .clean(false)
+    .use(changed({forcePattern: ["posts/*/*.md", "layouts/**"]}))
     .use(
         branch()
             .pattern(["posts/*/*.md"])
