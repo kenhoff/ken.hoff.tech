@@ -150,19 +150,24 @@ ul.nascar {
     }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
 section {
     padding: 4em 1.5em;
     @media (min-width: 768px) {
         padding: 8em 0;
     }
-
-    h1 {
-        margin-bottom: 1em;
-    }
-
     &.title {
         @media (min-width: 768px) {
-            padding: 4em 0;
+            padding: 0;
         }
     }
 }
