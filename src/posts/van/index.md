@@ -1,13 +1,10 @@
 ---
-title: So I'm thinking about getting a van
+title: So I'm thinking about getting a van.
 summary: Road trips, US National Parks, and a 1986 VW Vanagon Syncro.
+date: 2016-12-19
 ---
 
-# So I'm thinking about getting a van.
-
---------------------------------------------------------------------------------
-
-## Road trips
+# Road trips
 
 A long, long time ago, my family was a big fan of road trips.
 
@@ -37,9 +34,9 @@ Driving alone for hours and hours is nice. Sometimes I put on music, sometimes I
 
 ![My 2000 Subaru Impreza 2.5RS](2.5rs.jpg)
 
---------------------------------------------------------------------------------
+* * *
 
-## Big Life Adventures
+# Big Life Adventures
 
 This July, I turned 27. Lots of my friends are buying houses, and are in serious relationships. I'm feeling the pressure (internally and externally) to start "settling", but I know that realistically, once I make that decision, a lot of options get closed off to me. Taking that "Big Life Adventure" gets to be harder and harder (but not impossible) once you've got a mortgage, or a marriage, or kids.
 
@@ -65,9 +62,9 @@ Financially and professionally, I'd be fine. I'm super fortunate that I've been 
 
 Let's do it. Let's go on that Big Life Adventure. Let's make a giant list of places to go, things to do, people to see. Let's try to check as many of them off as we can, before we can't anymore.
 
---------------------------------------------------------------------------------
+* * *
 
-## The car
+# The car
 
 The first question we have is what car to use. While I love my little 2000 Subaru Impreza 2.5RS, living in it would be miserable - it doesn't even have passthrough rear seats.
 
@@ -93,7 +90,7 @@ Lots of them use legit, modern-day vans, converted to be campers, but there was 
 
 I started doing my research on old VW vans. I vaguely remember a friend telling me once that the average price of VW vans has never gone down, even after accounting for inflation. After the vans that I've seen, I'm inclined to believe it.
 
-There's two kinds of antique VW vans that you need to know about - the [T2's](https://en.wikipedia.org/wiki/Volkswagen_Type_2) (the "bus") and the [T3's](<https://en.wikipedia.org/wiki/Volkswagen_Type_2_(T3) (the "Vanagon"). While the buses are the iconic, desirable VW van, they're also getting onto 75 years old. The Vanagons aren't as iconic, but they're water-cooled and fuel injected (as opposed to air-cooled and carbureted) and most are in much better condition.
+There's two kinds of antique VW vans that you need to know about - the [T2's](https://en.wikipedia.org/wiki/Volkswagen_Type_2) (the "bus") and the [T3's]\(&lt;[https://en.wikipedia.org/wiki/Volkswagen_Type_2_(T3](<https://en.wikipedia.org/wiki/Volkswagen_Type_2_(T3>)) (the "Vanagon"). While the buses are the iconic, desirable VW van, they're also getting onto 75 years old. The Vanagons aren't as iconic, but they're water-cooled and fuel injected (as opposed to air-cooled and carbureted) and most are in much better condition.
 
 ![](vanagon.jpg)
 
@@ -101,9 +98,9 @@ There's two kinds of antique VW vans that you need to know about - the [T2's](ht
 
 So, an old VW Vanagon satisfies almost all the requirements that I have. It's small, livable, hipster, and can fit in a shipping container. But, can it go offroad...
 
---------------------------------------------------------------------------------
+* * *
 
-## The Syncro
+# The Syncro
 
 So, prepare to learn about the Volkswagen Vanagon GL **Syncro**.
 
@@ -137,7 +134,7 @@ So. I'm trying to find an antique, rare, 30-year-old car in the $10k range, of w
 
 ![](reliant-robin.gif)
 
---------------------------------------------------------------------------------
+* * *
 
 It's been tough. No joking here. I tried to land one in Pittsburgh, but the guy changed his mind about selling it at the last minute. I was about to call a trailer to pick one up in Nederland, CO, but the guy bailed, saying that he was getting crazy offers and had to rethink it.
 
@@ -153,7 +150,7 @@ We still needed some way to pick up the van. Somehow TJ agreed to my Dad's crazy
 
 I talked the owner down from $7500 to $5750 (those parts aren't cheap!) and we agreed. He's owned the van for 17 years, so he was a little sentimental about getting rid of it - totally understandable. Definitely going to keep in touch with the guy, and see if I can visit during my trip.
 
---------------------------------------------------------------------------------
+* * *
 
 So, here we are. TJ and I are leaving to drive to Wisconsin tomorrow afternoon, to pick up a 1986 VW Vanagon GL Syncro and drive it back to Colorado. For the next couple months, I'm going to do a bunch of work on it and start testing it out for road trips and vanlife. In August, I'm going to take it out on an epic mega road trip, visiting all the US National Parks and lots more along the way.
 
