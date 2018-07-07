@@ -1,3 +1,4 @@
+$blue: #29506D;
 @font-face {
     font-family: Whitney;
     font-style: light;
@@ -58,7 +59,7 @@ body {
 
 .highlight {
     background-color: yellow;
-    border-bottom: 2px dashed #29506D;
+    border-bottom: 2px dashed $blue;
     padding: 0 0.25em;
 }
 
@@ -66,7 +67,7 @@ footer,
 header {
     color: white;
     height: 3em;
-    background-color: #29506D;
+    background-color: $blue;
     z-index: 1;
     width: 100%;
     display: flex;
@@ -111,18 +112,18 @@ a:active,
 a:focus,
 a:hover,
 a:visited {
-    color: #29506D;
+    color: $blue;
     text-decoration: none;
 }
 
 a {
-    border-bottom: 2px solid #29506D;
+    border-bottom: 2px solid $blue;
     font-weight: bold;
 }
 // ul {
 //     li {
 //         a {
-//             border-bottom: 2px solid #29506D;
+//             border-bottom: 2px solid $blue;
 //         }
 //     }
 // }
@@ -165,6 +166,7 @@ section {
     @media (min-width: 768px) {
         padding: 8em 0;
     }
+
     &.title {
         @media (min-width: 768px) {
             padding: 0;
@@ -183,7 +185,7 @@ section {
         li {
             margin: auto;
             text-align: center;
-            border-bottom: 2px solid #29506D;
+            border-bottom: 2px solid $blue;
             font-weight: bold;
         }
     }
@@ -202,4 +204,32 @@ section {
 hr {
     // padding: 3em 0;
     margin: 3em;
+}
+
+blockquote {
+    font-style: oblique;
+    border-left: 2px solid $blue;
+    padding-left: 1em;
+    color: gray;
+}
+
+pre {
+    background-color: lightgray;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+ol,
+p,
+ul {
+    code {
+        color: $blue;
+    }
 }
