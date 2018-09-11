@@ -9,7 +9,7 @@ const posts = require("./plugins/posts");
 
 Metalsmith(__dirname)
     .clean(false)
-    .use(changed({forcePattern: ["posts/*/*.md", "layouts/**"]}))
+    .use(changed({forcePattern: ["posts/*/*.md", "layouts/**", "posts/index.pug"]}))
     .use(
         branch()
             .pattern(["posts/*/*.md"])

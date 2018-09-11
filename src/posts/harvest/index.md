@@ -81,7 +81,7 @@ Seems like kind of a roundabout way to do it, but hey it's a web app! Which mean
 
 # The crew
 
-I cannot express how thankful I was to have such an amazing team of creatives on this project.
+I cannot express how thankful I am to have had such an amazing team of creatives on this project. Seriously, I'm just the code
 
 Darrell
 <a href="https://twitter.com/HardyTales">@HardyTales</a>
