@@ -63,6 +63,8 @@ In this case, I described it as "near-future americana". Think about rural Ameri
 
 # What we ended up building
 
+_Harvest_ is a narrative, text-based, choose-your-own-adventure game, set in near-future americana. Part of the fun of the game is getting to try to figure out 
+
 # Tech deets
 
 Oh man. This was a bit of a...densely-engineered one.
@@ -81,14 +83,14 @@ Seems like kind of a roundabout way to do it, but hey it's a web app! Which mean
 
 # The crew
 
-I cannot express how thankful I am to have had such an amazing team of creatives on this project. Seriously, I'm just the code
+I cannot express how thankful I am to have had such an amazing team of creatives on this project. Seriously, I'm just the code monkey here, and there's absolutely no way this game would have turned out as well without all of the crazy talented people I got to work with.
 
-Darrell
-<a href="https://twitter.com/HardyTales">@HardyTales</a>
-Elizabeth
-<a href="https://twitter.com/lizbernhardt">@lizbernhardt</a>
-Jojo
-<a href="https://twitter.com/Ippika_">@Ippika\_</a>
-Joshua
-<a href="https://twitter.com/JoshuaDuChene">@JoshuaDuChene</a>
+[Darrell (@HardyTales)](https://twitter.com/HardyTales)
+
+[Elizabeth (@lizbernhardt)](https://twitter.com/lizbernhardt)
+
+[Jojo (@Ippika)](https://twitter.com/Ippika_)
+
+[Joshua (@JoshuaDuChene)](https://twitter.com/JoshuaDuChene)
+
 Terrence
