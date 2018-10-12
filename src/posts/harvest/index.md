@@ -11,9 +11,7 @@ Hey there! Back again, with another Global Game Jam. This time it's for 2018!
 
 # How game jams work
 
-![](harvest-2.png) 
-
-# The theme
+Game jams are 48-hour weekend events where the goal is to build a game by the end of the event. Sometimes they're competitions (like [Ludum Dare](http://ldjam.com/)), but Global Game Jam is a just-for-fun kind of jam.
 
 Usually what happens at these things is that everybody trickles in, sets up their workspaces, and gets together (around 6pm local time) in a big room to watch The Keynote.
 
@@ -22,6 +20,8 @@ The keynote is pretty much what you'd expect - some prominent members of the gam
 Then, they reveal the theme!
 
 This year, the theme was **transmission**. It's a pretty good theme - previous GGJ themes included ["ritual"](/posts/small-sacrifices), ["what do we do now"](/posts/maniac-mystery-mansion), and ["we don't see things as they are, we seem them as we are"](/posts/the-facility).
+
+![](harvest-2.png) 
 
 > ## An aside in which Ken rants about game jam themes
 >
@@ -43,7 +43,7 @@ I knew going into the jam that I was interested in doing some type of choose-you
 
 The thing that's kind of critical for a narrative-based game? Writers. Ken don't use words too good.
 
-This was the first time that I've actively recruited for
+This was the first time that I've actively recruited for other team members, and I was just looking for writers. I got 3 of them!
 
 # Ideation
 
@@ -63,7 +63,9 @@ In this case, I described it as "near-future americana". Think about rural Ameri
 
 # What we ended up building
 
-_Harvest_ is a narrative, text-based, choose-your-own-adventure game, set in near-future americana. Part of the fun of the game is getting to try to figure out 
+_Harvest_ is a narrative, text-based, choose-your-own-adventure game, set in near-future americana. The main fun of the game is getting to try to figure out what the story is - what's happened before the game, and what's going to happen after the game is over!
+
+All of the interaction with the game comes from dialogue choices - that means that the gameplay isn't super deep, but that's alright! The point of these games is to show off the art, sounds, and writing of the team.
 
 # Tech deets
 
@@ -85,12 +87,12 @@ Seems like kind of a roundabout way to do it, but hey it's a web app! Which mean
 
 I cannot express how thankful I am to have had such an amazing team of creatives on this project. Seriously, I'm just the code monkey here, and there's absolutely no way this game would have turned out as well without all of the crazy talented people I got to work with.
 
+Go check them out on Twitter, and hire them for your next project!
+
 [Darrell (@HardyTales)](https://twitter.com/HardyTales)
 
 [Elizabeth (@lizbernhardt)](https://twitter.com/lizbernhardt)
 
-[Jojo (@Ippika)](https://twitter.com/Ippika_)
+[Jojo (@Ippika\_)](https://twitter.com/Ippika_)
 
 [Joshua (@JoshuaDuChene)](https://twitter.com/JoshuaDuChene)
-
-Terrence
