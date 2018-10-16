@@ -1,0 +1,484 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Montserrat" rel="stylesheet" />
+        <link rel="stylesheet" href="../legacy-slides-assets/slides.css" />
+        <base target="_blank" />
+    </head>
+</html>
+<body>
+    <div>
+        <section class="slide">
+            <h1 id="denverscript-unit-testing-react-components">DenverScript: Unit Testing React Components</h1>
+            <p>Ken Hoff, <a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a></p>
+            <p>2017-01-24</p>
+        </section>
+        <section class="slide">
+            <h1 id="hi-i-m-ken-">Hi! I&#39;m Ken.</h1>
+            <p>A little about me:</p>
+            <ul>
+                <li>Graduated CU Boulder Computer Science in 2013</li>
+                <li>Worked at Microsoft for a few years (Program Manager, Azure Active Directory)</li>
+                <li>Currently doing full-stack web dev consulting and services, based out of Boulder<ul>
+                        <li>Usually work with aspiring startups that need MVPs built - things like &quot;Facebook for Dogs&quot; or &quot;<a href="https://hoff.tech/projects/the-glass-game/">Craigslist for Bongs</a>&quot;</li>
+                    </ul>
+                </li>
+                <li>Teach Frontend Web Dev classes at <a href="http://www.sparkboulder.com/">Spark Boulder</a></li>
+                <li>Lots more about me and my work at <a href="https://hoff.tech/">https://hoff.tech/</a></li>
+                <li>Fun fact: I&#39;m building out an <a href="https://www.instagram.com/originalsearchengine/">old VW van</a> to tour all the US National Parks in August</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="tonight-s-agenda-">Tonight&#39;s agenda:</h1>
+            <ul>
+                <li><strong>~30min</strong> - Unit Testing React Components</li>
+                <li><strong>~5-10min</strong> - questions</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="things-that-you-should-already-know">Things that you should already know</h1>
+            <ul>
+                <li>how to build a simple React component</li>
+                <li>how to transpile a React component and the associated libraries into JavaScript (either via babel, or a bundler w/ babel presets/plugins)</li>
+                <li>basic testing practices, frameworks, spies/stubs/mocks</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="things-that-we-re-going-to-learn-tonight">Things that we&#39;re going to learn tonight</h1>
+            <ul>
+                <li>rendering your react components into a synthetic DOM</li>
+                <li>querying the synthetic DOM for info</li>
+                <li>stubbing/mocking methods and components inside your react components</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="things-that-we-re-not-going-to-focus-on-tonight">Things that we&#39;re <strong>not</strong> going to focus on tonight</h1>
+            <ul>
+                <li>advanced testing practices</li>
+                <li>how to write awesome React components</li>
+                <li>configuring webpack in wild and wacky ways</li>
+                <li>working with a react-specific testing framework (react shallow testing, jest, enzyme)</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="unit-testing-react-components-summed-up-">Unit Testing React Components, summed up:</h1>
+            <p>(from the <a href="http://airbnb.io/enzyme/docs/api/mount.html">Enzyme docs</a>)</p>
+            <p>&quot;Full DOM rendering is ideal for use cases where you have components that may interact with DOM APIs, or may require the full lifecycle in order to fully test the component (i.e., componentDidMount etc.)</p>
+            <p>Full DOM rendering requires that a <strong>full DOM API be available at the global scope</strong>. This means that it must be run in an environment that at least &quot;looks like&quot; a browser environment. If you do not want to run
+                your tests inside of a browser, the recommended approach to using mount is to depend on a library called jsdom which is essentially a headless browser implemented completely in JS.&quot;</p>
+            <p>(emphasis mine)</p>
+            <p>You&#39;ll find that most of unit testing React components is <strong>just an exercise in managing global scope</strong>.</p>
+            <p>You can unit test <strong>any</strong> kind of frontend JavaScript using the same principles. (React and other frameworks usually come with some utilities to make it a little bit easier.)</p>
+        </section>
+        <section class="slide">
+            <h1 id="a-simple-todolist-app">A simple TodoList app</h1>
+            <p>You can find all of the code for this presentation at <a href="https://github.com/kenhoff/unit-testing-react-components">https://github.com/kenhoff/unit-testing-react-components</a></p>
+            <p>First, let&#39;s get our <code>index.html</code> and webpack config set up:</p>
+            <pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        This is where our app goes!
+    &lt;/div&gt;
+    &lt;!-- our app script needs to go after #app, so that it can mount the react component there  --&gt;
+    &lt;script src=&quot;./build/app.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+            <pre><code class="lang-javascript">// webpack.config.js
+
+module.exports = {
+    entry: &#39;./src/app.jsx&#39;,
+    output: {
+        filename: &#39;./build/app.js&#39;
+    },
+    module: {
+        loaders: [{
+            test: /\.jsx/,
+            exclude: /(node_modules|bower_components)/,
+            loader: &#39;babel-loader&#39;,
+            query: {
+                presets: [&#39;es2015&#39;, &#39;react&#39;]
+            }
+        }]
+    }
+}
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="rendering-todolist-onto-the-browser-page-the-bundle-entry-point">Rendering TodoList onto the browser page - the bundle entry point</h1>
+            <p>Then, let&#39;s create the entry point for our bundle, that renders the TodoList onto the page.</p>
+            <p>We&#39;re keeping the component separate from the code that mounts the component onto the page - so that we can test the component later, without rendering the component using ReactDOM.</p>
+            <pre><code class="lang-javascript">// src/app.jsx
+
+var React = require(&quot;react&quot;)
+var ReactDOM = require(&quot;react-dom&quot;);
+
+var TodoListReactComponent = require(&quot;./TodoListReactComponent.jsx&quot;)
+
+ReactDOM.render((
+    &lt;TodoListReactComponent&gt;&lt;/TodoListReactComponent&gt;
+), document.getElementById(&#39;app&#39;));
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="the-actual-todolist-component">The actual TodoList component</h1>
+            <p>(I&#39;ve tried to keep it simple by using ES5 features only, but I&#39;ll use ES6 arrow functions where it makes sense)</p>
+            <pre><code class="lang-javascript">// src/TodoListReactComponent.jsx
+
+var React = require(&quot;react&quot;);
+
+var TodoListReactComponent = React.createClass({
+    getInitialState: function() {
+        return {todos: [], todoInput: &quot;&quot;};
+    },
+    render: function () {
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Your todos:&lt;/h1&gt;
+                &lt;ul&gt;
+                    {this.state.todos.map((todo) =&gt; {
+                        return (
+                            &lt;li key={Math.random()}&gt;
+                                &lt;span&gt;{todo}&lt;/span&gt;
+                                &lt;button onClick={(e) =&gt; {
+                                    var newTodos = this.state.todos.slice();
+                                    newTodos.splice(newTodos.indexOf(todo), 1);
+                                    this.setState({todos: newTodos});
+                                }}&gt;remove todo&lt;/button&gt;
+                            &lt;/li&gt;
+                        )
+                    })}
+                &lt;/ul&gt;
+                &lt;form ref=&quot;newTodoForm&quot; onSubmit={(e) =&gt; {
+                    e.preventDefault();
+                    var newTodos = this.state.todos.slice();
+                    newTodos.push(this.state.todoInput);
+                    this.setState({todos: newTodos, todoInput: &quot;&quot;});
+                }}&gt;
+                    &lt;input ref=&quot;newTodoField&quot; onChange={(e) =&gt; {
+                        this.setState({todoInput: e.target.value});
+                    }} value={this.state.todoInput}&gt;&lt;/input&gt;
+                    &lt;input type=&quot;submit&quot; value=&quot;Add Todo&quot;&gt;&lt;/input&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+        // a couple notes -
+        // when the input text box is changed, change the state to reflect the new change. you _can_ use uncontrolled inputs, but in almost every situation, I&#39;ve been much happier using controlled inputs. (check out https://facebook.github.io/react/docs/forms.html and https://facebook.github.io/react/docs/uncontrolled-components.html for more info.)
+        // have to create a new array for the todos, push the new one on, then set the state with the new todos. have to treat existing state as immutable!
+        // using a form instead of just inputs and buttons. builtin support for hitting enter, and works better with mobile web keyboards! however, we have to use e.preventDefault() to prevent the browser from navigating to a new page.
+        // ES2015 gives us all sorts of fun things, like class definitions and arrow functions, but I&#39;m trying to limit their use here. generally, I&#39;ll use an arrow function wherever I want to avoid using `.bind(this)` on a function.
+    }
+});
+
+module.exports = TodoListReactComponent;
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="does-it-work-">Does it work?</h1>
+            <p>Let&#39;s find out!</p>
+            <p>(this is the part where you hook all of the code together, and find out if you have a simple React TodoList that works as expected)</p>
+        </section>
+        <section class="slide">
+            <h1 id="hooray-it-works-">Hooray! It works!</h1>
+            <p>(hopefully)</p>
+        </section>
+        <section class="slide">
+            <h1 id="next-testing-our-todolist-component">Next: testing our TodoList component</h1>
+            <p>If this was pure JS class, without any connections to the browser API (like document.createElement), this would be pretty straightforward - we&#39;d just <code>require(./TodoList.js)</code>, call some methods and use some <code>assert</code>
+                calls.</p>
+            <p>(but this isn&#39;t a pure JS class - it&#39;s a React component, which has a lot of React function calls, which in turn call the browser API a lot)</p>
+            <p>In the days of Ye Olde Web 2.0 Application Development, you might have had a full testing pipeline set up with Selenium and PhantomJS. You&#39;d have to run the PhantomJS binary, which would listen on a port that Selenium would
+                connect to, and then you&#39;d make calls to Selenium using a driver, and that would get the browser to query and manipulate the page.</p>
+            <p>(I know it&#39;s possible to do, but in my personal experience, I&#39;ve <em>never</em> been able to get it to work correctly. Getting PhantomJS and Selenium to play nicely <strong>consistently</strong> requires just a bit more
+                sysadmin knowledge than I currently have.)</p>
+            <p>So! What do we do?</p>
+        </section>
+        <section class="slide">
+            <h1 id="creating-a-fake-browser-api">Creating a fake browser API</h1>
+            <p>When a React component mounts, renders, and updates, it calls the browser API - a bunch of methods attached to the <code>window.document</code> element in the browser&#39;s global scope. Things like <code>document.createElement()</code>
+                and <code>document.getElementsByTagName()</code>.</p>
+            <p>So, if we can &quot;fake&quot; (&quot;stubbing&quot;, in testing lingo) the <code>document.createElement</code> method, we can theoretically render our TodoList element into the browser - React can call the <code>document.createElement</code>
+                method, and it won&#39;t throw an error.</p>
+            <p>(Of course, React calls other methods besides <code>document.createElement</code> - we would need to stub out all the other methods too.)</p>
+            <p>And, of course, we&#39;d want to be sure that after calling those methods (<code>document.createElement</code>), that calls to other methods (for example, <code>document.getElementsByTagName</code>) returns back the right information.</p>
+            <p>Essentially, this requires us to build a DOM, along with all of the API methods to manipulate it. Which is basically like building a full browser! And I don&#39;t get paid enough (yet) to do that!</p>
+        </section>
+        <section class="slide">
+            <h1 id="enter-jsdom">Enter JSDOM</h1>
+            <p><a href="https://github.com/tmpvar/jsdom">JSDOM</a> stands for JavaScript Document Object Model. It&#39;s basically a 1:1 representation of a DOM, plus the full browser API to back - we can make calls to <code>document.createElement</code>,
+                then use <code>document.getElementsByTagName</code> to get those new elements back.</p>
+            <p>JSDOM doesn&#39;t render anything! It&#39;s written entirely in JavaScript, which means that it&#39;s trivial to download from <code>npm</code> and run just as you would any other JavaScript file, with node.</p>
+        </section>
+        <section class="slide">
+            <h1 id="setting-up-jsdom">Setting up JSDOM</h1>
+            <p>In our new <code>test</code> directory:</p>
+            <pre><code class="lang-javascript">// test/setupJSDOM.js
+// liberally borrowed from http://jaketrent.com/post/testing-react-with-jsdom/
+
+console.log(&quot;Setting up jsdom...&quot;);
+var jsdom = require(&#39;jsdom&#39;);
+global.document = jsdom.jsdom(&#39;&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#39;);
+global.window = document.defaultView;
+global.window.localStorage = {
+    getItem: function() {},
+    setItem: function() {}
+};
+
+// take all properties of the window object and also attach it to the global object
+// (like being able to call `document` on its own, without using `window.document`)
+propagateToGlobal(global.window);
+
+// from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
+function propagateToGlobal(window) {
+    for (var key in window) {
+        if (!window.hasOwnProperty(key)) continue;
+        if (key in global) continue;
+
+        global[key] = window[key];
+    }
+}
+
+console.log(&quot;Done setting up jsdom&quot;);
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="testing-with-mocha">Testing with Mocha</h1>
+            <p>Running <code>mocha</code> by default runs all files and tests in the <code>test</code> directory.</p>
+            <pre><code>&gt; mocha
+Setting up jsdom...
+Done setting up jsdom
+
+
+  0 passing (0ms)
+</code></pre>
+            <p>We don&#39;t have any tests yet, and that&#39;s expected. But if we were to try to <code>console.log</code> out <code>document</code> or some of its methods, we would see roughly the same stuff that we would see in a browser!</p>
+        </section>
+        <section class="slide">
+            <h1 id="bundling-up-our-tests-and-running-it-in-jsdom">Bundling up our tests and running it in JSDOM</h1>
+            <p>Just like our normal app, we need to render our TodoList component into the synthetic DOM.</p>
+            <p>Normally I&#39;d use <code>ReactDOM.render()</code>, but <a href="https://facebook.github.io/react/docs/test-utils.html">ReactTestUtils</a> gives us a bunch of fun methods that make it easier to test React components. Neat!</p>
+            <p>In <code>test-jsx</code>, I&#39;m going to create the entry point for my test bundle, and use <code>ReactTestUtils.renderIntoDocument()</code>.</p>
+            <pre><code class="lang-javascript">// test-jsx/TodoListReactComponent.jsx
+
+const React = require(&quot;react&quot;);
+const ReactTestUtils = require(&quot;react-addons-test-utils&quot;);
+const assert = require(&quot;assert&quot;);
+
+const TodoListReactComponent = require(&quot;../src/TodoListReactComponent.jsx&quot;);
+
+let renderedComponent;
+
+define(&quot;tests for our TodoList component&quot;, function() {
+    console.log(&quot;Rendering component into DOM...&quot;);
+    renderedComponent = ReactTestUtils.renderIntoDocument(
+        &lt;TodoListReactComponent&gt;&lt;/TodoListReactComponent&gt;
+    );
+    console.log(&quot;Done rendering component into DOM&quot;);
+})
+</code></pre>
+            <p>We&#39;ll also need a <strong>second</strong> webpack config, just for our test suite. (The horror!)</p>
+            <pre><code class="lang-javascript">// webpack.config.js
+
+module.exports = {
+    entry: &#39;./test-jsx/TodoListReactComponent.test.jsx&#39;,
+    output: {
+        filename: &#39;./test/test-bundle.js&#39;
+    },
+    module: {
+        loaders: [{
+            test: /\.jsx/,
+            exclude: /(node_modules|bower_components)/,
+            loader: &#39;babel-loader&#39;,
+            query: {
+                presets: [&#39;react&#39;, &#39;es2015&#39;]
+            }
+        }]
+    }
+}
+</code></pre>
+            <p>(it may be possible to generate both the app and test bundle with a single webpack config, but I&#39;ll leave that as an exercise to the reader.)</p>
+        </section>
+        <section class="slide">
+            <h1 id="does-it-work-">Does it work?</h1>
+            <p>Let&#39;s find out!</p>
+            <p>Build the test bundle with <code>webpack --config webpack.test.config.js</code>, and run the tests with <code>mocha</code></p>
+            <p>(but Ken, what about race conditions?)</p>
+        </section>
+        <section class="slide">
+            <h1 id="hooray-it-works-">Hooray! It works!</h1>
+            <p>If you see something like this, you&#39;re doing it right:</p>
+            <pre><code>mocha -w test
+
+Setting up jsdom...
+Done setting up jsdom
+Rendering component into DOM...
+Done rendering component into DOM
+
+
+  0 passing (1ms)
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="querying-the-synthetic-dom-to-get-information-about-what-s-been-rendered">Querying the synthetic DOM to get information about what&#39;s been rendered</h1>
+            <p>Now that we&#39;ve rendered our component into our DOM, we can query it to make sure that the right stuff has been rendered.</p>
+            <p>I&#39;d recommend using the <a href="https://facebook.github.io/react/docs/test-utils.html#findrendereddomcomponentwithtag">ReactTestUtils</a> methods for this kind of stuff - you can even query by React Component types, not just tags
+                and class names!</p>
+            <pre><code class="lang-javascript">it(&quot;renders an h1 with \&quot;Your todos:\&quot;&quot;, function() {
+    assert.equal(ReactTestUtils.findRenderedDOMComponentWithTag(renderedComponent, &quot;h1&quot;).innerHTML, &quot;Your todos:&quot;);
+})
+</code></pre>
+            <p>(Note: You actually have to use ReactTestUtils. For some reason, I&#39;ve never been able to get <code>document.getElementsByTagName</code> to work. If you think you know why and you want to show off your JS kung fu, give it a shot
+                during the questions section!)</p>
+        </section>
+        <section class="slide">
+            <h1 id="sending-clicks-and-keypresses-into-your-rendered-component">Sending clicks and keypresses into your rendered component</h1>
+            <p>Next, we want to make sure that any <em>interaction</em> with the component results in the proper <em>manipulation</em> of the component:</p>
+            <pre><code class="lang-javascript">it(&quot;adds a new todolist item&quot;, function() {
+    // using refs to get/set underlying HTML elements. Not a fan - probably possible to work around it
+
+    let newTodoField = renderedComponent.refs.newTodoField;
+    newTodoField.value = &quot;This is a new todolist item!&quot;
+    ReactTestUtils.Simulate.change(newTodoField);
+
+    let newTodoForm = renderedComponent.refs.newTodoForm
+    ReactTestUtils.Simulate.submit(newTodoForm);
+    let todoListItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(renderedComponent, &quot;li&quot;)
+    assert.equal(todoListItems.length, 1);
+    assert.equal(todoListItems[0].innerHTML, &quot;&lt;span&gt;This is a new todolist item!&lt;/span&gt;&lt;button&gt;remove todo&lt;/button&gt;&quot;);
+})
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="stubbing-spying-and-mocking-out-functions-and-other-components">Stubbing, Spying, and Mocking out functions and other components</h1>
+            <p>In true Stack Overflow fashion, the biggest question is &quot;how do I do this with jQuery?&quot;</p>
+            <p>First, let&#39;s have our TodoList check the weather when it mounts, so that we can add a &quot;bring a jacket&quot; todo if necessary. We&#39;ll also install jQuery via CDN.</p>
+            <pre><code class="lang-javascript">componentDidMount: function() {
+    $.ajax(&quot;http://api.openweathermap.org/data/2.5/weather?zip=80206,us&amp;appid=d7080b0bfa9ef49bad4a168e685ed2f0&quot;).done((data) =&gt; {
+        if (data.main.temp &lt; 288.706) { // because kelvin!
+            let newTodos = this.state.todos.slice()
+            newTodos.push(&quot;Bring a jacket!&quot;)
+            this.setState({todos: newTodos});
+        }
+    })
+}
+</code></pre>
+            <pre><code class="lang-html">&lt;script src=&quot;https://code.jquery.com/jquery-3.1.1.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+            <p>This works great when manually testing in the browser, but it breaks our JSDOM tests :(</p>
+            <pre><code>ReferenceError: $ is not defined
+    at componentDidMount (/Users/ken/dev/unit-testing-react-components/test/test-bundle.js:23290:4)
+    at /Users/ken/dev/unit-testing-react-components/test/test-bundle.js:15764:26
+    (etc)
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="stubbing-spying-and-mocking-out-functions-and-other-components">Stubbing, Spying, and Mocking out functions and other components</h1>
+            <p>We&#39;re going to switch up our testing file, so that we can isolate each one of our tests, and provide an initial stubbing of jQuery:</p>
+            <pre><code class="lang-javascript">// test-jsx/TodoListReactComponent.jsx
+
+const React = require(&quot;react&quot;);
+const ReactTestUtils = require(&quot;react-addons-test-utils&quot;);
+const assert = require(&quot;assert&quot;);
+
+const TodoListReactComponent = require(&quot;../src/TodoListReactComponent.jsx&quot;);
+
+let renderedComponent;
+
+define(&quot;tests for our TodoList component&quot;, function() {
+    beforeEach(function() {
+        $ = {
+            ajax: function() {
+                return {
+                    done: function(cb) {
+                        cb({
+                            main: {
+                                temp: 0
+                            }
+                        })
+                    }
+                }
+            }
+        }
+
+        renderedComponent = ReactTestUtils.renderIntoDocument(
+            &lt;TodoListReactComponent&gt;&lt;/TodoListReactComponent&gt;
+        );
+    })
+    it(&quot;renders an h1 with \&quot;Your todos:\&quot;&quot;, function() {
+        assert.equal(ReactTestUtils.findRenderedDOMComponentWithTag(renderedComponent, &quot;h1&quot;).innerHTML, &quot;Your todos:&quot;);
+    })
+    it(&quot;adds a new todolist item&quot;, function() {
+        // using refs to get/set underlying HTML elements. Not a fan - probably possible to work around it
+        let newTodoField = renderedComponent.refs.newTodoField;
+        newTodoField.value = &quot;This is a new todolist item!&quot;
+        ReactTestUtils.Simulate.change(newTodoField);
+        let newTodoForm = renderedComponent.refs.newTodoForm
+        ReactTestUtils.Simulate.submit(newTodoForm);
+        let todoListItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(renderedComponent, &quot;li&quot;);
+        assert.equal(todoListItems.length, 2);
+        assert.equal(todoListItems[1].innerHTML, &quot;&lt;span&gt;This is a new todolist item!&lt;/span&gt;&lt;button&gt;remove todo&lt;/button&gt;&quot;);
+    })
+    it(&quot;adds a \&quot;Bring a jacket!\&quot; todo after making a call to jQuery&quot;, function() {
+        let todoListItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(renderedComponent, &quot;li&quot;);
+        assert.equal(todoListItems.length, 1);
+        assert.equal(todoListItems[0].innerHTML, &quot;&lt;span&gt;Bring a jacket!&lt;/span&gt;&lt;button&gt;remove todo&lt;/button&gt;&quot;);
+    })
+})
+</code></pre>
+            <p>This <strong>technically</strong> works. But there&#39;s some considerations you have to make:</p>
+            <ol>
+                <li>We&#39;ll have to adjust all of our other tests to account for the &quot;Bring a jacket!&quot; todolist item getting added.</li>
+                <li>Our fake jQuery object is a stub, but does not include any of the super-convenient inspection/manipulation methods that a full-featured library like Sinon offers.</li>
+                <li>You, Savvy Full Stack JavaScript Developer, wouldn&#39;t be caught dead serving assets from a CDN, or even from another file. You&#39;d be bundling them together! You should probably check out <a href="https://github.com/jhnns/rewire">rewire</a>,
+                    which is sort of like standard require, but allows you to manipulate all of the member variables and methods when you import stuff.</li>
+                <li>There might be times when you want to render a component into JSDOM, but not render all of the sub-components and sub-sub-components that it renders by default. You used to have to mock this stuff out using rewire, but React has
+                    recently introduced the <code>[mockComponent()](https://facebook.github.io/react/docs/test-utils.html#mockcomponent)</code> function into ReactTestUtils - check it out.</li>
+            </ol>
+        </section>
+        <section class="slide">
+            <h1 id="in-true-frontend-web-dev-fashion-this-technique-may-already-be-obsolete">In true Frontend Web Dev fashion, this technique may already be obsolete</h1>
+            <p>Like the comings and goings of our favorite frameworks, there may <em>already</em> be a better solution for this!</p>
+            <p>sorry :(</p>
+            <p>But don&#39;t worry! Now you know <em>how</em> it works, which is probably more important if you&#39;re going to implement/debug it in the future.</p>
+            <p>If you&#39;re interested in picking up the latest and greatest JavaScript testing libraries and frameworks, check out <a href="https://github.com/avajs/ava">Ava.js</a> and <a href="https://github.com/airbnb/enzyme">Enzyme</a>! I
+                believe Enzyme already bundles in JSDOM, which makes it <em>super</em> easy to use! :O</p>
+        </section>
+        <section class="slide">
+            <h1 id="obligatory-hofftech-pitch">Obligatory Hofftech Pitch</h1>
+            <p>If you or someone you know wants an app built, let me know! I&#39;m starting to book clients for 2017.</p>
+            <p>If you want to go grab coffee, chat about the industry, or get some eyes on your code, hit me up! Totally down to hang out with other people in the industry.</p>
+            <p>And if you&#39;re looking for work, get in touch! I&#39;m always looking for reliable subcontractors with diverse skills that can assist on projects.</p>
+            <p>Contact is best at <a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a>.</p>
+        </section>
+        <section class="slide">
+            <h1 id="what-questions-are-there-">What questions are there?</h1>
+            <p>(remind me to repeat every question so the mic can pick it up)</p>
+            <p>Afterwards - come find me and ask me questions! I&#39;ve got business cards! Say hi at <a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a>!</p>
+        </section>
+    </div>
+    <footer><a class="location">asdfasdfasdf</a><a class="contact" href="mailto:ken@hoff.tech">ken@hoff.tech</a></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/deck.js/1.1.0/core/deck.core.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+    <script>
+        $(function() {
+            $.deck.defaults.hashPrefix = ""
+            $.deck('.slide');
+        });
+    </script>
+    <script>
+        $(".location").text(window.location).prop("href", window.location)
+        $(document).bind("deck.change", function(event, from, to) {
+            newURL = [window.location.href.split("#")[0], to].join("#")
+            $(".location").text(newURL).prop("href", newURL)
+        })
+    </script>
+</body>

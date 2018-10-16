@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Web Dev 101 - CSCI 448</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/css/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/css/theme/night.min.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css" media="screen" title="no title" charset="utf-8">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Web Dev 101</h1>
+					<h3>CSM, CSCI 448 - Mobile App Dev</h3>
+					<p>
+						Ken Hoff, <a href="https://hoff.tech">hoff.tech</a>
+					</p>
+					<p>
+						2016.04.27 - 2016.04.29
+					</p>
+					<p>
+						<a href="#/0">Part 1</a> - <a href="#/33">Part 2</a>
+					</p>
+				</section>
+				<section>
+					<p>
+						Follow along in the slides at <a href="https://hoff.tech/slides/csci448">hoff.tech/slides/csci448</a>
+					</p>
+				</section>
+				<section>
+					<h3>
+						Before we begin, you'll need some tools:
+					</h3>
+					<ol>
+						<li><b>A browser</b> (Chrome is best, Firefox is fine)</li>
+						<li><b>A command line</b> (Terminal on Mac, cmd.exe/Powershell on PC)</li>
+						<li><b>A text editor</b> (I use <a href="https://atom.io/">Atom</a>, whatever you're comfortable with works too. Even Notepad!)</li>
+						<li><b>Node.js</b> (If you haven't done so, <a href="https://nodejs.org/">go download it now!</a> <span class="muted">Should already be installed on the lab computers</span>)</li>
+					</ol>
+				</section>
+				<section>
+					<h3>a little about Ken Hoff (that's me!)</h3>
+					<ul>
+						<li>CU Boulder, Computer Science, 2013</li>
+						<li>Microsoft 2014-2016-ish</li>
+						<li>Do some web dev consulting through <a href="https://hoff.tech">hoff.tech</a></li>
+						<li>Working on Barfly - helps bars order liquor every week</li>
+						<li>Teach web dev classes at <a href="http://sparkboulder.com/">Spark Boulder</a></li>
+						<li>First computer memory that I have: Playing <a href="https://www.youtube.com/watch?v=ISP9su7okHo">Beyond Dark Castle</a> on the <a href="https://en.wikipedia.org/wiki/Macintosh_512Ke">Mac 512k</a> with my dad (that guy who teaches this
+							class)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>I'm a web developer!</h3>
+					<p>
+						Here's a couple of dumb fun things that I've built:
+					</p>
+					<ul>
+						<li><a href="https://hoff.tech">Hoff.tech</a></li>
+						<li><a href="http://harderbetterfasteripsum.hoff.tech/">Daft Punk Lorem Ipsum</a></li>
+						<li><a href="https://tsa-randomizer.hoff.tech/">The TSA Randomizer App</a></li>
+					</ul>
+					<p>
+						Not strictly web dev, but I grade the students in my web dev classes using a Slack bot - code here: <a href="https://github.com/kenhoff/grader">https://github.com/kenhoff/grader</a>
+					</p>
+					<p>
+						Barfly helps bars order liquor every week - still in private beta, so I can't really share source code. It keeps track of all bars, sales reps, and liquor products in the state of Colorado, and routes text message orders between them.
+					</p>
+				</section>
+				<section>
+					<h3>How is a web app different from a mobile app?</h3>
+					<p>
+						A <strong>mobile app</strong> is downloaded once from an app store, stored on the phone, and periodically recieves updates. Generally written in Java (Android) or Objective-C/Swift(iOS).
+					</p>
+					<p>
+						A <strong>mobile web app</strong> is served over HTTP, and used within the browser. Written in HTML, CSS, and JavaScript.
+					</p>
+					<p>
+						It's basically the difference between the <strong>Facebook app</strong> on your phone, and <strong>mobile.facebook.com</strong>.
+					</p>
+					<p>
+						It's faster and easier to update a <strong>mobile web app</strong>, and you only have to develop a single app that varies slightly between browsers. However, <strong>mobile apps</strong> get access to all of the native, speedy UI and
+						computational
+						power that the OS has.
+					</p>
+				</section>
+				<section>
+					<h3>How to be a web developer:</h3>
+					<ol>
+						<li>Look stuff up on the internet</li>
+						<li>Make stuff</li>
+						<li>Repeat</li>
+					</ol>
+				</section>
+				<section>
+					<h3>A (very) brief history of web development</h3>
+					<p>
+						The very first website: <a href="http://info.cern.ch/hypertext/WWW/TheProject.html">http://info.cern.ch/hypertext/WWW/TheProject.html</a> (1989)
+					</p>
+					<p>
+						Now we have stuff like this: <a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/</a> (2015)
+					</p>
+				</section>
+				<section>
+					<h3>Let's be web developers too!</h3>
+					<p>
+						Checking in - any questions? Everybody have a browser? What about a command line? What about a text editor? Everybody get Node.js installed alright?
+					</p>
+				</section>
+				<section>
+					<h3>Let's write some HTML</h3>
+					<p>
+						First, create a new directory (folder) where we're going to host your site. (something like <code>your_name_here_site</code> is just fine)
+					</p>
+					<p class="muted">
+						(Put in, like, the Desktop or something, because that's always a good place to keep stuff)
+					</p>
+					<p>
+						Create a new file in that folder titled <code>index.html</code>
+					</p>
+				</section>
+				<section>
+					<p>
+						In <code>index.html</code>, write:
+						<pre>
+						<code data-trim data-noescape>&lt;h1&gt;asdfasdfasdf&lt;/h1&gt;</code>
+					</pre> and save it.
+					</p>
+					<p>
+						Open index.html in a browser.
+					</p>
+					<p class="muted">
+						(You can double-click it in the Finder/Explorer, or Ctrl-O in a browser)
+					</p>
+				</section>
+				<section>
+					<h3>yay!</h3>
+					<img src="http://replygif.net/i/549.gif" alt="" />
+				</section>
+				<section>
+					<h3>
+						Next step: Get that **** on The Internet
+					</h3>
+					<p>
+						Your magnum opus isn't worth anything if people can't read it online!
+					</p>
+					<p>
+						Let's put your page on <a href="http://firebase.com/">Firebase</a>.
+					</p>
+					<p class="muted">
+						Firebase is a service by Google that gives us free static site hosting.
+					</p>
+				</section>
+				<section>
+					<p>
+						Open a command line!
+					</p>
+					<p class="muted">
+						Terminal on Mac, cmd.exe on Windows
+					</p>
+					<p>
+						Question: how familiar are people with the command line?
+					</p>
+				</section>
+				<section>
+					<p>
+						On your command line, run <code>npm install firebase-tools -g</code>
+					</p>
+					<p>
+						If you're using one of the lab computers, you'll also need to create a path to the "npm" folder:
+					</p>
+					<pre>
+					<code>
+Click on “start”, type “envi”, select “Edit environment variables for your account”
+Create a PATH variable with this value:
+%USERPROFILE%\AppData\Roaming\npm</code>
+				</pre>
+					<p>
+						Once it's done installing, run <code>firebase login</code>
+					</p>
+					<p class="muted">
+						It's going to take you to a login screen - go ahead and log in with your google account.
+					</p>
+					<p class="muted">
+						Follow all the steps to create your account, then go back to the command line.
+					</p>
+				</section>
+				<section>
+					<p>
+						On the command line, change your current directory to the project directory that we created earlier.
+					</p>
+					<p class="muted">
+						If you're on Mac/Linux, use <code>cd foo</code> to change to the foo directory and <code>pwd</code> to see what directory you're in. Use <code>ls</code> to see what's in that directory.
+					</p>
+					<p class="muted">
+						If you're on Windows, use <code>cd foo</code> to change to the foo directory and <code>cd</code> to see what directory you're in. Use <code>dir</code> to see what's in that directory.
+					</p>
+					<p>
+						Once you're in your project directory (use <code>ls</code>/<code>dir</code> to be sure!) run <code>firebase init</code>.
+					</p>
+				</section>
+				<section>
+					<p>
+						<code>firebase init</code> is going to ask you a couple questions.
+					</p>
+					<p>
+						For "What Firebase do you want to use?", just choose the Firebase that's already created for you. <span class="muted">Should be something like <code>blistering-torch-1337</code></span>
+					</p>
+					<p>
+						For "What directory should be the public root?", type <code>.</code> (the period character) and hit enter.
+					</p>
+					<p>
+						It should say "Firebase initialized, configuration written to firebase.json".
+					</p>
+				</section>
+				<section>
+					<p>
+						Next, run <code>firebase deploy</code>
+					</p>
+					<p>
+						Assuming that you've created your <code>index.html</code>, you're in the right project directory, <strong>and</strong> you've successfully run <code>firebase init</code>, this should complete successfully.
+					</p>
+					<p>
+						Finally, run <code>firebase open</code>...
+					</p>
+				</section>
+				<section>
+					<h3>whoa!</h3>
+					<img src="http://i.imgur.com/0tlqT2F.gif" alt="" />
+					<p>
+						you now have a page on The Internet!
+					</p>
+					<p class="muted">
+						You can <code>firebase deploy</code> whenever you want, but you don't have to every time. For this class, you can just keep refreshing the <code>index.html</code> that you've already opened in the browser from your local machine.
+					</p>
+				</section>
+				<section>
+					<h3>Cool! Now let's build an app!</h3>
+					<p>
+						We're going to build a <strong>Your Favorite Quotes</strong> app!
+					</p>
+					<p class="muted">
+						For me, it's going to be an Adventure Time Quotes app, just because I love Adventure Time sooooo much.
+					</p>
+				</section>
+				<section>
+					<p>
+						Here's what your app will look like at the end:
+					</p>
+					<p>
+						<a href="https://mathematical.firebaseapp.com" target="_blank">mathematical.firebaseapp.com</a>
+					</p>
+				</section>
+				<section>
+					<h3>First things first</h3>
+					<p>
+						Go back to your <code>index.html</code> and replace it with:
+					</p>
+					<pre>
+					<code>&lt;h1&gt;Adventure time quotes!&lt;/h1&gt;
+&lt;p&gt;this is where our quote goes&lt;/p&gt;</code>
+				</pre>
+					<p>
+						This defines two things:
+					</p>
+					<ul>
+						<li><code>&lt;h1&gt;</code> defines a "Heading 1" for our app. We'll just have this be the title of our app.</li>
+						<li><code>&lt;p&gt;</code> defines a "paragraph" tag. This will be where our app displays my favorite quote!</li>
+					</ul>
+				</section>
+				<section>
+					<p>
+						At the end of <code>index.html</code>, let's include a <code>&lt;script&gt;</code> tag.
+					</p>
+					<p>
+						<pre>
+						<code>&lt;script&gt;
+	// our code is going to go here
+&lt;/script&gt;</code>
+					</pre>
+					</p>
+					<p>
+						The <code>&lt;script&gt;</code> tag tells the browser, "There's JavaScript in here!"
+					</p>
+					<p>
+						JavaScript is what we use to manipulate content on the page.
+					</p>
+					<p>
+						<code>//</code> defines a JavaScript comment.
+					</p>
+				</section>
+				<section>
+					<p>
+						Let's include some quotes that we like as an <strong>Array</strong> of <strong>String</strong>s in our <code>&lt;script&gt;</code> tag.
+					</p>
+					<pre>
+		<code>&lt;script&gt;
+	var quotes = [&quot;Mathematical!&quot;,
+			&quot;Whoa! Algebraic!&quot;,
+			&quot;Rhombus! Iceclops!&quot;,
+			&quot;Seriously, Stanley... For a watermelon, you get into trouble way more often than you should.&quot;,
+			&quot;I keep finding baby shoes. What the heck, man? And they're all lefties!&quot;,
+			&quot;I have pants! Spun from spider webs... by pixies.&quot;,
+			&quot;I wanna help you outta this, man, but she scares the filling outta my doughnut!&quot;,
+			&quot;The bazooka goblin has you in its sights!&quot;,
+			&quot;Dude, suckin' at something is the first step towards being sorta good at something.&quot;
+	]
+&lt;/script&gt;</code>
+	</pre>
+					<p>
+						Here, we're defining a new (untyped) variable called <code>quotes</code>.
+					</p>
+					<p>
+						We're setting <code>quotes</code> equal to an array (using square brackets, <code>[]</code>) of strings (using quotation marks <code>&quot;&quot;</code>)
+					</p>
+					<p>
+						Don't forget commas after each element!
+					</p>
+				</section>
+				<section>
+					<p>
+						Now, let's find the <code>&lt;p&gt;</code> tag, and replace its contents with an element selected at random from our array of quotes.
+					</p>
+					<pre>
+					<code data-trim data-noescape>&lt;script&gt;
+	var quotes = [&quot;Mathematical!&quot;,
+		&quot;Whoa! Algebraic!&quot;,
+		&quot;Rhombus! Iceclops!&quot;,
+		&quot;Seriously, Stanley... For a watermelon, you get into trouble way more often than you should.&quot;,
+		&quot;I keep finding baby shoes. What the heck, man? And they're all lefties!&quot;,
+		&quot;I have pants! Spun from spider webs... by pixies.&quot;,
+		&quot;I wanna help you outta this, man, but she scares the filling outta my doughnut!&quot;,
+		&quot;The bazooka goblin has you in its sights!&quot;,
+		&quot;Dude, suckin' at something is the first step towards being sorta good at something.&quot;
+	]
+	document.getElementsByTagName('p')[0].innerHTML =
+		quotes[Math.floor(Math.random() * quotes.length)]
+&lt;/script&gt;</code>
+				</pre>
+				</section>
+				<section>
+					<h3>whoa whoa whoa</h3>
+					<p>
+						Okay, let's work through this line:
+					</p>
+					<pre>
+					<code>document.getElementsByTagName('p')[0].innerHTML =
+	quotes[Math.floor(Math.random() * quotes.length)]</code>
+				</pre>
+					<p>
+						<code>document</code> is an <strong>object</strong> that the browser provides to us. It's got lots of different methods and variables.
+					</p>
+					<p>
+						<code>getElementsByTagName</code> is a <strong>method</strong> of <code>document</code> that takes a <strong>string</strong> as an argument (in this case, the <strong>tag name</strong> that we're looking for) and returns an <strong>array of
+							HTML elements (objects)</strong>.
+					</p>
+					<p>
+						more <strong>document</strong>-ation on <code>document</code> <span class="muted">(ha, get it?)</span>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">https://developer.mozilla.org/en-US/docs/Web/API/Document</a>
+					</p>
+
+				</section>
+				<section>
+					<pre>
+					<code>document.getElementsByTagName('p')[0].innerHTML =
+	quotes[Math.floor(Math.random() * quotes.length)]</code>
+				</pre>
+					<p>
+						<code>[0]</code> is a reference to the first element (the element at index 0) of the array produced by <code>document.getElementsByTagName('p')</code>. In this case, that array only has a length of 1, but if there were more <code>&lt;p&gt;</code>
+						tags on the page, it would be larger.
+					</p>
+					<p>
+						<code>innerHTML</code> is a reference to the actual content of the element that we've referenced in <code>getElementsByTagName</code>. It's got lots more variables and methods, like <code>children</code> and <code>hasAttribute()</code>.
+					</p>
+					<p>
+						Here's the <strong>element</strong>-ary documentation on Elements: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">https://developer.mozilla.org/en-US/docs/Web/API/Element</a>
+					</p>
+				</section>
+				<section>
+					<pre>
+					<code>document.getElementsByTagName('p')[0].innerHTML =
+	quotes[Math.floor(Math.random() * quotes.length)]</code>
+				</pre>
+					<p>
+						Finally, we pick a quote at random, by multiplying a random number (from 0 to 1) by the length of the array, and then flooring the number to get an integer.
+					</p>
+					<p>
+						Now, let's save and refresh the page...
+					</p>
+				</section>
+				<section>
+					<img src="http://i.imgur.com/YLNyFaJ.gif" alt="" />
+					<p>
+						Marvel at your ultimate cosmic power!
+					</p>
+				</section>
+				<section>
+					<h3>An exercise for the reader:</h3>
+					<p>
+						See if you can add a <code>button</code> that refreshes the quote <strong>without</strong> refreshing the whole page.
+					</p>
+					<p>
+						Hint: <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick">https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick</a>
+					</p>
+				</section>
+				<section>
+					<h3>That's it for today!</h3>
+					<p>
+						Next time, we're going to do two things:
+					</p>
+					<ul>
+						<li>We're going to have our app call a server to get a quote, instead of hardcoding all our quotes into the app</li>
+						<li>We're going to <em>style</em> our app (just a little bit)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Other dumb fun web stuff</h3>
+					<ul>
+						<li><a href="http://ncase.me/polygons/">http://ncase.me/polygons/</a></li>
+						<li><a href="https://estimatemyapp.com/">https://estimatemyapp.com/</a></li>
+						<li><a href="http://xkcd.com/1608/">http://xkcd.com/1608/</a></li>
+						<li><a href="http://1101b.com/xkcd1608/">http://1101b.com/xkcd1608/</a></li>
+						<li><a href="http://adarkroom.doublespeakgames.com/">http://adarkroom.doublespeakgames.com/</a></li>
+						<li><a href="https://jenniferdewalt.com/">https://jenniferdewalt.com/</a></li>
+					</ul>
+				</section>
+				<section>
+					<p>
+						Say hi sometime at <a href="mailto:ken@hoff.tech">ken@hoff.tech</a>!
+					</p>
+					<h3>
+						Excelsior! 🚀
+					</h3>
+				</section>
+				<section>
+					<h1>Web Dev 101 - Part 2</h1>
+					<h3>CSM, CSCI 448 - Mobile App Dev</h3>
+					<p>
+						Ken Hoff, <a href="https://hoff.tech">hoff.tech</a>
+					</p>
+					<p>
+						2016.04.27 - 2016.04.29
+					</p>
+					<p>
+						<a href="#/0">Part 1</a> - <a href="#/33">Part 2</a>
+					</p>
+				</section>
+				<section>
+					<h3>Anybody want to show off what they built last time?</h3>
+				</section>
+				<section>
+					<p>
+						In the previous session, we did some <strong>front end web development</strong> - computation and logic only occurred on the client, or the page within the browser.
+					</p>
+					<p>
+						This session, we're going to have our client call a server and retrieve a quote. This is <strong>back end web development</strong> - the server is going to do the computation (picking a quote at random) and then send the information back to
+						the
+						client.
+					</p>
+				</section>
+				<section>
+					<p>
+						(quick demo of what we're doing today)
+					</p>
+					<p>
+						How is this different from what we did before?
+					</p>
+					<p>
+						Before, every time we sent the HTML over the wire, we'd include all of our quotes in that HTML, resulting in a larger page.
+					</p>
+					<p>
+						This time, we're going to store the quotes on the server, and have a (smaller) page just request one at random every time.
+					</p>
+					<p class="muted">
+						Note that this method won't work on Firebase anymore - if you're interested in simple Node.js server hosting, check out <a href="http://heroku.com/">Heroku</a> or <a href="https://modulus.io/">Modulus.</a>
+					</p>
+				</section>
+				<section>
+					<h3>Question for the class</h3>
+					<p>
+						Does the client-server model work for mobile apps? What kinds of apps should we use the client-server model for?
+					</p>
+					<img src="http://24.media.tumblr.com/tumblr_m0jcuyvWwq1rqfhi2o1_250.gif" alt="" />
+				</section>
+				<section>
+					<p>
+						What do you guys think of JavaScript so far?
+					</p>
+					<img src="http://engineering.wix.com/wp-content/uploads/2015/04/mIuuwgx-1024x576.jpg" alt="" />
+				</section>
+				<section>
+					<p>
+						You know how we can run JavaScript in the browser? We can also run JavaScript in Node.js!
+					</p>
+					<p>
+						Things look a little different between the two: In the browser, you get some builtin variables/objects, like <code>document</code> and <code>window</code>
+					</p>
+					<p>
+						In Node, you get a whole different bunch of builtin variables/objects, like <code>fs</code> and <code>require</code>
+					</p>
+					<p>
+						Node.js is built on top of the V8 JavaScript engine: <a href="http://thibaultlaurens.github.io/javascript/2013/04/29/how-the-v8-engine-works/">http://thibaultlaurens.github.io/javascript/2013/04/29/how-the-v8-engine-works/</a>
+					</p>
+					<p class="muted">
+						To get a Node.js REPL loop, just run <code>node</code> on the command line. (You can play around with it later)
+					</p>
+				</section>
+				<section>
+					<h3>Project setup</h3>
+					<p>
+						On the command line, go back to your project folder, the one that has our <code>index.html</code> in it.
+					</p>
+					<p>
+						Run: <code>npm init</code>
+					</p>
+					<p>
+						This is going to prompt you for a lot of different things; defaults are fine
+					</p>
+				</section>
+				<section>
+					<p>
+						Create a new file, <code>index.js</code>
+					</p>
+					<p>
+						Add <code>console.log("asdfasdfasdf");</code> to <code>index.js</code>
+					</p>
+					<p>
+						Try running <code>node index.js</code>
+					</p>
+				</section>
+				<section>
+					<p>
+						Did your command line output <code>asdfasdfasdf</code>?
+					</p>
+					<p>
+						If so, give yourself a high-five:
+					</p>
+					<img src="http://gifrific.com/wp-content/uploads/2012/04/Tina-Fey-giving-herself-high-five.gif" alt="" />
+				</section>
+				<section>
+					<p>
+						Next, we need to set up our Node.js script to "listen" for HTTP requests on our machine.
+					</p>
+					<p>
+						We're going to use a library called Express (<a href="http://expressjs.com/">http://expressjs.com/</a>).
+					</p>
+				</section>
+				<section>
+					<p>
+						Installing <strong>Express</strong>
+					</p>
+					<p>
+						On the command line, run <code>npm install express --save</code>
+					</p>
+					<p>
+						This installs the <code>express</code> library <strong>locally</strong> to our project.
+					</p>
+					<p class="muted">
+						You may notice that a <code>node_modules</code> folder has been created - feel free to explore it, but we won't dive deep into it this session.
+					</p>
+				</section>
+				<section>
+					<p>
+						Inside of your <code>index.js</code> file, enter:
+					</p>
+					<pre>
+					<code>var express = require('express');
+var app = express();
+
+app.listen(3000, function () {
+	console.log("Listening on port 3000...");
+})</code>
+				</pre>
+					<p>
+						Now, try running <code>node index.js</code>. What happens? What happens if we try to navigate to <a href="http://localhost:3000/">http://localhost:3000/</a>?
+					</p>
+				</section>
+				<section>
+					<h3>Spoiler alert: Nothing!</h3>
+					<p>
+						Whoops, we're currently listening for HTTP requests on port 3000, but we're not actually responding to them. Let's fix that!
+					</p>
+					<p>
+						Make a call to the <code>app.get</code> method in your <code>index.js</code>:
+					</p>
+					<pre>
+					<code>var express = require('express');
+var app = express();
+
+app.get("/", function(request, response) {
+	response.sendFile(__dirname + "/index.html");
+})
+
+app.listen(3000, function() {
+	console.log("Listening on port 3000...");
+})</code>
+				</pre>
+				</section>
+				<section>
+					<p>
+						Don't forget to restart your script! It's still running the old Node.js script. You'll need to restart it every time you make changes to your <code>index.js</code> file.
+					</p>
+					<p>
+						Then navigate back to <a href="http://localhost:3000/">http://localhost:3000/</a>...
+					</p>
+				</section>
+				<section>
+					<h3>
+						Hooray!
+					</h3>
+					<img src="http://images.huffingtonpost.com/2013-07-25-fallonelmo.gif" alt="" />
+					<p>
+						It should show you the <code>index.html</code> file you created earlier!
+					</p>
+				</section>
+				<section>
+					<h3>Next step: AJAX</h3>
+					<p>
+						We need to have our page (<code>index.html</code>) call our server (our Node.js script) to retrieve the latest quote (using AJAX), and insert the quote into our page.
+					</p>
+					<p class="muted">
+						AJAX stands for Asynchronous JavaScript and XML, but that's not really something that you need to know.
+					</p>
+					<p>
+						General AJAX documentation (no libraries here!): <a href="https://developer.mozilla.org/en-US/docs/AJAX">https://developer.mozilla.org/en-US/docs/AJAX</a>
+					</p>
+				</section>
+				<section>
+					<p>
+						Back on <code>index.html</code>, let's include jQuery at the <strong>top</strong> of the page.
+					</p>
+					<pre>
+					<code>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js&quot;&gt;&lt;/script&gt;</code>
+				</pre>
+					<p>
+						jQuery is a library that wraps a lot of the standard <code>document</code> and <code>element</code> methods, and makes it easier to manipulate the page. <span class="muted">Generally you don't need it for most manipulation, though.</span>
+					</p>
+					<p>
+						jQuery documentation: <a href="http://api.jquery.com/">http://api.jquery.com/</a>
+					</p>
+				</section>
+				<section>
+					<p class="muted">
+						Aside: The browser exposes a native method for making HTTP requests, called <code>XMLHttpRequest</code>, but it's kind of a pain to use. jQuery wraps it for us, provides some other functionality, and makes it a little easier to use.
+					</p>
+					<p>
+						More info on XMLHttpRequest: <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest</a>
+					</p>
+				</section>
+				<section>
+					<p>
+						In the <code>script</code> that's at the bottom of our page, replace the contents with:
+					</p>
+					<pre>
+	<code>$.ajax("/random_quote").done(function (data) {
+	document.getElementsByTagName('p')[0].innerHTML = data;
+})</code>
+</pre>
+					<p>
+						This makes an HTTP request to http://localhost:3000/random_quote, gets a response back, and replaces the contents of the <code>p</code> tag with the data.
+					</p>
+					<p>
+						Literally everything you ever wanted to know about jQuery's <code>ajax</code> method: <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a>
+					</p>
+					<p>
+						Restart your script, reload the page, and head back on over to <a href="http://localhost:3000/">http://localhost:3000/</a>...
+					</p>
+				</section>
+				<section>
+					<h3>Hm. Still not quite working as expected.</h3>
+					<img src="http://i.imgur.com/tVjNl.gif" alt="" />
+					<p>
+						Oh, right! We need to implement <code>/random_quote</code>!
+					</p>
+				</section>
+				<section>
+					<p>
+						Back in <code>index.js</code>, include:
+					</p>
+					<p>
+						<pre>
+						<code>app.get(&quot;/random_quote&quot;, function(request, response) {
+	var quotes = [&quot;Mathematical!&quot;,
+		&quot;Whoa! Algebraic!&quot;,
+		&quot;Rhombus! Iceclops!&quot;,
+		&quot;Seriously, Stanley... For a watermelon, you get into trouble way more often than you should.&quot;,
+		&quot;I keep finding baby shoes. What the heck, man? And they're all lefties!&quot;,
+		&quot;I have pants! Spun from spider webs... by pixies.&quot;,
+		&quot;I wanna help you outta this, man, but she scares the filling outta my doughnut!&quot;,
+		&quot;The bazooka goblin has you in its sights!&quot;,
+		&quot;Dude, suckin' at something is the first step towards being sorta good at something.&quot;
+	]
+	response.send(quotes[Math.floor(Math.random() * quotes.length)])
+})</code>
+					</pre>
+					</p>
+					<p>
+						Restart your <code>index.js</code> script, and reload <a href="http://localhost:3000/">http://localhost:3000/</a>...
+					</p>
+				</section>
+				<section>
+					<h3>
+						Huzzah! It works!
+					</h3>
+					<img src="http://scienceblogs.com.br/100nexos/files/2011/08/elmo_.gif" alt="" />
+				</section>
+				<section>
+					<p>
+						Now, we can make things a little more complicated:
+					</p>
+					<p>
+						A new file, <code>quotes.js</code>
+					</p>
+					<pre>
+					<code>module.exports = ["Mathematical!",
+	"Whoa! Algebraic!",
+	"Rhombus! Iceclops!",
+	"MY HAT IS AWESOME!",
+	"I'm hanging the piñatas... They are all around you! Smash the piñatas!",
+	"Candy People explode when they get scared?",
+	"Slamacow! That was tops! Who's not good at math? I was all, \"Four!\"",
+	"Tree Trunks, I'm all jacked up because of you. Look at my jacked up face!",
+	...
+]</code>
+				</pre>
+					<p>
+						<code>index.js</code>
+					</p>
+					<pre><code>app.get("/random_quote", function(request, response) {
+	var quotes = require("./quotes.js")
+	response.send(quotes[Math.floor(Math.random() * quotes.length)])
+})</code>
+				</pre>
+				</section>
+				<section>
+					<h3>An exercise for the reader:</h3>
+					<p>
+						Include a form where users can submit new quotes to your service, and have those quotes stored in a persistent database (or text file).
+					</p>
+					<p>
+						Some links that might be helpful:
+					</p>
+					<ul>
+						<li><a href="http://lmgtfy.com/?q=how+to+make+a+POST+request+with+jquery">Making a POST request with jQuery</a></li>
+						<li><a href="http://lmgtfy.com/?q=sending+data+with+jquery+POST+request">Sending data with jQuery POST request</a></li>
+						<li><a href="http://lmgtfy.com/?q=handle+post+request+with+express">Handling a POST request with Express</a></li>
+						<li><a href="http://lmgtfy.com/?q=how+to+read%2Fwrite+a+file+with+node">How to read/write a file with Node</a></li>
+						<li><a href="http://lmgtfy.com/?q=how+to+automatically+restart+a+node+script">How to automatically restart a node script</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>How to be a web developer:</h3>
+					<ol>
+						<li>Look stuff up on the internet</li>
+						<li>Make stuff</li>
+						<li>Repeat</li>
+					</ol>
+				</section>
+				<section>
+					<h3>CSS</h3>
+					<ul>
+						<li>CSS Selectors: <a href="http://flukeout.github.io/">http://flukeout.github.io/</a></li>
+						<li>CSS Selector Reference: <a href="http://www.w3schools.com/cssref/css_selectors.asp">http://www.w3schools.com/cssref/css_selectors.asp</a></li>
+						<li>Bootstrap: <a href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+						<li>Bootswatch (Bootstrap Themes): <a href="https://bootswatch.com/">https://bootswatch.com/</a></li>
+						<li>StartBootstrap (Themes): <a href="http://startbootstrap.com/">http://startbootstrap.com/</a></li>
+						<li>Flexbox layout: <a href="http://flexboxfroggy.com/">http://flexboxfroggy.com/</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Congratulations! You're now a full-stack web developer!</h3>
+					<p>
+						What happens when you realize that this is your life, forever:
+					</p>
+					<img src="https://media.giphy.com/media/l41lVI74QCvdbTua4/giphy.gif" alt="" />
+				</section>
+				<section>
+					<p>
+						but srs tho
+					</p>
+				</section>
+				<section>
+					<h3>More dumb fun web stuff</h3>
+					<ul>
+						<li><a href="http://xkcd.com/1663">http://xkcd.com/1663</a></li>
+						<li><a href="http://xkcd.com/1663/#55944f62-fa9b-11e5-8001-42010a8e0010 ">http://xkcd.com/1663/#55944f62-fa9b-11e5-8001-42010a8e0010</a></li>
+						<li><a href="http://ncase.me/polygons/">http://ncase.me/polygons/</a></li>
+						<li><a href="https://estimatemyapp.com/">https://estimatemyapp.com/</a></li>
+						<li><a href="http://xkcd.com/1608/">http://xkcd.com/1608/</a></li>
+						<li><a href="http://1101b.com/xkcd1608/">http://1101b.com/xkcd1608/</a></li>
+						<li><a href="http://adarkroom.doublespeakgames.com/">http://adarkroom.doublespeakgames.com/</a></li>
+						<li><a href="https://jenniferdewalt.com/">https://jenniferdewalt.com/</a></li>
+					</ul>
+				</section>
+				<section>
+					<p>
+						Say hi sometime at <a href="mailto:ken@hoff.tech">ken@hoff.tech</a>!
+					</p>
+					<h3>
+						Excelsior! 🚀
+					</h3>
+				</section>
+			</div>
+		</div>
+		<div class="footer">
+			<p><a href="https://hoff.tech/slides/csci448">hoff.tech/slides/csci448</a></p>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/js/reveal.min.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			Reveal.initialize({
+				transition: "none",
+				history: "true",
+				minScale: 1.0
+			});
+		</script>
+		<script>
+			hljs.initHighlightingOnLoad();
+		</script>
+	</body>
+</html>

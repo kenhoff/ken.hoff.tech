@@ -1,0 +1,507 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Montserrat" rel="stylesheet" />
+        <link rel="stylesheet" href="../legacy-slides-assets/slides.css" />
+        <base target="_blank" />
+    </head>
+</html>
+<body>
+    <div>
+        <section class="slide">
+            <h1 id="csm-mobile-app-dev-guest-lecture-fall-2016">CSM Mobile App Dev Guest Lecture, Fall 2016</h1>
+            <p>Ken Hoff</p>
+            <p>2016-11-30</p>
+        </section>
+        <section class="slide">
+            <h1 id="a-little-about-me">A little about me</h1>
+            <p>Hi there! I&#39;m Ken Hoff. You can find out more about me and my work at <a href="https://hoff.tech/">https://hoff.tech/</a>, and feel free to get in touch at <a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a>.</p>
+            <ul>
+                <li>Graduated CU Boulder, BS of Computer Science, 2013</li>
+                <li>Worked at Microsoft in Seattle for 2 years</li>
+                <li>Worked on a startup on-and-off for 3 years</li>
+                <li>Consulting full-stack web developer based out of Boulder, CO</li>
+                <li>Teach Frontend Web Development classes in the evening through <a href="http://www.sparkboulder.com/">Spark Boulder</a></li>
+            </ul>
+            <h2 id="some-dumb-things-that-i-have-built">Some dumb things that I have built</h2>
+            <ul>
+                <li><a href="http://app.runlife.run/">RunLife Analytics</a> (no writeup yet)</li>
+                <li><a href="https://hoff.tech/projects/overwatch-statsbot/">Overwatch Statsbot</a></li>
+                <li><a href="https://hoff.tech/projects/harder-better-faster-ipsum/">Daft Punk Lorem Ipsum</a></li>
+                <li><a href="https://hoff.tech/projects/the-glass-game/">The Glass Game</a></li>
+                <li><a href="https://github.com/kenhoff/classbot">Slack bot that automatically grades the assignments for the students in my web dev class</a></li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="how-to-be-a-web-developer">How to be a web developer</h1>
+            <ul>
+                <li>Look stuff up on the internet</li>
+                <li>Make stuff</li>
+                <li>Repeat</li>
+            </ul>
+            <p><img src="../legacy-slides-assets/elmo_dancing.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="what-we-re-going-to-learn-today">What we&#39;re going to learn today</h1>
+            <ul>
+                <li>HTML (content)</li>
+                <li>CSS (styling)</li>
+                <li>JavaScript (user interaction, networking, and page manipulation)</li>
+                <li>Build a small app that uses all three and displays all the latest loans from <a href="https://www.kiva.org/">kiva.org</a></li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="let-s-get-tooling-out-of-the-way-first">Let&#39;s get tooling out of the way first</h1>
+            <h2 id="what-text-editor-should-i-use-">What text editor should I use?</h2>
+            <p>I primarily use <a href="https://atom.io/">Atom</a> for all my development. It&#39;s pretty customizable - I use a bunch of community-created plugins with it, including <a href="https://atom.io/packages/atom-beautify">beautifying</a>,
+                <a href="https://atom.io/packages/linter">linting</a>, and <a href="https://orktes.github.io/atom-react/">language-specific support</a>.</p>
+            <p>You can also use <a href="https://www.sublimetext.com/">Sublime Text</a>, <a href="https://code.visualstudio.com/">Visual Studio Code</a>, or <a href="https://notepad-plus-plus.org/">Notepad++</a>. Even just Notepad or TextEdit works
+                too!</p>
+            <p>For web development, I generally <strong>don&#39;t</strong> recommend using a big IDE like XCode, Visual Studio, Eclipse or IntelliJ. The project management overhead costs generally aren&#39;t worth it for me, as most of my build
+                steps happen from a command line. However, if you&#39;ve got something that works for you, use it!</p>
+            <h2 id="what-browser-should-i-use-">What browser should I use?</h2>
+            <p>I primarily use Chrome. I&#39;d recommend that you do too.</p>
+            <p>It&#39;s fine if you want to use Firefox, Safari, or even Edge (the instructions will differ a little bit)</p>
+            <p>However, I wouldn&#39;t recommend using Internet Explorer. Old versions of IE (and even current versions!) have <em>notoriously</em> bad support for some HTML, CSS, and JavaScript features. Check <a href="http://caniuse.com/">http://caniuse.com/</a>
+                for more info on which ones.</p>
+            <p><img src="../legacy-slides-assets/scrubs-ie.jpg" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="writing-your-first-web-page-with-html-index-html">Writing your first web page with HTML - <code>index.html</code></h1>
+            <p>Alright, bust open your text editor, and create a new file titled <code>index.html</code>.</p>
+            <p>Then, put the following in the file and save it:</p>
+            <pre><code class="lang-html">&lt;h1&gt;Hello, World!&lt;/h1&gt;
+</code></pre>
+            <p>Then, double-click the file in your Finder/Explorer. It should open up in your browser. (you can also use <code>cmd/ctrl-O</code> from the browser to open the file.)</p>
+            <p><img src="../legacy-slides-assets/chaplain-yay.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="debugging-html-css-and-javascript-the-browser-s-dev-tools">Debugging HTML, CSS, and JavaScript: the browser&#39;s dev tools</h1>
+            <p>To debug sites, we&#39;ll be using Chrome&#39;s built-in <strong>Developer Tools</strong>.</p>
+            <p>Chrome&#39;s Developer Tools are located in <strong>View &gt; Developer &gt; Developer Tools</strong>. You can also right-click anywhere on the page and click <strong>Inspect</strong>.</p>
+            <p>You&#39;ll mostly be staying in the <strong>Elements</strong> tab. It has a view for all of the HTML on the page, a view for all the styles on the page (declarations and computed), and you might already have a JavaScript console open.
+                (If you don&#39;t see a console anywhere, try hitting <strong>Esc</strong> - if that doesn&#39;t work, click the three dots in the upper right and choose <strong>More tools &gt; Console</strong>.)</p>
+        </section>
+        <section class="slide">
+            <h1 id="html-elements">HTML elements</h1>
+            <pre><code class="lang-html">&lt;a href=&quot;https://hoff.tech&quot;&gt;Hofftech&lt;/a&gt;
+</code></pre>
+            <p>There&#39;s four parts to every HTML element:</p>
+            <ul>
+                <li>The opening tag <code>&lt;a&gt;</code></li>
+                <li>Any attributes inside the opening tag <code>href=&quot;https://hoff.tech&quot;</code></li>
+                <li>The contents of the tag</li>
+                <li>The closing tag</li>
+            </ul>
+            <p>Try messing around with a bunch of different HTML elements:</p>
+            <ul>
+                <li>h1, h2, h3...</li>
+                <li>p</li>
+                <li>a</li>
+                <li>img</li>
+                <li>ul, ol, li</li>
+                <li>title</li>
+                <li>div, span</li>
+                <li>table, tr, th, td...</li>
+            </ul>
+            <p>A couple notes:</p>
+            <ul>
+                <li>HTML elements can be nested - everything on the internet is just a series of nested boxes</li>
+                <li>Web developers usually use <code>div</code>s to separate out a bunch of different content</li>
+                <li>There&#39;s a bunch of new HTML5 tags now - <code>header</code>, <code>section</code>, <code>footer</code>, <code>aside</code>, etc - these all behave just like <code>div</code>s when laying out the page, but help search engine
+                    crawlers parse and display more relevant data. Most likely you&#39;ll never have to deal with these.</li>
+                <li>There&#39;s a single root <code>html</code> element that contains two elements, the <code>head</code> and the <code>body</code>.<ul>
+                        <li>Everything in <code>head</code> shouldn&#39;t be displayed on the page that&#39;s where we put stylesheets, scripts, page metadata, etc</li>
+                        <li>Everything in <code>body</code> should be displayed on the page - our headings, paragraphs, links, content, etc</li>
+                    </ul>
+                </li>
+                <li>You can include comments like this: <code>&lt;!-- this is a comment! --&gt;</code></li>
+                <li>We&#39;ll use the <code>class</code> and <code>id</code> attributes a lot when styling our app with CSS and manipulating our app with JavaScript<ul>
+                        <li>You can have as many elements as you want with the same <code>class</code> on a page</li>
+                        <li>You can (should) only have <strong>one</strong> element with a given <code>id</code> on a page</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="starting-to-lay-out-our-kiva-app">Starting to lay out our Kiva app</h1>
+            <p>Add a little bit of content for your Kiva app - I&#39;ve included a title, a section where I&#39;d like to put the list of loans, and some links to relevant pages.</p>
+            <p>Don&#39;t forget to include an <code>html</code> and <code>body</code> tag!</p>
+            <pre><code class="lang-html">&lt;!-- index.html --&gt;
+
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Ken&#39;s Kiva.org Loan Display App&lt;/h1&gt;
+
+        &lt;div class=&quot;navigation&quot;&gt;
+            &lt;a href=&quot;https://www.kiva.org/&quot; target=&quot;_blank&quot;&gt;Kiva.org&lt;/a&gt;
+            &lt;a href=&quot;http://eecs.mines.edu/Courses/csci498B_fall2016/&quot; target=&quot;_blank&quot;&gt;Class Syllabus&lt;/a&gt;
+            &lt;a href=&quot;https://hoff.tech/&quot; target=&quot;_blank&quot;&gt;Hofftech&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;loans&quot;&gt;
+            (This is where all the loans are going to go!)
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="styling-your-first-web-page-with-css-style-css">Styling your first web page with CSS - <code>style.css</code></h1>
+            <p>In order to start appling <strong>styles</strong> to our page, we need to use the <code>link</code> element to point to an external <strong>stylesheet</strong>. Put this inside of your <code>head</code> tag on the page, which should
+                be inside the <code>html</code> tag, but as a sibling before the <code>body</code> tag.</p>
+            <pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+</code></pre>
+            <p>(It&#39;s possible to use the <code>style</code> element instead, and just declare CSS styles inside the HTML file, but that&#39;s not good practice.)</p>
+            <p>Then, create a <code>style.css</code> file and put it in the same directory as your <code>index.html</code>.</p>
+            <pre><code class="lang-css">/* style.css */
+
+h1 {
+    color: blue;
+}
+</code></pre>
+            <p>A CSS <strong>declaration</strong> is composed of two parts:</p>
+            <ul>
+                <li>The <strong>selector</strong>, which &quot;selects&quot; the elements on the page that we want to apply styles to (<code>h1</code>)</li>
+                <li>The <strong>declaration block</strong>, which lists the styles that we want to apply (<code>color: blue;</code>)</li>
+            </ul>
+            <h2 id="selectors">Selectors</h2>
+            <p>There&#39;s a whole bunch of different selectors that we can use to select elements on the page.</p>
+            <ul>
+                <li>Just the tag name (e.g. <code>p</code>, <code>h1</code>) will select all instances of that tag on the page.</li>
+                <li>Select all elements on the page with a specific <code>class</code> attribute by setting <code>.className</code> as our selector.</li>
+                <li>Select the element with a specific <code>id</code> attribute by setting the <code>#id</code> selector.</li>
+                <li>Select multiple tags, ids, and classes by stringing them together: <code>button#submit.continue</code> would select all <code>button</code> elements with the <code>id</code> of &quot;submit&quot; and a <code>class</code> of
+                    &quot;continue&quot;.</li>
+                <li>Select specific nested elements by putting spaces between the selectors or using the <code>&gt;</code> selector.<ul>
+                        <li><code>.input-section button</code> will select all button elements inside of elements with the class <code>.input-section</code>.</li>
+                        <li><code>.input-section &gt; button</code> will select all button elements <strong>that are direct descendants</strong> of elements with the class <code>.input-section</code>.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h2 id="styles">Styles</h2>
+            <p>There are tons of different styles that we can apply to our elements - try some of these:</p>
+            <ul>
+                <li>color</li>
+                <li>background-color</li>
+                <li>width</li>
+                <li>height</li>
+                <li>padding</li>
+                <li>margin</li>
+                <li>text-align</li>
+            </ul>
+            <h2 id="reference-material">Reference material</h2>
+            <p>And finally, here&#39;s a bunch of reference material that you can check out</p>
+            <ul>
+                <li>CSS selectors reference: <a href="http://www.w3schools.com/cssref/css_selectors.asp">http://www.w3schools.com/cssref/css_selectors.asp</a></li>
+                <li>CSS selectors game: <a href="https://flukeout.github.io/">https://flukeout.github.io/</a></li>
+                <li>Flexbox reference: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+                <li>Flexbox froggy game: <a href="http://flexboxfroggy.com/">http://flexboxfroggy.com/</a></li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="adding-some-style-to-your-kiva-app">Adding some style to your Kiva app</h1>
+            <p>Your <code>index.html</code> should now look like this:</p>
+            <pre><code class="lang-html">&lt;!-- index.html --&gt;
+
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Ken&#39;s Kiva.org Loan Display App&lt;/h1&gt;
+
+        &lt;div class=&quot;navigation&quot;&gt;
+            &lt;a href=&quot;https://www.kiva.org/&quot; target=&quot;_blank&quot;&gt;Kiva.org&lt;/a&gt;
+            &lt;a href=&quot;http://eecs.mines.edu/Courses/csci498B_fall2016/&quot; target=&quot;_blank&quot;&gt;Class Syllabus&lt;/a&gt;
+            &lt;a href=&quot;https://hoff.tech/&quot; target=&quot;_blank&quot;&gt;Hofftech&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;loans&quot;&gt;
+            (This is where all the loans are going to go!)
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>And I&#39;m going to add some styles to make my Kiva app look a little better. Get creative!</p>
+            <pre><code class="lang-css">/* style.css */
+
+body {
+    font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;
+    /* these are generally built-in fonts on the system - check out https://fonts.google.com/ if you want some fancy ones */
+    color: #333;
+    /* apply a very slightly off-black color to our entire body to soften the black */
+    margin: 0;
+    /* there&#39;s always a little bit of margin around the edges of the body tag, so this just removes those. */
+}
+h1 {
+    background-color: #63a541;
+    /* the same color that Kiva&#39;s site uses */
+    border-bottom-color: #49953f;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    /* 1 &quot;em&quot; is equivalent to the height of 1 line of text, and will change depending on how big your font-size is. */
+    margin-bottom: 0;
+}
+.navigation {
+    text-align: center;
+    background-color: #63a541;
+    color: white;
+}
+.navigation a {
+    display: inline-block;
+    /* spoooooooky dark magic! I don&#39;t have time to go into CSS layout in-depth, so I&#39;m going to leave this as an exercise to the reader. */
+    padding: 1em;
+    text-decoration: none;
+    color: inherit;
+    /* &quot;none&quot; and &quot;inherit&quot; are reserved CSS keywords. &quot;none&quot; specifically indicates the zero/null value for a style, and &quot;inherit&quot; says &quot;just use the value that the parent element has&quot; */
+    border-right-color: #49953f;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+.navigation a:last-child {
+    /* fancy selector: only selects the last &lt;li&gt; in a sequence of &lt;li&gt; elements */
+    border-right: none;
+}
+.navigation a:hover {
+    background-color: #49953f;
+}
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="manipulating-your-first-web-page-with-javascript-script-js">Manipulating your first web page with JavaScript - <code>script.js</code></h1>
+            <p>Now that your page is all styled up and ready to show some loan data, we can start using JavaScript to listen for user input on the page, make requests across the network, and manipulate the page.</p>
+            <h2 id="the-javascript-console">The JavaScript Console</h2>
+            <p>First, open up the Developer Tools on your page, and open the JavaScript console.</p>
+            <p>Type in the following:</p>
+            <pre><code class="lang-javascript">console.log(&quot;Hello, World!&quot;);
+</code></pre>
+            <p><img src="../legacy-slides-assets/high-five.gif" alt=""></p>
+            <h2 id="including-javascript-on-your-page">Including JavaScript on your page</h2>
+            <p>We can include JavaScript on our page by using the <code>script</code> HTML element, along with (optionally) the <code>src</code> attribute.</p>
+            <p>(you can put JavaScript directly inside the <code>script</code> element, but it&#39;s better practice to put it inside an external file.)</p>
+            <p>Inside your <code>index.html</code>, put the following at the <strong>bottom of your <code>body</code> element</strong>:</p>
+            <pre><code class="lang-html">&lt;script src=&quot;myscript.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+            <p>Then, create a new file <code>myscript.js</code> and put it in the same directory as your <code>index.html</code>:</p>
+            <pre><code class="lang-javascript">// myscript.js
+
+console.log(&quot;Hello, World!&quot;);
+</code></pre>
+            <p>Then, head back over to your browser, reload the page, and check the JavaScript console!</p>
+            <p><img src="../legacy-slides-assets/italian_spiderman.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="a-brief-history-of-javascript">A brief history of JavaScript</h1>
+            <p><img src="../legacy-slides-assets/javascript_the_good_parts.jpg" alt=""></p>
+            <p><a href="https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript">W3&#39;s Short History of JavaScript</a></p>
+            <p><a href="https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.n8k7evmvn">The 2016 Javascript Stack</a></p>
+        </section>
+        <section class="slide">
+            <h1 id="listening-for-user-interaction">Listening for user interaction</h1>
+            <p>Let&#39;s add a button to the page, that, when clicked, loads some loans from the Kiva API.</p>
+            <p>First thing we&#39;ll need to do is actually include the button, then tell the button to run a bit of code every time that it&#39;s clicked.</p>
+            <p>Include a button on your page:</p>
+            <pre><code class="lang-html">&lt;button id=&quot;load-loans-button&quot;&gt;Load loans&lt;/button&gt;
+</code></pre>
+            <pre><code class="lang-javascript">// myscript.js
+
+document.getElementById(&quot;load-loans-button&quot;).onclick = function() {
+    console.log(&quot;Hello, World!&quot;);
+}
+</code></pre>
+            <p>Head back over to the browser, refresh the page, click the button and check the JavaScript console to verify that it works.</p>
+            <p><strong>Remember</strong>: You have to put the <code>script</code> element for your script (<code>myscript.js</code>) at the <strong>bottom</strong> of your <code>body</code> element!</p>
+            <p>Your code should now look like this:</p>
+            <pre><code class="lang-html">&lt;!-- index.html --&gt;
+
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Ken&#39;s Kiva.org Loan Display App&lt;/h1&gt;
+
+        &lt;div class=&quot;navigation&quot;&gt;
+            &lt;a href=&quot;https://www.kiva.org/&quot; target=&quot;_blank&quot;&gt;Kiva.org&lt;/a&gt;
+            &lt;a href=&quot;http://eecs.mines.edu/Courses/csci498B_fall2016/&quot; target=&quot;_blank&quot;&gt;Class Syllabus&lt;/a&gt;
+            &lt;a href=&quot;https://hoff.tech/&quot; target=&quot;_blank&quot;&gt;Hofftech&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;loans&quot;&gt;
+            (This is where all the loans are going to go!)
+        &lt;/div&gt;
+
+        &lt;button id=&quot;load-loans-button&quot;&gt;Load loans&lt;/button&gt;
+
+        &lt;script src=&quot;myscript.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <pre><code class="lang-javascript">// myscript.js
+
+document.getElementById(&quot;load-loans-button&quot;).onclick = function() {
+    console.log(&quot;Hello, World!&quot;);
+}
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="making-web-requests-with-javascript">Making web requests with JavaScript</h1>
+            <p>Browsers send HTTP requests with <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest">XMLHttpRequest</a>.</p>
+            <p>Unfortunately, it&#39;s kind of difficult to use, so people have written libraries that make it easier.</p>
+            <p>We&#39;re going to use jQuery to make simpler HTTP requests. It&#39;s a pretty huge JavaScript library, but the part that we&#39;re using just wraps XMLHttpRequest.</p>
+            <p>jQuery&#39;s AJAX documentation: <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a></p>
+            <p>Kiva&#39;s API documentation - <a href="http://build.kiva.org/api">http://build.kiva.org/api</a></p>
+            <p>To include jQuery on your page, put this in your <code>head</code> element:</p>
+            <pre><code class="lang-html">&lt;script src=&quot;https://code.jquery.com/jquery-3.1.1.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+            <p>To actually make an HTTP request, we use the <code>$.ajax()</code> method:</p>
+            <pre><code class="lang-javascript">$.ajax(&quot;http://api.kivaws.org/v1/loans/newest.json&quot;)
+    .done(function(data) {
+        // the request succeeded
+        console.log(data);
+    })
+    .fail(function(error) {
+        // the request failed
+        console.log(error.responseText);
+    });
+</code></pre>
+            <h2 id="clicking-the-button-sending-the-http-request">Clicking the button -&gt; sending the HTTP request</h2>
+            <p>To run our HTTP request code every time the button is clicked, just put it inside your <code>onclick</code> event handler, like this:</p>
+            <pre><code class="lang-javascript">// myscript.js
+
+document.getElementById(&quot;load-loans-button&quot;).onclick = function() {
+    console.log(&quot;Button was clicked - running our HTTP request...&quot;);
+    $.ajax(&quot;http://api.kivaws.org/v1/loans/newest.json&quot;)
+        .done(function(data) {
+            // the request succeeded
+            console.log(data);
+        })
+        .fail(function(error) {
+            // the request failed
+            console.log(error.responseText);
+        });
+}
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="manipulating-the-page-with-javascript">Manipulating the page with JavaScript</h1>
+            <p>Now that we&#39;ve got all of our loans in JavaScript, we want to actually show them on the page.</p>
+            <p>To do that, we&#39;ve got to create some new HTML elements, and attach them to the page.</p>
+            <p>I&#39;m going to loop over each one of the loans that we got in response from the Kiva API, create a new HTML element for that loan, and then attach it to another element on the page.</p>
+            <pre><code class="lang-javascript">// myscript.js
+
+document.getElementById(&quot;load-loans-button&quot;).onclick = function() {
+    console.log(&quot;Button was clicked - running our HTTP request...&quot;);
+    $.ajax(&quot;http://api.kivaws.org/v1/loans/newest.json&quot;)
+        .done(function(data) {
+            // the request succeeded
+            for (var i = 0; i &lt; data.loans.length; i++) {
+                console.log(data.loans[i]);
+                var newElement = document.createElement(&quot;div&quot;);
+                newElement.innerHTML = data.loans[i].name + &quot; - &quot; + data.loans[i].activity
+                document.getElementById(&quot;loans&quot;).appendChild(newElement);
+            }
+        })
+        .fail(function(error) {
+            // the request failed
+            console.log(error.responseText);
+        });
+}
+</code></pre>
+        </section>
+        <section class="slide">
+            <h1 id="web-dev-freestyling-if-we-have-time">Web dev freestyling, if we have time</h1>
+            <p><img src="../legacy-slides-assets/scotty.gif" alt=""></p>
+            <p>Things we can do to improve our Kiva app:</p>
+            <ul>
+                <li>Have a &quot;load more&quot; button at the bottom (use query params for API pagination)</li>
+                <li>Have the page automatically load more loans when it scrolls to the bottom of the page</li>
+                <li>grab images for each loan</li>
+                <li>stick map coordinates on each loan</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="what-questions-are-there-">What questions are there?</h1>
+            <p><img src="../legacy-slides-assets/elmo_thinking.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="when-you-realize-that-web-development-is-your-life-forever-">When you realize that web development is your life, forever:</h1>
+            <p><img src="../legacy-slides-assets/kid_crying.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="more-dumb-fun-web-stuff">More Dumb Fun Web Stuff</h1>
+            <ul>
+                <li><a href="http://info.cern.ch/hypertext/WWW/TheProject.html">http://info.cern.ch/hypertext/WWW/TheProject.html</a></li>
+                <li><a href="http://ncase.me/polygons/">http://ncase.me/polygons/</a></li>
+                <li><a href="https://estimatemyapp.com/">https://estimatemyapp.com/</a></li>
+                <li><a href="http://xkcd.com/1608/">http://xkcd.com/1608/</a></li>
+                <li><a href="http://1101b.com/xkcd1608/">http://1101b.com/xkcd1608/</a></li>
+                <li><a href="http://adarkroom.doublespeakgames.com/">http://adarkroom.doublespeakgames.com/</a></li>
+                <li><a href="https://jenniferdewalt.com/">https://jenniferdewalt.com/</a></li>
+                <li><a href="http://xkcd.com/1663">http://xkcd.com/1663</a></li>
+                <li><a href="http://xkcd.com/1663/#55944f62-fa9b-11e5-8001-42010a8e0010">http://xkcd.com/1663/#55944f62-fa9b-11e5-8001-42010a8e0010</a></li>
+                <li><a href="http://idlewords.com/talks/website_obesity.htm">http://idlewords.com/talks/website_obesity.htm</a></li>
+                <li><a href="http://blog.chriszacharias.com/page-weight-matters">http://blog.chriszacharias.com/page-weight-matters</a></li>
+                <li><a href="http://jgthms.com/web-design-in-4-minutes/">http://jgthms.com/web-design-in-4-minutes/</a></li>
+                <li><a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/</a></li>
+            </ul>
+            <p>Not strictly web dev stuff, but some programming/systems/teaching-you-to-learn games you might like:</p>
+            <ul>
+                <li><a href="http://www.zachtronics.com/shenzhen-io/">SHENZHEN I/O</a></li>
+                <li><a href="https://www.factorio.com/">Factorio</a></li>
+                <li><a href="http://store.steampowered.com/app/210970/">The Witness</a></li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h1 id="obligatory-hofftech-pitch">Obligatory Hofftech Pitch</h1>
+            <p>Students: say hi! I can answer questions about life after college, web dev, interviewing, Microsoft, if you need me to look at your code, or even if you just want to get coffee. Totally down to help out students however I can. (you
+                obviously don’t need to pay me)</p>
+            <p>If you or someone you know is working on a charity, 501c3, or social impact project, let me know. I can usually spend an evening or two on the project in exchange for pizza and beer :D</p>
+            <p>And if you find someone that needs an app (or anything else) built, definitely get in touch! I’d be happy to hire you on as a subcontractor so you can make some money and get some more experience.</p>
+            <p>Hit me up at <a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a>.</p>
+        </section>
+        <section class="slide">
+            <h1 id="how-to-be-a-web-developer">How to be a web developer</h1>
+            <ul>
+                <li>Look stuff up on the internet</li>
+                <li>Make stuff</li>
+                <li>Repeat</li>
+            </ul>
+            <p><img src="../legacy-slides-assets/elmo_dancing.gif" alt=""></p>
+        </section>
+        <section class="slide">
+            <h1 id="excelsior-">Excelsior! 🚀</h1>
+            <p>Thanks!</p>
+            <p><a href="mailto:ken@hoff.tech">mailto:ken@hoff.tech</a></p>
+        </section>
+        <section class="slide">
+            <h1 id="appendix">Appendix</h1>
+            <p><img src="http://i.imgur.com/YLNyFaJ.gif" alt="">
+                <img src="http://i.imgur.com/tVjNl.gif" alt="">
+                <img src="http://scienceblogs.com.br/100nexos/files/2011/08/elmo_.gif" alt=""></p>
+        </section>
+    </div>
+    <footer><a class="location">asdfasdfasdf</a><a class="contact" href="mailto:ken@hoff.tech">ken@hoff.tech</a></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/deck.js/1.1.0/core/deck.core.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+    <script>
+        $(function() {
+            $.deck.defaults.hashPrefix = ""
+            $.deck('.slide');
+        });
+    </script>
+    <script>
+        $(".location").text(window.location).prop("href", window.location)
+        $(document).bind("deck.change", function(event, from, to) {
+            newURL = [window.location.href.split("#")[0], to].join("#")
+            $(".location").text(newURL).prop("href", newURL)
+        })
+    </script>
+</body>
