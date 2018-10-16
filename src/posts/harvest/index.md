@@ -1,5 +1,5 @@
 ---
-title: "Global Game Jam 2018: Harvest"
+title: "Harvest"
 date: 2018-01-28
 ---
 
