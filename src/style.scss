@@ -198,7 +198,10 @@ section {
 }
 
 .breadcrumbs {
-    margin: 1.5em 0;
+    margin: 1.5em;
+    @media (min-width: 768px) {
+        margin: 1.5em 0;
+    }
 }
 
 hr {
