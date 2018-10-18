@@ -29,7 +29,12 @@ Metalsmith(__dirname)
             .pattern(["posts/*/*.md", "layouts/**"])
             .use(
                 jstransformer({
-                    defaultLayout: "layouts/post.pug"
+                    defaultLayout: "layouts/post.pug",
+                    engineOptions: {
+                        "markdown-it": {
+                            html: true
+                        }
+                    }
                 })
             )
             .use(posts())
