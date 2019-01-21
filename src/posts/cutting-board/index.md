@@ -7,7 +7,7 @@ date: 2018-12-25
 
 Hey! I made a cutting board! Check it out!
 
-![](images/final-1.JPG)
+![](images/final-1.jpg)
 
 It's not just any cutting board. It's made of cherry (the wood, not the berry that comes from the tree), it's about 2.5" thick, and about 12" wide by 18" long.
 
@@ -97,13 +97,13 @@ Then, I brought the board inside to give it a couple (many) coats of mineral oil
 
 TJ was pretty stoked with it :) It came out really well. Once the mineral oil goes on, it brings out the grain and deepens the color in a really wonderful way.
 
-![](images/final-2.JPG)
+![](images/final-2.jpg)
 
-![](images/final-3.JPG)
+![](images/final-3.jpg)
 
 CC was very interested in licking the mineral oil out of the board, and had to be locked away during the photo shoot.
 
-![](images/cc.JPG)
+![](images/cc.jpg)
 
 ## Clean up
 
