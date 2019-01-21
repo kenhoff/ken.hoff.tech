@@ -1,8 +1,13 @@
-# End-grain butcher's block cutting board
+---
+title: "End-grain butcher block cutting board"
+date: 2018-12-25
+---
+
+# End-grain butcher block cutting board
 
 Hey! I made a cutting board! Check it out!
 
-\***\*_(some picture of the finished product)_\*\***
+![](images/final-1.JPG)
 
 It's not just any cutting board. It's made of cherry (the wood, not the berry that comes from the tree), it's about 2.5" thick, and about 12" wide by 18" long.
 
@@ -36,7 +41,7 @@ Rip the board along the grain, so you've got lots of tiny square strips of wood!
 
 ![](images/cherry-boards-glued-1.jpg)
 
-This is where it gets a little tricky. Figure out the width of the cutting board, then bust out your  ![Type-3 wood glue](https://www.homedepot.com/p/Titebond-III-16-oz-Ultimate-Wood-Glue-1414/100522343) (because it's rated for food contact) and an unreasonable number of clamps, and get to work.
+This is where it gets a little tricky. Figure out the width of the cutting board, then bust out your  [Type-3 wood glue](https://www.homedepot.com/p/Titebond-III-16-oz-Ultimate-Wood-Glue-1414/100522343) (because it's rated for food contact) and an unreasonable number of clamps, and get to work.
 
 (clamps not shown above. but trust me, there were a lot of them.)
 
@@ -66,27 +71,39 @@ Loads of glue. Loads of clamps. Nothing lines up perfectly, but that's okay! It'
 
 ![](images/final-glue-2.jpg)
 
-The next thing that happens on the board is to plane it again, just to get all the excess glue and any height disparities sorted out. However, this is where one of the fundamental problems with the cutting board pop up - chipout.
+The next thing that happens on the board is to plane it again, just to get all the excess glue and any height disparities sorted out. However, this is where we have a fundamental problem with using a thickness planer on the cutting board - chipout.
 
 When the board goes through the planer, the blades of the planer cut down the top surface of the board. When the planer reaches the end of the board, the force of the blades on the board tend to "chip out" the wood at the very end of the board, leaving some nasty gouges on the edges of the cutting board :C
 
-(there's a couple ways to mitigate this, but I decided that it was just something that I'd end up cleaning up later.)
+(there's a couple ways to mitigate this, usually by using some sacrificial strips around the edge of the cutting board, but I decided that it was just something that I'd clean up later.)
 
-Next, I went ahead and cut all the edges of the board perfectly straight and square with my table saw. (Yeah, it was a little dicey trying to trim up that big of a board with a table saw. I took all the appropriate precautions with anti-kickback devices and blade guards.)
+Next, I went ahead and cut all the edges of the board perfectly straight and square with my table saw. (Yeah, it was a little dicey trying to trim up that big of a board with a table saw. I took all the appropriate precautions with anti-kickback devices and blade guards. A nice fat jointer is next on the tool wish list.)
 
 ![](images/final-trimming-and-planing.jpg)
+
+_(You can see some teeny tiny lines all the way down the edge of the board, where one of the thickness planer blades has a bit of a chip.)_
 
 ## Trim router!
 
 I got a trim router! It is fun, and rather difficult to use, but the results were pretty good. I just put a 1/4" roundover on all the edges of the board, including the vertical edges, then went through afterwards and cleaned up burn marks and edges with 80 grit sandpaper.
 
-Last thing in the garage was sanding - I don't have an orbital sander, so I just did a quick hand sanding with 80, 120, 180, and 220 grit sandpaper. It was already pretty smooth from planing, but it didn't hurt to scrub it down just a little bit more.
+Last thing to do in the garage was sanding - I don't have an orbital sander, so I just did a quick hand sanding with 80, 120, 180, and 220 grit sandpaper. It was already pretty smooth from planing, but it didn't hurt to scrub it down just a little bit more.
 
 ![](images/final-trimmed-board.jpg)
 
-Then, I brought the board inside to give it a couple (many) coats of mineral oil. Apparently it's pretty important to use food-safe and non-organic oils for cutting boards, so there's no risk of the food getting contaminated by the finish (in the case of varnishes and waxes) or the finishing oil decomposing and going rancid (in the case of flaxseed and vegetable/canola oils).
+Then, I brought the board inside to give it a couple (many) coats of mineral oil. Apparently it's pretty important to use food-safe and non-organic oils for cutting boards - using varnishes or waxes risks of the food getting contaminated, and flaxseed/vegetable/canola oils tend to decompose and go rancid D:
 
 ## Take product photos — give to recipient
+
+TJ was pretty stoked with it :) It came out really well. Once the mineral oil goes on, it brings out the grain and deepens the color in a really wonderful way.
+
+![](images/final-2.JPG)
+
+![](images/final-3.JPG)
+
+CC was very interested in licking the mineral oil out of the board, and had to be locked away during the photo shoot.
+
+![](images/cc.JPG)
 
 ## Clean up
 
