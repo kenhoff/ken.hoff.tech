@@ -22,7 +22,7 @@ I just built the site. All of the cards were thought up by the exceedingly talen
 
 ## 25 square miles surrounded by reality
 
-[Tara Gilboa](https://twitter.com/tigilboa) was actually one of my students in the first [Spark Boulder Front End Web Development class](http://www.sparkboulder.com/sparkclasses)! (I also [wrote a postmortem on that class](/posts/2016/06/26/spark-class-spring-2016-postmortem), and I'm still teaching it, so [go sign up!](http://www.sparkboulder.com/sparkclasses)) We ran into each other at a recent Startup Weekend, and she told me about this "Boulder expansion pack for Cards Against Humanity" that she was working on.
+[Tara Gilboa](https://twitter.com/tigilboa) was actually one of my students in the first [Spark Boulder Front End Web Development class](http://www.sparkboulder.com/sparkclasses)! (I also [wrote a postmortem on that class](/stuff/2016/06/26/spark-class-spring-2016-postmortem), and I'm still teaching it, so [go sign up!](http://www.sparkboulder.com/sparkclasses)) We ran into each other at a recent Startup Weekend, and she told me about this "Boulder expansion pack for Cards Against Humanity" that she was working on.
 
 Tara (along with Dan, the designer on the project) were looking to get a nice landing/marketing site done for Carbs Against Hummus. They wanted something done before the holidays, so that they could send it around to their friends and family - just something where people could download the card pack, and follow them on social media.
 

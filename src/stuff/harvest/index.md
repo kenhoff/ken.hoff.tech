@@ -19,7 +19,7 @@ The keynote is pretty much what you'd expect - some prominent members of the gam
 
 Then, they reveal the theme!
 
-This year, the theme was **transmission**. It's a pretty good theme - previous GGJ themes included ["ritual"](/posts/small-sacrifices), ["what do we do now"](/posts/maniac-mystery-mansion), and ["we don't see things as they are, we seem them as we are"](/posts/the-facility).
+This year, the theme was **transmission**. It's a pretty good theme - previous GGJ themes included ["ritual"](/stuff/small-sacrifices), ["what do we do now"](/stuff/maniac-mystery-mansion), and ["we don't see things as they are, we seem them as we are"](/stuff/the-facility).
 
 ![](harvest-2.png) 
 
@@ -27,9 +27,9 @@ This year, the theme was **transmission**. It's a pretty good theme - previous G
 >
 > Usually, when I look at a theme, I think about all the different ways that it can be interpreted - words with multiple meanings are the best examples. In this case, "transmission" could mean a couple different things - transmission of disease, the transmission in a car, some kind of radio transmission, etc.
 >
-> Another good litmus test for a theme is how the theme changes depending on which word you emphasize. (Try saying "I never said she stole my money" with emphasis on different words, and see how the phrase changes meaning.) The theme ["what do we do now"](/posts/maniac-mystery-mansion) is fantastic - you can put emphasis on each one of the different words, and the phrase takes new meaning every time.
+> Another good litmus test for a theme is how the theme changes depending on which word you emphasize. (Try saying "I never said she stole my money" with emphasis on different words, and see how the phrase changes meaning.) The theme ["what do we do now"](/stuff/maniac-mystery-mansion) is fantastic - you can put emphasis on each one of the different words, and the phrase takes new meaning every time.
 >
-> There's been game jams in the past that have gotten me _really_ cranky. ["Minimalism"](/posts/snape) is too vague, and doesn't constrain the creators at all - any game made in 48 hours is going to be minimalist. Alternatively, ["entire game on one screen"](/posts/titan) is waaaaay too specific - there's basically no other ways to interpret that theme. Even if I did win 2nd for "innovation" on that jam. ¯\\\_(ツ)\_/¯
+> There's been game jams in the past that have gotten me _really_ cranky. ["Minimalism"](/stuff/snape) is too vague, and doesn't constrain the creators at all - any game made in 48 hours is going to be minimalist. Alternatively, ["entire game on one screen"](/stuff/titan) is waaaaay too specific - there's basically no other ways to interpret that theme. Even if I did win 2nd for "innovation" on that jam. ¯\\\_(ツ)\_/¯
 
 ![](harvest-3.png)
 
@@ -73,7 +73,7 @@ Oh man. This was a bit of a...densely-engineered one.
 
 The code for this game consists of roughly three parts - [one deceptively compact JavaScript "engine"](https://github.com/kenhoff/harvest-ggj-2018/blob/master/src/gameSequence.js), [one bog-standard view controller](https://github.com/kenhoff/harvest-ggj-2018/blob/master/src/GameComponent.jsx), and [one heckin' huge gameplay script file](https://github.com/kenhoff/harvest-ggj-2018/blob/master/src/gameSequence.js).
 
-I'd built something sort-of like this before, last year, when we built [a deckbuilding DJing game](/posts/kwav-1085). Essentially, we've got the plain JS "engine", which just manages the state of the game - what scene is currently displayed, the current array of dialog responses to render, if we're currently waiting for another character to speak, if we're waiting for the user to select a dialog option, what dialog options to display, if we're currently on a dialog option tree, etc etc etc...
+I'd built something sort-of like this before, last year, when we built [a deckbuilding DJing game](/stuff/kwav-1085). Essentially, we've got the plain JS "engine", which just manages the state of the game - what scene is currently displayed, the current array of dialog responses to render, if we're currently waiting for another character to speak, if we're waiting for the user to select a dialog option, what dialog options to display, if we're currently on a dialog option tree, etc etc etc...
 
 The engine seems like it manages a lot of different complexity, but it mostly just loads in an reads data from the [`gameSequence.js`](https://github.com/kenhoff/harvest-ggj-2018/blob/master/src/gameSequence.js) file, which contains all dialog and choice data for the game. (Spoilers in that file!)
 

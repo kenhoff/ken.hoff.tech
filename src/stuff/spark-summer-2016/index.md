@@ -5,7 +5,7 @@ date: 2016-08-22
 
 Hey, it happened again! Somehow I was able to get 9 students to come down to [Spark Boulder](http://sparkboulder.com/) twice a week and listen to me ramble about Front End Web Development. **Mathematical!**
 
-You know the drill - I usually put together a postmortem after each one of these classes, figure out what went well, and what could have gone better. You can also check out [the postmortem for the Spring 2016 session](/posts/2016/06/26/spark-class-spring-2016-postmortem) to get an idea of how things have changed.
+You know the drill - I usually put together a postmortem after each one of these classes, figure out what went well, and what could have gone better. You can also check out [the postmortem for the Spring 2016 session](/stuff/2016/06/26/spark-class-spring-2016-postmortem) to get an idea of how things have changed.
 
 # Things that went well
 
@@ -19,7 +19,7 @@ So, I was pretty happy when we bumped the time for the class back a little bit! 
 
 ## HTML Slides
 
-So glad I finally got this one done. Last time we used Google Slides - have a look at the [Spring 2016 postmortem](/posts/2016/06/26/spark-class-spring-2016-postmortem#google-slides) for more info on that.
+So glad I finally got this one done. Last time we used Google Slides - have a look at the [Spring 2016 postmortem](/stuff/2016/06/26/spark-class-spring-2016-postmortem#google-slides) for more info on that.
 
 I've messed around with a couple HTML slide frameworks in the past. [Reveal.js](http://lab.hakim.se/reveal-js) is probably the one that I've used most often. [Impress](http://impress.github.io/impress.js) is another promising one, but that seems like it requires a _lot_ of configuration.
 
@@ -93,7 +93,7 @@ It's a dumb, stupid problem, I know. And probably pretty easily solved with a qu
 
 ## The Syllabus
 
-So I had [this great idea last semester](/posts/2016/06/26/spark-class-spring-2016-postmortem#using-trello-for-the-syllabus) to move the entire syllabus onto @classbot!
+So I had [this great idea last semester](/stuff/2016/06/26/spark-class-spring-2016-postmortem#using-trello-for-the-syllabus) to move the entire syllabus onto @classbot!
 
 Yeah, that might have been a mistake. Don't get me wrong - having everything (readings, slides, assignments) in one place for the students is great.
 

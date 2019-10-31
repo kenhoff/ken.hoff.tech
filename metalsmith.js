@@ -9,10 +9,10 @@ const posts = require("./plugins/posts");
 
 Metalsmith(__dirname)
     .clean(false)
-    .use(changed({forcePattern: ["posts/*/*.md", "layouts/**", "posts/index.pug"]}))
+    .use(changed({forcePattern: ["stuff/*/*.md", "layouts/**", "stuff/index.pug"]}))
     .use(
         branch()
-            .pattern(["posts/*/*.md"])
+            .pattern(["stuff/*/*.md"])
             .use((files, metalsmith, done) => {
                 for (var file in files) {
                     if (files.hasOwnProperty(file)) {
@@ -26,7 +26,7 @@ Metalsmith(__dirname)
     )
     .use(
         branch()
-            .pattern(["posts/*/*.md", "layouts/**"])
+            .pattern(["stuff/*/*.md", "layouts/**"])
             .use(
                 jstransformer({
                     defaultLayout: "layouts/post.pug",
@@ -40,8 +40,8 @@ Metalsmith(__dirname)
             .use(posts())
     )
     .use((files, metalsmith, done) => {
-        if (files["posts/index.pug"]) {
-            files["posts/index.pug"].postGroups = {...metalsmith.postGroups};
+        if (files["stuff/index.pug"]) {
+            files["stuff/index.pug"].postGroups = {...metalsmith.postGroups};
         }
         return done();
     })

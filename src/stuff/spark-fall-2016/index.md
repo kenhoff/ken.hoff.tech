@@ -37,7 +37,7 @@ Students still have to submit assignments on the @classbot Slack bot, though. Ma
 
 ## Attendance
 
-See, I had this problem [last time](/posts/2016/08/22/spark-class-summer-2016-postmortem#attendance) where I sometimes forgot to take attendance.
+See, I had this problem [last time](/stuff/2016/08/22/spark-class-summer-2016-postmortem#attendance) where I sometimes forgot to take attendance.
 
 I could have solved this problem in the most epic developer way possible - every class session, @classbot could message each individual student, and only accept a certain code word (that was provided during the class session) to validate that the student was there every single session. However, we'd have to come up with some way to prevent student cheating...students could message other, absent students what the secret keys were! So that would be a pretty fun system to make.
 
@@ -73,7 +73,7 @@ Enter [site44](http://www.site44.com/). It's what it says on the box - it takes 
 
 Sweet, simple @classbot. It tries so hard.
 
-(If you're not sure what @classbot is, check out my [other](/posts/2016/08/22/spark-class-summer-2016-postmortem) [postmortems](/posts/2016/06/26/spark-class-spring-2016-postmortem).)
+(If you're not sure what @classbot is, check out my [other](/stuff/2016/08/22/spark-class-summer-2016-postmortem) [postmortems](/stuff/2016/06/26/spark-class-spring-2016-postmortem).)
 
 [There's](https://github.com/kenhoff/classbot/blob/master/assignments/tests/hello_world.js) [a](https://github.com/kenhoff/classbot/blob/master/assignments/tests/is_this_person_old.js) [couple](https://github.com/kenhoff/classbot/blob/master/assignments/tests/jquery_get_request.js) [assignments](https://github.com/kenhoff/classbot/blob/master/assignments/tests/say_hello.js) where students need to [write](https://github.com/kenhoff/classbot/blob/master/assignments/tests/jquery_post_request.js) [some](https://github.com/kenhoff/classbot/blob/master/assignments/tests/jquery_get_paragraph_tags.js) [JavaScript](https://github.com/kenhoff/classbot/blob/master/assignments/tests/create_hello_string.js) [functions](https://github.com/kenhoff/classbot/blob/master/assignments/tests/count_to_100.js).
 
@@ -109,7 +109,7 @@ Next time, I think we're going to use [Gomix](https://gomix.com/). It's basicall
 
 ## Class in the evenings
 
-Funny how things change! [Last time I wrote about](/posts/2016/08/22/spark-class-summer-2016-postmortem#front-end-web-dev-_nights_) how we were moving to a later time slot for the class.
+Funny how things change! [Last time I wrote about](/stuff/2016/08/22/spark-class-summer-2016-postmortem#front-end-web-dev-_nights_) how we were moving to a later time slot for the class.
 
 It was a good experiment, but it didn't really work for me. Usually I'd have students stick around a little after the class to ask questions (which is great!) but that usually means that I don't get home til about 10pm, and I'm already exhausted from doing all the other work from the rest of the day, so I don't end up going to the gym `:C` &lt;-- mega sad face. And it was always too late to go out to drinks after class!
 
