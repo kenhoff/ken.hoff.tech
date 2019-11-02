@@ -9,6 +9,7 @@
     "metalsmith-jstransformer": "^0.13.2",
     "metalsmith-pug": "^2.0.0",
     "metalsmith-sass": "^1.6.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "puppeteer": "^2.0.0"
   }
 }
