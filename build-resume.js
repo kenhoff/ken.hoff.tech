@@ -1,10 +1,11 @@
 const puppeteer = require("puppeteer");
 const dayjs = require("dayjs");
 
+
 (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("file:///Users/ken/dev/ken.hoff.tech/resume/resume.html", {
+    await page.goto(`file://${process.cwd()}/resume/resume.html`, {
         waitUntil: "networkidle2"
     });
 

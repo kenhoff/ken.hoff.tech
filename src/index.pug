@@ -18,7 +18,7 @@ block content
         section.available
             h1 Let's chat.
             p I love talking to smart, growing companies that are solving really tough problems in fascinating ways.
-            p Feel free to check out my #[a(href="/posts") most recent projects], my #[a(href="https://github.com/kenhoff") GitHub], my #[a( href="https://www.linkedin.com/in/thekenhoff/") LinkedIn], and my #[a(href="/Ken-Hoff-Resume-2018-06-18.pdf") resume].
+            p Feel free to check out my #[a(href="/posts") most recent projects], my #[a(href="https://github.com/kenhoff") GitHub], my #[a( href="https://www.linkedin.com/in/thekenhoff/") LinkedIn], and my #[a(href=`/Ken-Hoff-Resume-${resumeFormattedDate}.pdf`) resume].
             p Once you're ready, shoot me an email at #[a(href="mailto:ken@hoff.tech") ken@hoff.tech].
         img(src="profile3.jpg" alt="" class="img-fluid")
         section.contact
@@ -31,7 +31,7 @@ block content
             p 
                 a(href="https://github.com/kenhoff") GitHub
             p 
-                a(href="/Ken-Hoff-Resume-2018-06-18.pdf") Resumé
+                a(href=`/Ken-Hoff-Resume-${resumeFormattedDate}.pdf`) Resumé
 
 block body-scripts
     script(type="text/javascript" src="/assets/js/milliseconds.js")

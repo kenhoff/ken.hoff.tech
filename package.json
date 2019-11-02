@@ -1,9 +1,9 @@
 {
     "scripts": {
         "build-resume": "node build-resume.js",
-        "dev-resume": "nodemon build-resume.js",
+        "dev-resume": "nodemon build-resume.js --watch ./resume -e html",
         "build-site": "node metalsmith.js",
-        "dev-site": "nodemon metalsmith.js",
+        "dev-site": "nodemon metalsmith.js --watch ./src --ignore ./build -e pug,js,md,scss,html",
         "deploy": "sh ./deploy.sh"
     },
     "dependencies": {

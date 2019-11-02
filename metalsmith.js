@@ -6,6 +6,7 @@ const jstransformer = require("metalsmith-jstransformer");
 const branch = require("metalsmith-branch");
 const moment = require("moment");
 const posts = require("./plugins/posts");
+const dayjs = require("dayjs");
 
 Metalsmith(__dirname)
     .clean(false)
@@ -43,6 +44,10 @@ Metalsmith(__dirname)
         if (files["stuff/index.pug"]) {
             files["stuff/index.pug"].postGroups = {...metalsmith.postGroups};
         }
+        return done();
+    })
+    .use((files, metalsmith, done) => {
+        files["index.pug"].resumeFormattedDate = dayjs().format("YYYY-MM-DD");
         return done();
     })
     .use(pug({useMetadata: true}))
