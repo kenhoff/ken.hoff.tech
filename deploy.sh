@@ -2,6 +2,8 @@
 
 rm -rf build
 
-node metalsmith.js
+yarn build-site
+
+yarn build-resume
 
 aws s3 sync --delete --size-only ./build s3://ken.hoff.tech
