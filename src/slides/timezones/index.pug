@@ -1,0 +1,437 @@
+extends ../../layouts/slides/nexthealth
+
+block head
+    title Timezones
+    //- link(rel="stylesheet" href="fragments.css")
+
+block slides
+    .slide
+        h1 "Just use milliseconds" and other lies that I tell myself
+        h3 The timezones talk
+        p 2020.06.24
+        img(src="https://media.giphy.com/media/fuEbh3lzH1ryeIdikI/giphy.gif")
+    .slide.alt
+        h1 Hey there! I'm Ken
+        p I work at a pretty neat company called NextHealth
+        p and I'm using you all as guinea pigs so that I can give this talk at meetups whenever we're allowed to have those again
+        p this is a first version, so go easy on me 😉
+        
+    .slide
+        p If you'd like to revisit this later:
+        table
+            tr
+                td Slides: 
+                td #[a(href="https://hoff.tech/slides/timezones") hoff.tech/slides/timezones]
+    .slide
+        img(src="https://uploads-ssl.webflow.com/5d5c68b08993c75aa14352cb/5d61a7d8e3123d4d764520c1_halp.png")
+        h3 "Conversational Ticketing"
+        p aka
+        h3 "a slack plugin that lets you mark a message in chat with the 🎫 reaction emoji and it'll make a helpdesk ticket for you"
+    .slide
+        h1 2 Halp features:
+        .row
+            div
+                h3 SLAs
+                p Service Level Agreements
+                p e.g. low-priority tickets will be acknowledged within 24 hours, #[br] high-priority tickets in 1 hour
+            div
+                h3 Reporting
+                p e.g. average response time in 1.2 hours, #[br] average resolution time in 4.3 hours
+        p in both features, we need to #[strong calculate the amount of time elapsed]
+    .slide
+        h1 This is theoretically pretty easy!
+        img(src="ticket-time-representation-A.gif")
+        p or another way:
+        img(src="ticket-time-representation-B.gif")
+        p
+            em [notes for ken: turn to audience, ask: "...right? Are there any special product requirements here?"]
+    .slide
+        .row
+            div
+                h1 here's the issue
+                :markdown-it
+                    helpdesk teams (generally) don't work 24 hours a day
+
+                    ticket created at 4:30pm on a friday -> resolved at 9:30am on a monday
+
+                    took **49 hours to resolve**
+            img(src="https://media.giphy.com/media/FGTVmzksb2j0k/giphy.gif")
+    .slide
+        :markdown-it
+            # ken, build this "working hours" feature
+
+            some helpdesk teams only work 9am-5pm, Monday through Friday
+
+            when calculating SLAs breaches and generating reports, only use **working hours** to determine how long it took to respond to / resolve a ticket
+    .slide
+        img(src="ticket-time-representation-C.png")
+        p what are the other arguments?
+        ul 
+            li workday start time?
+            li workday end time?
+            li weekends?
+            li ...any others?
+    .slide.alt
+        h1 what about timezones?
+        img(src="https://media.giphy.com/media/Hz6WKZkKkLOE0/giphy.gif")
+    .slide.alt
+        h1 what about #[em daylight saving time]?
+        img(src="https://media.giphy.com/media/kGCuRgmbnO9EI/giphy.gif")
+    .slide
+        .row
+            h1 let's back up a little bit and examine our concept of #[em time]
+            img(src="https://media.giphy.com/media/24C2paIV0IBEY/giphy.gif")
+    .slide
+        img(src="https://media.giphy.com/media/PxSFAnuubLkSA/giphy.gif")
+        h1 what time is it right now?
+        hr
+        p Hello, #[code NAME_NOT_FOUND], the time is currently: 
+            code.milliseconds-now #{new Date().valueOf()}
+    .slide
+        h1 Time: the # of milliseconds since the epoch
+        p the 0th second on January 1st, 1970
+        img(src="https://media.giphy.com/media/zV5IxD2rFSM7e/giphy.gif")
+    .slide.alt
+        table
+            tr
+                td 
+                    code.milliseconds-now #{new Date().valueOf()} 
+                td.locale-now #{new Date().toLocaleString()}
+                td right now! (ish)
+            tr
+                td 
+                    code #{new Date(1000000000000000).valueOf()} 
+                td #{new Date(1000000000000000).toLocaleString()}
+                td the #[em quadrillionth] millisecond!
+            tr
+                td 
+                    code #{new Date(0).valueOf()} 
+                td 
+                    strong #{new Date(0).toLocaleString()}
+                td the.........epoch? wait what?
+    .slide
+        .row
+            div
+                h1 hello, humans
+                p what time is it? 
+            div
+                p 
+                    strong it's currently: 
+                p.locale-now #{new Date().toLocaleString()}
+    .slide
+        .row
+            div
+                h1 hello, computers
+                p 
+                    | please convert 
+                    code.milliseconds-now #{new Date().valueOf()} 
+                    | to a human-readable format
+            img(src="https://media.giphy.com/media/y7kvOYLzas6Ag/giphy.gif")
+    .slide
+        img(src="https://upload.wikimedia.org/wikipedia/commons/8/88/World_Time_Zones_Map.png")
+    .slide
+        .row
+            div
+                p the first piece of information computers need to tell you what time it is: your #[strong timezone]
+                p great!! so.........what is a time zone exactly?
+            img(src="https://upload.wikimedia.org/wikipedia/commons/8/88/World_Time_Zones_Map.png")
+    .slide
+        h1 Greenwich Mean Time (GMT)
+        .row
+            ul
+                li this is the #[strong Royal Observatory in Greenwich, London], which is the reference location for #[strong Greenwich Mean Time]
+                li Greenwich Mean Time, or #[strong GMT], is the global reference point for converting time into a human-readable format - e.g. 9:21am, 5:32pm 
+                li every point to the #[strong west] of the observatory is considered #[strong behind] GMT (e.g., GMT-01 is "one hour behind" GMT)
+                li every point to the #[strong east] of the observatory is considered #[strong ahead of] GMT (e.g., GMT+01 is "one hour ahead" of GMT)
+                li for all intents and purposes, UTC (Coordinated Univeral Time) is the same thing as GMT.
+            img(src="observatory.jpeg")
+        p what questions are there so far?
+    .slide
+        h1 NextHealth takes a road trip from Denver, Colorado to Ogallala, Nebraska!
+        .row
+            img(src="road-trip.png")
+            ul
+                li Our time changes #[strong ahead] by one hour, because we're in the Central Time Zone now (GMT-06) instead of Mountain (GMT-07)
+    .slide
+        h1 The (continental) US has four time zones
+        img(src="us-time-zones.png")
+    .slide
+        h1 NextHealth takes a (...road?) trip from Murghab, Tajikistan to Kashgar Prefecture, China!
+        img(src="doomed-road-trip-distance.png")
+        img(src="china.png")
+
+    .slide
+        h1 NextHealth takes a (...road?) trip from Murghab, Tajikistan to Kashgar Prefecture, China!
+        .row
+            img(src="doomed-road-trip-distance.png")
+            div
+                ul
+                    li it's only about 140 miles away! that's only about 60% of our Ogallala trip!
+                    li by the time we cross the border from Tajikistan to China, we will be in a time zone that's #[strong three hours later] than when we started (GMT+05 to GMT+08)
+                img(src="https://media.giphy.com/media/1dAherVVrP9Wo/giphy.gif")
+    .slide
+        h1 China is all #[em one] time zone (GMT+08)
+        .row
+            img(src="china-time-zone.png")
+            div
+                ul
+                    li sunset time in Kashgar is ~10:30pm (2020.06.24)
+                    li Tajikistan is GMT+05, but Afghanistan (GMT+04 1/2) shares a teeny tiny border with China, so you'll be jumping 3.5 hours if you cross there
+                    li you can also cross into Nepal (GMT+05 3/4) if you're feeling like doing some time math
+    .slide
+        h1 time zones are not #[em uniform] across the globe
+        .row
+            ul
+                li a #[em rational] way to think to think about time zones would be to divide the planet's longitudes into 24 equal sections, and assign a 1-hour time zone difference to each one
+                li regrettably, human beings are not commonly described as "rational"
+                li (it also doesn't help that cities don't happen to fall neatly between the longitude borders)
+                li so, time zones are #[strong politically defined] at the regional level
+            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Longitude_blue.svg/1200px-Longitude_blue.svg.png")
+    .slide
+        h1 cool! so let's just use time zones.
+        p just to recap - in order for a computer to display the #[strong local time] for a user, it needs to know:
+        ul
+            li the #[strong number of milliseconds] that have elapsed since the epoch for the time they want to display
+            li the #[strong user's current time zone / GMT offset]
+            li and that's it! this should work perfectly for everything ever and we will never have to think about it ever again
+    .slide
+        .row
+            div
+                h3 please describe the local time in the Mountain time zone at 0 milliseconds past the epoch. 
+                hr
+                p Hello, #[code NAME_NOT_FOUND], the local time at 0 milliseconds past the epoch in the Mountain time zone (GMT-07) was: 
+                    code.milliseconds-now #{new Date(0).toLocaleString()}
+                hr
+                p that's correct! great job, computer.
+            img(src="https://media.giphy.com/media/PxSFAnuubLkSA/giphy.gif")
+        p what questions are there so far?
+    .slide
+        p erm....aren't we forgetting something?
+        img(src="https://media.giphy.com/media/ViUqU2JgM4eaY/giphy.gif")
+    .slide
+        h1 Daylight Saving Time
+        .row
+            img(src="https://media.giphy.com/media/VXxy0at5j484U/giphy.gif")
+            ul
+                li It's Daylight #[em Saving] Time, not Daylight #[em Savings] Time
+                li It's called "summer time" in Europe, but Asia and Africa don't use it at all
+                li It actually #[strong changes the offset] of the time zone that it applies to - e.g., for Mountain time, our offset will change from GMT-07 to GMT-06 and back again, twice a year
+                li It's absolutely critical for outdoor jobs (agriculture, construction) and small businesses, and an absolutely tremendous pain in the ass for software engineers
+    .slide
+        h1 okay perfect! let's use time zones, #[em and] keep track of Daylight Saving Time.
+        p just to recap - in order for a computer to display the #[strong local time] for a user, it needs to know:
+        ul
+            li the #[strong number of milliseconds] that have elapsed since the epoch for the time they want to display
+            li the #[strong user's current time zone / GMT offset]
+            li the #[strong time zone change schedule] for a given time zone
+            li and that's it! this should work perfectly for everything ever and we will never have to think about it ever again. no for real this time
+    .slide
+        .row
+            div
+                h3 please describe the local time in the Mountain time zone at 13,046,400,000 milliseconds past the epoch. 
+                hr
+                p Hello, #[code NAME_NOT_FOUND], the local time at #[code 13046400000] milliseconds past the epoch in the Mountain time zone #[strong (GMT-06)] was: 
+                    code #{new Date(13046400000).toLocaleString()}
+                hr
+                p that's correct! great job, computer.
+            img(src="https://media.giphy.com/media/PxSFAnuubLkSA/giphy.gif")
+    
+    
+    .slide
+        .row
+            div
+                h3 hello computer!
+                p please describe the local time in #[strong Phoenix, Arizona] at 13,046,400,000 milliseconds past the epoch. 
+                hr
+                p ...
+            img(src="https://media.giphy.com/media/8acGIeFnqLA7S/giphy.gif")
+    
+    .slide
+        h1 well, you see, most of Arizona #[em doesn't follow Daylight Saving Time]
+        .row
+            img(src="https://upload.wikimedia.org/wikipedia/commons/c/c3/AZTZ.png")
+            div
+                ul
+                    li this is a political thing, just like picking what time zone you're in
+                    li but, Arizona is in the #[strong same Mountain time zone] that Colorado is in
+                    li there's even some sections of Arizona that follow Daylight Saving Time anyway!
+                    li 
+                        a(href="https://en.wikipedia.org/wiki/Time_in_Arizona") https://en.wikipedia.org/wiki/Time_in_Arizona
+    .slide
+        h3 #[em Time zones] don't follow Daylight Saving Time #[br] #[em individual regions] follow Daylight Saving Time
+        p computers need to keep track of the time zone offset information and Daylight Saving schedules for every #[strong geographical location on the planet] 
+    
+    .slide
+        h1 one more time, except with individual regions instead of time zones
+        p just to recap - in order for a computer to display the #[strong local time] for a user, it needs to know:
+        ul
+            li the number of milliseconds that have elapsed since the epoch for the time they want to display
+            li the user's #[strong current geographical location]
+            li
+                strong all possible geographical locations, with GMT offsets and time zone change schedules for each geographical location
+            li and that's it! this should work perfectly for everything ever and we will never have to think about it ever again. no for real this time, seriously, please
+
+
+    .slide
+        .row
+            img(src="https://media.giphy.com/media/PxSFAnuubLkSA/giphy.gif")
+            div
+                p please describe the local time in #[strong Phoenix, Arizona] at 13,046,400,000 milliseconds past the epoch. 
+                hr
+                p Hello, #[code NAME_NOT_FOUND], the local time at #[code 13046400000] milliseconds past the epoch in Phoenix, Arizona #[strong (GMT-07)] was: 
+                    code 5/31/1970, 5:00:00 PM
+                hr
+                p that's correct! great job, computer.
+    .slide
+        .row
+            div
+                h3 hello computer!
+                p please describe the local time in #[strong Indianapolis, Indiana] at 13,046,400,000 milliseconds past the epoch. 
+                hr
+                p ...
+            img(src="https://media.giphy.com/media/MZAHsmzAs3hBiwwaG3/giphy.gif")
+    .slide
+        h1 oh come on indiana are you serious
+        .row
+            img(src="https://upload.wikimedia.org/wikipedia/commons/9/97/UTC_hue4map_USA-IN_1961_ICC.svg")
+            div
+                ul
+                    li It turns out that Indiana has been fighting about what time zone / daylight saving time pattern it's been in for the past #[strong 70 years]
+                    li not at a state level, not at a city level, but at a #[em county by county level]
+                    li some changes have happened as recently as 2007
+                    li 
+                        a(href="https://en.wikipedia.org/wiki/Time_in_Indiana#Controversy") https://en.wikipedia.org/wiki/Time_in_Indiana#Controversy
+    .slide
+        h1 but, #[em this is not an uncommon thing]
+        .row
+            div
+                ul
+                    li remember china? They used to have four time zones! (intermittently up until 1949)
+                    li and, they adopted and subsequently dropped Daylight Saving Time #[em twice] (1945-1948, 1986-1991)
+                    li this happens all over the world, too - countries, regions, states, cities and counties all adjust their time zones due to political and geographical changes
+            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UTC_hue4map_X_Republic_of_China.svg/735px-UTC_hue4map_X_Republic_of_China.svg.png")
+    .slide
+        h1 okay, just to recap one last time
+        .row
+            div
+                p computer, please keep track of:
+                ul
+                    li the current number of milliseconds since the epoch
+                    li all possible geographical locations on the planet
+                    li the time zone for each geographical location on the planet
+                    li the daylight saving pattern for each geographical location on the planet
+                    li #[em all changes] to time zones and daylight saving patterns, for each geographical location on the planet, #[strong since the beginning of recorded human history]
+            img(src="https://media.giphy.com/media/106PwpLIIXJnXi/giphy.gif")
+    .slide
+        h1 The IANA Time Zone Database
+        .row
+            div
+                ul
+                    li This guy is Paul Eggert
+                    li He's the current coordinator of the IANA (Internet Assigned Numbers Authority) "Time Zone Database"
+                    li 
+                        a(href="https://www.iana.org/time-zones") https://www.iana.org/time-zones
+                    li The database is in the public domain - all contributions to the database are completely open-source!
+            img(src="https://samueli.ucla.edu/wp-content/uploads/samueli/Paul_Eggert.jpg")
+                
+    .slide
+        h1 Denver in the IANA Time Zone Database
+        
+        :markdown-it
+            | # Zone | NAME           |            | STDOFF | RULES                | FORMAT | [UNTIL] |
+            | ------ | -------------- | ---------- | ------ | -------------------- | ------ | ------- |
+            | Zone   | America/Denver | -6:59:56 - | LMT    | 1883 Nov 18 12:00:04 |        |         |
+            |        |                |            | -7:00  | US                   | M%sT   | 1920    |
+            |        |                |            | -7:00  | Denver               | M%sT   | 1942    |
+            |        |                |            | -7:00  | US                   | M%sT   | 1946    |
+            |        |                |            | -7:00  | Denver               | M%sT   | 1967    |
+            |        |                |            | -7:00  | US                   | M%sT   |         |
+
+    .slide
+        h1 Indianapolis in the IANA Time Zone Database
+
+        :markdown-it
+            | # Rule | NAME         | FROM | TO   | TYPE | IN  | ON      | AT   | SAVE | LETTER |
+            | ------ | ------------ | ---- | ---- | ---- | --- | ------- | ---- | ---- | ------ |
+            | Rule   | Indianapolis | 1941 | only | -    | Jun | 22      | 2:00 | 1:00 | D      |
+            | Rule   | Indianapolis | 1941 | 1954 | -    | Sep | lastSun | 2:00 | 0    | S      |
+            | Rule   | Indianapolis | 1946 | 1954 | -    | Apr | lastSun | 2:00 | 1:00 | D      |
+
+            | # Zone | NAME                                        |                      | STDOFF                  | RULES             | FORMAT | [UNTIL]           |     |
+            | ------ | ------------------------------------------- | -------------------- | ----------------------- | ----------------- | ------ | ----------------- | --- |
+            | Zone   | America/Indiana/Indianapolis -5:44:38 - LMT | 1883 Nov 18 12:15:22 |                         |                   |        |                   |     |
+            |        |                                             |                      | -6:00                   | US                | C%sT   | 1920              |     |
+            |        |                                             |                      | -6:00 Indianapolis C%sT | 1942              |        |                   |     |
+            |        |                                             |                      | -6:00                   | US                | C%sT   | 1946              |     |
+            |        |                                             |                      | -6:00 Indianapolis C%sT | 1955 Apr 24  2:00 |        |                   |     |
+            |        |                                             |                      | -5:00                   | -                 | EST    | 1957 Sep 29  2:00 |     |
+            |        |                                             |                      | -6:00                   | -                 | CST    | 1958 Apr 27  2:00 |     |
+            |        |                                             |                      | -5:00                   | -                 | EST    | 1969              |     |
+            |        |                                             |                      | -5:00                   | US                | E%sT   | 1971              |     |
+            |        |                                             |                      | -5:00                   | -                 | EST    | 2006              |     |
+            |        |                                             |                      | -5:00                   | US                | E%sT   |                   |     |
+
+
+    .slide
+        h1 thoughts on the IANA tzdb
+        ul 
+            li this is all developed and built with C. while I may be an expert at pushing pixels around and using a lot of whiteboard markers, I have a long way to go before I can explain how the database gets built for inclusion in browsers and OSes! 
+            li if you ever have a chance, I #[em highly] recommend looking through the data portions of the time zone database. It includes lots of explanations, thoughts, and original research by the maintainers, including a few pointed remarks about Indiana's time zone decisions 😅)
+            li want to get a little wacky? Iran has some time zone changes that are scheduled #[strong every year] for a particular holiday 
+
+    .slide
+        .row
+            img(src="https://media.giphy.com/media/PxSFAnuubLkSA/giphy.gif")
+            div
+                p please describe the local time in #[strong Phoenix, Arizona] at 13,046,400,000 milliseconds past the epoch. 
+                hr
+                p Hello, #[code NAME_NOT_FOUND], the local time at #[code 13046400000] milliseconds past the epoch in Indianapolis, Indiana #[strong (GMT-04)] was: 
+                    code 5/31/1970, 8:00:00 PM
+                hr
+                p yes! we actually have #[strong all the information that we need] in order to calculate that now
+    .slide
+        h1 where is the IANA Time Zone database in all of thise?
+        .row
+            ul
+                li it's bundled with OSes and desktop apps!
+                li sometimes those OSes provide APIs to query the time zone database directly, sometimes not
+                li for the past 5ish years, frontend web devs had to rely on a pretty chunky library called #[a(href="https://momentjs.com/") moment.js] to provide timezone conversion support
+                li but now browsers have an Internationalization library that exposes the time zone conversion info via API! #[a(href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat") mdn docs]
+            img(src="moment.png")
+            
+    .slide
+        h1 bringing it all back together
+        p remember this function? we need to know what extra args to provide            
+        img(src="ticket-time-representation-C.png")
+        p the other args we need are:
+        ul
+            li the workday start time (e.g. 9am)
+            li the workday end time (e.g. 5pm)
+            li whether we want to include weekends or not
+            li #[strong the current geographical location] of the helpdesk team
+            ul 
+                li #[strong not] the time zone - because remember, GMT offsets aren't always consistent in an entire time zone (thanks, Phoenix)
+
+
+
+    .slide
+        img(src="ticket-time-representation-C.png")
+        ul
+            li so, given an absolute timestamp representing when a ticket was #[em opened], we can calculate the #[strong local time] for that timestamp
+            li same with the absolute time stamp representing when the ticket was #[em resolved]
+            li we have the #[strong local time the ticket was opened], and the #[strong local time that the ticket was resolved] - which means we can calculate the number of working hours between the two times!
+            li ..............but what if those two times are on two different days?
+        img(src="https://media.giphy.com/media/3o85xlSIiw7HYrBvKo/giphy.gif")
+    .slide
+        h1 so, I'll leave that for my H2 talk 😅
+
+    .slide
+        h1 Thanks!!
+        img(src="elmo-wave.gif")
+        p questions!
+    .slide
+        h1 Exercises for the reader
+        ul
+            li How does GMT / UTC account for leap seconds?
+            li How do spacecraft account for time dilation? (time passes slower, the farther you are away from a large gravitational body)
+            li How does the IANA account for locations that no longer exist, or locations that have been newly created?

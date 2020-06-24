@@ -1,0 +1,22 @@
+html
+    head
+        base(target="_blank")
+        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
+        link(rel="stylesheet" href="/assets/slide-themes/stream/stream.css")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js', charset='utf-8')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/deck.js/1.1.0/core/deck.core.js', charset='utf-8')
+        script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
+        block head
+
+    body
+        block slides
+        footer
+            .left
+                a(href="https://www.nexthealthtechnologies.com/")
+                    img(src="/assets/slide-themes/nexthealth/nexthealth-logo.svg")
+            .middle
+                a.location
+
+        script(src="/assets/js/init-slides.js")

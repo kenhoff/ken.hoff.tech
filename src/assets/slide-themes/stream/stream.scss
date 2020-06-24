@@ -218,6 +218,9 @@ footer {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    > * {
+        max-width: 50%;
+    }
     > *:not(:last-child) {
         margin-right: 1rem;
     }

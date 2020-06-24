@@ -47,7 +47,9 @@ Metalsmith(__dirname)
         return done();
     })
     .use((files, metalsmith, done) => {
-        files["index.pug"].resumeFormattedDate = dayjs().format("YYYY-MM-DD");
+        if ("index.pug" in files) {
+            files["index.pug"].resumeFormattedDate = dayjs().format("YYYY-MM-DD");
+        }
         return done();
     })
     .use(pug({useMetadata: true}))
