@@ -216,14 +216,14 @@ block slides
                 li It's Daylight #[em Saving] Time, not Daylight #[em Savings] Time
                 li It's called "summer time" in Europe, but Asia and Africa don't use it at all
                 li It actually #[strong changes the offset] of the time zone that it applies to - e.g., for Mountain time, our offset will change from GMT-07 to GMT-06 and back again, twice a year
-                li It's absolutely critical for outdoor jobs (agriculture, construction) and small businesses, and an absolutely tremendous pain in the ass for software engineers
+                li It's absolutely critical for outdoor jobs (agriculture, construction) and small businesses, and an absolute tremendous pain in the ass for software engineers
     .slide
         h1 okay perfect! let's use time zones, #[em and] keep track of Daylight Saving Time.
         p just to recap - in order for a computer to display the #[strong local time] for a user, it needs to know:
         ul
             li the #[strong number of milliseconds] that have elapsed since the epoch for the time they want to display
             li the #[strong user's current time zone / GMT offset]
-            li the #[strong time zone change schedule] for a given time zone
+            li the #[strong Daylight Saving Time change schedule] for a given time zone
             li and that's it! this should work perfectly for everything ever and we will never have to think about it ever again. no for real this time
     .slide
         .row
@@ -318,9 +318,9 @@ block slides
                 ul
                     li the current number of milliseconds since the epoch
                     li all possible geographical locations on the planet
-                    li the time zone for each geographical location on the planet
+                    li the time zone / GMT offset for each geographical location on the planet
                     li the daylight saving pattern for each geographical location on the planet
-                    li #[em all changes] to time zones and daylight saving patterns, for each geographical location on the planet, #[strong since the beginning of recorded human history]
+                    li #[em all changes] to time zone offsets and daylight saving patterns, for each geographical location on the planet, #[strong since the beginning of recorded human history]
             img(src="https://media.giphy.com/media/106PwpLIIXJnXi/giphy.gif")
     .slide
         h1 The IANA Time Zone Database
@@ -390,7 +390,7 @@ block slides
                 hr
                 p yes! we actually have #[strong all the information that we need] in order to calculate that now
     .slide
-        h1 where is the IANA Time Zone database in all of thise?
+        h1 where is the IANA Time Zone database in all of this?
         .row
             ul
                 li it's bundled with OSes and desktop apps!
