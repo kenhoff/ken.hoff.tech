@@ -17,6 +17,9 @@ Metalsmith(__dirname)
             .use((files, metalsmith, done) => {
                 for (var file in files) {
                     if (files.hasOwnProperty(file)) {
+                        if (!files[file].date) {
+                            throw new Error(`${file} does not have a date`)
+                        }
                         files[file].formattedDate = moment(
                             files[file].date
                         ).format("YYYY, MMMM Do");
