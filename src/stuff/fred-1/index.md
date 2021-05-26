@@ -77,6 +77,9 @@ Fix all the stuff. So far, I've removed the backup camera, given it an oil chang
 
 I've already ordered a whole bunch of parts that need to go on as well. Wheel bearings, Bilstein 5100 shocks all the way around, new android head unit, front and rear dashcam + hardwire kit. I'll need to order brake parts, but that's going to be a little pricey, so I'm verifying that I have all the compatible parts under the car before I pull the trigger on those.
 
+Oh - and go on some heckin' adventures! 
+
+![](fred4.jpg)
 
 
 
