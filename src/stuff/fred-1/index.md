@@ -80,27 +80,3 @@ I've already ordered a whole bunch of parts that need to go on as well. Wheel be
 Oh - and go on some heckin' adventures! 
 
 ![](fred4.jpg)
-
-
-
-<!-- 
-
-
-
-
-Here's the major ones:
-
-**The airbag light is on.** Not flashing, or appearing for a little bit - just straight-up on. The dealership wants $1200 to swap out the SRS computer, because they didn't actually go through the process of diagnosing the code that was thrown. So, hunt down an FSM, flip your way to the "diagnostics" section, and get the heck to work.
-
-**4lo and center diff locking aren't working.** I'm getting a pretty horrible grinding noise when trying to engage the 4-lo, and the center diff lock just clicks without actually engaging. This is one of those things that you just want to slap the previous owner around, when you hear about it - apparently you really need to use the 4-lo or center diff at least once a month, to keep the linear actuators in the transfer case lubricated. In the 6 years of owning the car, he never turned it on once. I'm hoping this is a pretty easy fix - potentially flush + refill the transfer case oil, and just give the actuator a couple taps with a mallet while trying to engage it. If not....might need to take it off to examine a little more.
-
-**Driveshaft clunk.** Clunk? Maybe more of a "wonder if that honda civic rear-ended you every time you take your foot off the brake" noise. It's pretty rough. Initially I thought that it was a diff backlash issue, but after a bit of research, coupled with my unparalleled observational skills, I'll bet that the previous owner had _literally no idea_ that driveshafts were supposed to be lubricated regularly.
-
-
-
-things that would be nice to haves
-
--   dash cam
--   cargo net in the back area
--   under-seat molle panels
--   rear window molle panels + cargo box -->
